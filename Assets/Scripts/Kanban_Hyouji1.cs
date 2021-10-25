@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Kanban_Hyouji1 : MonoBehaviour
 {
-        public MessageManager messagemanager; 
-    void OnCollisionStay2D(Collision2D collison){
+        void OnCollisionStay2D(Collision2D collison){
 
-        if(collison.gameObject.name == "Player(仮)"){
+        if(collison.gameObject.name == "Player"){
         Debug.Log("当たっている");
         }
 
