@@ -5,11 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     GameObject Panel;
+    GameObject IsExitPanel;
     // Start is called before the first frame update
     void Start()
     {
-        Panel = GameObject.Find("Panel");
-        Panel.SetActive(false);
+       GameObject.Find("Panel").SetActive(false);
+       GameObject.Find("IsExitPanel").SetActive(false);
     }
 
     // Update is called once per frame
