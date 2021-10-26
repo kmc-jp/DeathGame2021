@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Status
 {
+    public int MaxHp;
+    public int MaxMp;
     public int Hp;
     public int Mp;
     public int Atk;
@@ -12,6 +14,8 @@ public class Status
 
     public Status(int hp, int mp, int atk, int def, int agi)
     {
+        this.MaxHp = hp;
+        this.MaxMp = mp;
         this.Hp = hp;
         this.Mp = mp;
         this.Atk = atk;
