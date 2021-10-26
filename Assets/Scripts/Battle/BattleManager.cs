@@ -30,6 +30,8 @@ public class BattleManager : MonoBehaviour
 
     public void Execute()
     {
+        // agi降順にソート
+        turnActions.Sort((a, b) => a.actor.status.Agi - b.actor.status.Agi);
         turnActions.ForEach((a)=>
         {
             a.Exec();
