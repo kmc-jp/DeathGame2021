@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
     [SerializeField]
     private DisplayStatus playerStatusView;
@@ -13,7 +13,7 @@ public class BattleManager : MonoBehaviour
     private Player buddy;
     */
     [SerializeField]
-    private List<GameObject> enemyList;
+    private List<GameObject> enemyList = new List<GameObject>();
     private Enemy enemy;
 
     private List<ITurnAction> turnActions;
@@ -22,15 +22,10 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         player = new Player();
+        enemy = enemyList[0].GetComponent<EnemyBehaviour>().EnemyCore;
         turnActions = new List<ITurnAction>();
     
         UpdatePlayerStatusView();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void AttackButton()
