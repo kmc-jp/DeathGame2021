@@ -5,13 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Entry_NewGame : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D collision){
-        StartCoroutine("Change");
+    void OnCollisionEnter2D(Collision2D collision)
+    {
         SceneManager.LoadScene("New Game");
     }
 
-    private IEnumerator Change()
-    {
-        yield return new WaitForSeconds(1.0f);
-    }
 }
