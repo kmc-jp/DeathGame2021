@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
+    [SerializeField]
+    private DisplayStatus playerStatusView;
     private Player player;
+    /*
+    [SerializeField]
+    private DisplayStatus buddyStatusView;
+    private Player buddy;
+    */
+    [SerializeField]
+    private List<GameObject> enemyList;
     private Enemy enemy;
 
     private List<TurnAction> turnActions;
@@ -13,8 +22,9 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         player = new Player();
-        enemy = new Enemy();
         turnActions = new List<TurnAction>();
+    
+        UpdatePlayerStatusView();
     }
 
     // Update is called once per frame
@@ -35,8 +45,15 @@ public class BattleManager : MonoBehaviour
         turnActions.ForEach((a)=>
         {
             a.Exec();
+            UpdatePlayerStatusView();
         });
         turnActions.Clear();
         Debug.Log(enemy.status.Hp);
+    }
+
+    private void UpdatePlayerStatusView()
+    {
+        playerStatusView.SetHpText(player.status.Hp.ToString());
+        playerStatusView.SetMpText(player.status.Mp.ToString());
     }
 }
