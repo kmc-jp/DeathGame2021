@@ -10,4 +10,8 @@ public interface IActor
         set;
     }
     
+    bool isDead
+    {
+        get;
+    }
 }

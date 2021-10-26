@@ -10,6 +10,14 @@ public class Player : IActor
         set;
     }
 
+    public bool isDead
+    {
+        get
+        {
+            return this.status.Hp > 0;
+        }
+    }
+
     public Player()
     {
         this.status = new Status(100, 100, 20, 5, 5);
