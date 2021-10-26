@@ -33,7 +33,7 @@ public class BattleManager : MonoBehaviour
         
     }
 
-    public void AtackButton()
+    public void AttackButton()
     {
         turnActions.Add(new TurnAction(player, enemy));
     }
