@@ -7,30 +7,30 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     [SerializeField]
     private DisplayStatus playerStatusView;
     private Player player;
-    /*
+    
     [SerializeField]
     private DisplayStatus buddyStatusView;
     private Player buddy;
-    */
+    
     [SerializeField]
     private List<EnemyBehaviour> enemyList = new List<EnemyBehaviour>();
     private Enemy enemy;
 
     private List<ITurnAction> turnActions;
     
-    // Start is called before the first frame update
     void Start()
     {
         player = new Player();
+        buddy = new Player();
         enemy = enemyList[0].EnemyCore;
         turnActions = new List<ITurnAction>();
-    
-        UpdatePlayerStatusView();
+        UpdatePlayersStatusView();
     }
 
     public void AttackButton()
     {
         turnActions.Add(new AttackAction(player, enemy));
+        if (turnActions.Count >= 2) Execute();
     }
 
     public void Execute()
@@ -40,7 +40,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         turnActions.ForEach((a)=>
         {
             a.Exec();
-            UpdatePlayerStatusView();
+            UpdatePlayersStatusView();
             enemyList.ForEach((e) => 
             {
                 e.UpdateHealthBar();
@@ -50,9 +50,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         Debug.Log(enemy.status.Hp);
     }
 
-    private void UpdatePlayerStatusView()
+    private void UpdatePlayersStatusView()
     {
         playerStatusView.SetHpText(player.status.Hp.ToString());
         playerStatusView.SetMpText(player.status.Mp.ToString());
+        buddyStatusView.SetHpText(buddy.status.Hp.ToString());
+        buddyStatusView.SetMpText(buddy.status.Mp.ToString());
     }
 }
