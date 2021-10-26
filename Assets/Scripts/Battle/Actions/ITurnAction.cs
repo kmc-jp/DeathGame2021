@@ -9,11 +9,6 @@ public interface ITurnAction
         get;
         set;
     }
-    Actor Target
-    {
-        get;
-        set;
-    }
 
     void Exec();
 }
