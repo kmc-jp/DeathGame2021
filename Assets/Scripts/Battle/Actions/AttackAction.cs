@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackAction : MonoBehaviour
+public class AttackAction : ITurnAction
 {
-    // Start is called before the first frame update
-    void Start()
+    public Actor Actor
     {
-        
+        get;
+        set;
+    }
+    public Actor Target
+    {
+        get;
+        set;
     }
 
-    // Update is called once per frame
-    void Update()
+    public AttackAction(Actor _actor, Actor _target)
     {
-        
+        this.Actor = _actor;
+        this.Target = _target;
+    }
+
+    public void Exec()
+    {
+        if (Actor.isDead) return;
+        int damage = Mathf.Clamp(Actor.status.Atk - Target.status.Def, 0, Target.status.Hp);
+        Target.status.Hp -= damage;
     }
 }
