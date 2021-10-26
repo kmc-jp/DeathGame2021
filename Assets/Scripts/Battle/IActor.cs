@@ -14,7 +14,7 @@ public class Actor
     {
         get
         {
-            return this.status.Hp > 0;
+            return this.status.Hp <= 0;
         }
     }
 }
