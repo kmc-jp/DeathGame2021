@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : Actor
 {
-    public Enemy()
+    public Enemy(Status _status)
     {
-        this.status = new Status(100, 100, 10, 5, 5);
+        this.status = _status;
     }
 }

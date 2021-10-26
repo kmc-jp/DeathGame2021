@@ -10,6 +10,11 @@ public class Actor
         set;
     }
 
+    public virtual void SetHp(int value)
+    {
+
+    }
+
     public bool isDead
     {
         get
