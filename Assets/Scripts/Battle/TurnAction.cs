@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TurnAction
 {
-    public IActor actor;
-    public IActor target;
+    public Actor actor;
+    public Actor target;
 
-    public TurnAction(IActor _actor, IActor _target)
+    public TurnAction(Actor _actor, Actor _target)
     {
         this.actor = _actor;
         this.target = _target;

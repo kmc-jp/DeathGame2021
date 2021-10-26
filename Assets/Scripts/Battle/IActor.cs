@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IActor
+public class Actor
 {
-    Status status
+    public Status status
     {
         get;
         set;
     }
-    
-    bool isDead
+
+    public bool isDead
     {
-        get;
+        get
+        {
+            return this.status.Hp > 0;
+        }
     }
 }
