@@ -20,8 +20,6 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO: 体力変更時に更新したい
-        UpdateHealthBar();
     }
 
     public void UpdateHealthBar()
