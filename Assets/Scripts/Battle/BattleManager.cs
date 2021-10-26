@@ -13,7 +13,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private Player buddy;
     */
     [SerializeField]
-    private List<GameObject> enemyList = new List<GameObject>();
+    private List<EnemyBehaviour> enemyList = new List<EnemyBehaviour>();
     private Enemy enemy;
 
     private List<ITurnAction> turnActions;
@@ -22,7 +22,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     void Start()
     {
         player = new Player();
-        enemy = enemyList[0].GetComponent<EnemyBehaviour>().EnemyCore;
+        enemy = enemyList[0].EnemyCore;
         turnActions = new List<ITurnAction>();
     
         UpdatePlayerStatusView();
@@ -41,6 +41,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         {
             a.Exec();
             UpdatePlayerStatusView();
+            enemyList.ForEach((e) => 
+            {
+                e.UpdateHealthBar();
+            });
         });
         turnActions.Clear();
         Debug.Log(enemy.status.Hp);
