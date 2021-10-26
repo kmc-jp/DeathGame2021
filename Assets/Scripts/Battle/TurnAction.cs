@@ -15,6 +15,8 @@ public class TurnAction
 
     public void Exec()
     {
-        target.status.Hp -= actor.status.Atk - target.status.Def;
+        if (actor.isDead) return;
+        int damage = Mathf.Clamp(actor.status.Atk - target.status.Def, 0, target.status.Hp);
+        target.status.Hp -= damage;
     }
 }
