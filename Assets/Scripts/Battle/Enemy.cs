@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Enemy : Actor
 {
-    public Enemy(Status _status)
+    public Enemy(string _name, Status _status)
     {
+        this.Name = _name;
         this.Status = _status;
     }
 }

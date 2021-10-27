@@ -23,8 +23,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     
     void Start()
     {
-        player = new Player();
-        buddy = new Player();
+        player = new Player("主人公");
+        buddy = new Player("相棒");
         players = new List<Player>();
         players.Add(player);
         players.Add(buddy);
@@ -35,7 +35,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void AttackButton()
     {
-        turnActions.Add(new AttackAction(player, enemy));
+        Actor actor = players[turnActions.Count];
+        turnActions.Add(new AttackAction(actor, enemy));
         if (turnActions.Count >= 2) Execute();
     }
 
@@ -65,6 +66,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 e.UpdateHealthBar();
             });
         }
+        yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
     }
 

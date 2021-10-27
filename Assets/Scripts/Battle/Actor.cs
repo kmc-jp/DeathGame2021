@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Actor
 {
+    public string Name;
+
     public Status Status
     {
         get;

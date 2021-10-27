@@ -24,7 +24,7 @@ public class AttackAction : ITurnAction
     public void Prepare()
     {
         if (Actor.IsDead) return;
-        MessageWindow.Instance.MakeWindow("攻撃するよ");
+        MessageWindow.Instance.MakeWindow($"{Actor.Name} のこうげき！");
     }
 
     public void Exec()
@@ -32,6 +32,6 @@ public class AttackAction : ITurnAction
         if (Actor.IsDead) return;
         int damage = Mathf.Clamp(Actor.Status.Atk - Target.Status.Def, 0, Target.Status.Hp);
         Target.Status.Hp -= damage;
-        MessageWindow.Instance.MakeWindow($"{damage} ダメージを与えた！");
+        MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
     }
 }
