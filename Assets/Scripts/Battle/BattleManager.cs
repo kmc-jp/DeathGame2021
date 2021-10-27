@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UniRx;
 
@@ -20,6 +21,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private Enemy enemy;
 
     private List<ITurnAction> turnActions;
+
+    private int commandOrder = 0;
     
     void Start()
     {
@@ -35,9 +38,19 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AttackButton()
     {
         enemy = enemyList[0].EnemyCore;
-        Actor actor = players[turnActions.Count];
+        Actor actor = players[commandOrder];
         turnActions.Add(new AttackAction(actor, enemy));
-        if (turnActions.Count >= 2) Execute();
+        if (commandOrder >= 1) Execute();
+        commandOrder ++;
+    }
+
+    public void GuardButton()
+    {
+        Actor actor = players[commandOrder];
+        turnActions.Add(new GuardAction(actor, false, 1));
+        turnActions.Add(new GuardAction(actor, true, -1));
+        if (commandOrder >= 1) Execute();
+        commandOrder ++;
     }
 
     public void Execute()
@@ -46,17 +59,21 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         {
             turnActions.Add(e.Action());
         });
-        // agi降順にソート
-        turnActions.Sort((a, b) => a.Actor.Status.Agi - b.Actor.Status.Agi);
         StartCoroutine(ExecuteCore());
     }
 
     private IEnumerator ExecuteCore()
     {
-        foreach (var a in turnActions)
+        // agi降順にソート
+        var orderdTurnActions = turnActions
+            .OrderByDescending(val => { return val.Priority; })
+            .ThenBy(val => { return -val.Actor.Status.Agi; });
+        foreach (var a in orderdTurnActions)
         {
-            a.Prepare();
-            yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+            if (a.Prepare())
+            {
+                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+            }
             a.Exec();
             yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             UpdatePlayersStatusView();
@@ -76,6 +93,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
+        commandOrder = 0;
     }
 
     private void UpdatePlayersStatusView()

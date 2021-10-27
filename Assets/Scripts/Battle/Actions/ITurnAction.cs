@@ -4,13 +4,19 @@ using UnityEngine;
 
 public interface ITurnAction
 {
+    int Priority
+    {
+        get;
+        set;
+    }
+
     Actor Actor
     {
         get;
         set;
     }
 
-    void Prepare();
+    bool Prepare();
     
     void Exec();
 }

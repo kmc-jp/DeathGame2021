@@ -24,4 +24,10 @@ public class Actor
             return this.Status.Hp <= 0;
         }
     }
+    
+    public bool IsGuard
+    {
+        get;
+        set;
+    }
 }

@@ -14,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.EnemyCore = new Enemy("ねこちゃん", new Status(100, 100, 10, 5, 5));
+        this.EnemyCore = new Enemy("ねこちゃん", new Status(100, 100, 20, 5, 5));
     }
 
     // Update is called once per frame
