@@ -49,7 +49,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         // agi降順にソート
         turnActions.Sort((a, b) => a.Actor.Status.Agi - b.Actor.Status.Agi);
         StartCoroutine(ExecuteCore());
-        Debug.Log(enemy.Status.Hp);
     }
 
     private IEnumerator ExecuteCore()
@@ -65,6 +64,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 e.UpdateHealthBar();
             });
+
+            bool clear = true;
+            foreach (var e in enemyList) { clear &= e.EnemyCore.IsDead; }
+            if (clear) 
+            {
+                MessageWindow.Instance.MakeWindow("敵をたおした！");
+                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                break;
+            }
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
