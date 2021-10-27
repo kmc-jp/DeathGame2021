@@ -22,6 +22,13 @@ public class EnemyBehaviour : MonoBehaviour
     {
     }
 
+    public ITurnAction Action()
+    {
+        int index = Random.Range(0, BattleManager.Instance.players.Count);
+        var target = BattleManager.Instance.players[index];
+        return new AttackAction(EnemyCore, target);
+    }
+
     public void UpdateHealthBar()
     {
         float healthRate = (float)EnemyCore.status.Hp / EnemyCore.status.MaxHp;

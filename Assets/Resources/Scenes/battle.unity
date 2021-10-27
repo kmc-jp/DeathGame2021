@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 619087237}
   textField: {fileID: 1323348349}
-  CloseButton: {fileID: 0}
+  CloseButton: {fileID: 619087239}
 --- !u!222 &35073077
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1193,6 +1193,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5819736195326120243, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
+      propertyPath: m_Color.b
+      value: 0.31132078
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819736195326120243, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
+      propertyPath: m_Color.g
+      value: 0.31132078
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819736195326120243, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
+      propertyPath: m_Color.r
+      value: 0.31132078
+      objectReference: {fileID: 0}
     - target: {fileID: 5819736195449052778, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1317,6 +1329,18 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 0cb02dce9ece4bb46a437067e973b1f9, type: 3}
+    - target: {fileID: 5819736195544282119, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5471698
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819736195544282119, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5471698
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819736195544282119, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5471698
+      objectReference: {fileID: 0}
     - target: {fileID: 5819736195593625644, guid: 895c86c04c25f6046b3dda3edc96fc29, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

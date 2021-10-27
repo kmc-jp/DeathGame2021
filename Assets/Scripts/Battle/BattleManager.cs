@@ -12,6 +12,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     [SerializeField]
     private DisplayStatus buddyStatusView;
     private Player buddy;
+
+    public List<Player> players;
     
     [SerializeField]
     private List<EnemyBehaviour> enemyList = new List<EnemyBehaviour>();
@@ -23,6 +25,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         player = new Player();
         buddy = new Player();
+        players = new List<Player>();
+        players.Add(player);
+        players.Add(buddy);
         enemy = enemyList[0].EnemyCore;
         turnActions = new List<ITurnAction>();
         UpdatePlayersStatusView();
@@ -36,6 +41,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void Execute()
     {
+        enemyList.ForEach((e) =>
+        {
+            turnActions.Add(e.Action());
+        });
         // agi降順にソート
         turnActions.Sort((a, b) => a.Actor.status.Agi - b.Actor.status.Agi);
         StartCoroutine(ExecuteCore());
