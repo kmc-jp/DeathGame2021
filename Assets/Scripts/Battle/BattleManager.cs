@@ -16,7 +16,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public List<Player> players;
     
     [SerializeField]
-    private List<EnemyBehaviour> enemyList = new List<EnemyBehaviour>();
+    private List<EnemyBehaviour> enemyList;
     private Enemy enemy;
 
     private List<ITurnAction> turnActions;
@@ -28,13 +28,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         players = new List<Player>();
         players.Add(player);
         players.Add(buddy);
-        enemy = enemyList[0].EnemyCore;
         turnActions = new List<ITurnAction>();
         UpdatePlayersStatusView();
     }
 
     public void AttackButton()
     {
+        enemy = enemyList[0].EnemyCore;
         Actor actor = players[turnActions.Count];
         turnActions.Add(new AttackAction(actor, enemy));
         if (turnActions.Count >= 2) Execute();
