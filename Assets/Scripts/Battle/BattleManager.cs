@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
@@ -37,17 +38,25 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         // agi降順にソート
         turnActions.Sort((a, b) => a.Actor.status.Agi - b.Actor.status.Agi);
-        turnActions.ForEach((a)=>
+        StartCoroutine(ExecuteCore());
+        Debug.Log(enemy.status.Hp);
+    }
+
+    private IEnumerator ExecuteCore()
+    {
+        foreach (var a in turnActions)
         {
+            a.Prepare();
+            yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             a.Exec();
+            yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             UpdatePlayersStatusView();
             enemyList.ForEach((e) => 
             {
                 e.UpdateHealthBar();
             });
-        });
+        }
         turnActions.Clear();
-        Debug.Log(enemy.status.Hp);
     }
 
     private void UpdatePlayersStatusView()

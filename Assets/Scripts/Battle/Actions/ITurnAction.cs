@@ -10,5 +10,7 @@ public interface ITurnAction
         set;
     }
 
+    void Prepare();
+    
     void Exec();
 }
