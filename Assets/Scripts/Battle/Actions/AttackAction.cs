@@ -23,15 +23,15 @@ public class AttackAction : ITurnAction
 
     public void Prepare()
     {
-        if (Actor.isDead) return;
+        if (Actor.IsDead) return;
         MessageWindow.Instance.MakeWindow("攻撃するよ");
     }
 
     public void Exec()
     {
-        if (Actor.isDead) return;
-        int damage = Mathf.Clamp(Actor.status.Atk - Target.status.Def, 0, Target.status.Hp);
-        Target.status.Hp -= damage;
+        if (Actor.IsDead) return;
+        int damage = Mathf.Clamp(Actor.Status.Atk - Target.Status.Def, 0, Target.Status.Hp);
+        Target.Status.Hp -= damage;
         MessageWindow.Instance.MakeWindow($"{damage} ダメージを与えた！");
     }
 }

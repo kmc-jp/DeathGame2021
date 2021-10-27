@@ -31,7 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        float healthRate = (float)EnemyCore.status.Hp / EnemyCore.status.MaxHp;
+        float healthRate = (float)EnemyCore.Status.Hp / EnemyCore.Status.MaxHp;
         HealthBarImage.transform.localScale = new Vector3(healthRate, 1.0f, 1.0f);
     }
 }

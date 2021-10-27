@@ -6,6 +6,6 @@ public class Enemy : Actor
 {
     public Enemy(Status _status)
     {
-        this.status = _status;
+        this.Status = _status;
     }
 }

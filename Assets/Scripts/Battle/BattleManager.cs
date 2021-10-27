@@ -46,9 +46,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             turnActions.Add(e.Action());
         });
         // agi降順にソート
-        turnActions.Sort((a, b) => a.Actor.status.Agi - b.Actor.status.Agi);
+        turnActions.Sort((a, b) => a.Actor.Status.Agi - b.Actor.Status.Agi);
         StartCoroutine(ExecuteCore());
-        Debug.Log(enemy.status.Hp);
+        Debug.Log(enemy.Status.Hp);
     }
 
     private IEnumerator ExecuteCore()
@@ -70,9 +70,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private void UpdatePlayersStatusView()
     {
-        playerStatusView.SetHpText(player.status.Hp.ToString());
-        playerStatusView.SetMpText(player.status.Mp.ToString());
-        buddyStatusView.SetHpText(buddy.status.Hp.ToString());
-        buddyStatusView.SetMpText(buddy.status.Mp.ToString());
+        playerStatusView.SetHpText(player.Status.Hp.ToString());
+        playerStatusView.SetMpText(player.Status.Mp.ToString());
+        buddyStatusView.SetHpText(buddy.Status.Hp.ToString());
+        buddyStatusView.SetMpText(buddy.Status.Mp.ToString());
     }
 }

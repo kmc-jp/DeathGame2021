@@ -6,6 +6,6 @@ public class Player : Actor
 {
     public Player()
     {
-        this.status = new Status(100, 100, 20, 5, 5);
+        this.Status = new Status(100, 100, 20, 5, 5);
     }
 }

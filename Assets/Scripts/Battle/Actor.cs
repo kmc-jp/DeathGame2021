@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Actor
 {
-    public Status status
+    public Status Status
     {
         get;
         set;
@@ -15,11 +15,11 @@ public class Actor
 
     }
 
-    public bool isDead
+    public bool IsDead
     {
         get
         {
-            return this.status.Hp <= 0;
+            return this.Status.Hp <= 0;
         }
     }
 }
