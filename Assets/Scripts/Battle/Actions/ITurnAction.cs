@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ITurnAction
 {
+    // 優先度 0がデフォルト 大きいほど早く行動する
     int Priority
     {
         get;
@@ -16,6 +17,7 @@ public interface ITurnAction
         set;
     }
 
+    // ウィンドウを開かないときはfalse
     bool Prepare();
     
     void Exec();
