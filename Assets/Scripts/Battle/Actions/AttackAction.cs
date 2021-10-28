@@ -29,13 +29,14 @@ public class AttackAction : ITurnAction
         return true;
     }
 
-    public void Exec()
+    public bool Exec()
     {
-        if (Actor.IsDead) return;
+        if (Actor.IsDead) return false;
         int damage = Actor.Status.Atk - Target.Status.Def;
         if (Target.IsGuard) damage = damage / 3;
         damage = Mathf.Clamp(damage, 0, Target.Status.Hp);
         Target.DealDamage(damage);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
+        return true;
     }
 }
