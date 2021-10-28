@@ -18,6 +18,7 @@ public class Player : Actor
         this.Skills = new List<SkillMaster>();
         // 回復を入れてテスト
         this.Skills.Add(SkillMaster.Heal);
+        this.Skills.Add(SkillMaster.Heal);
     }
 
     public override void DealDamage(int value)
