@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
@@ -26,8 +27,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     
     void Start()
     {
-        player = new Player("主人公", new Status(500, 100, 20, 10, 10));
-        buddy = new Player("相棒", new Status(350, 300, 20, 10, 10));
+        Image psv = playerStatusView.StatusPanel;
+        Image bsv = buddyStatusView.StatusPanel;
+        player = new Player("主人公", new Status(500, 100, 20, 10, 10), psv);
+        buddy = new Player("相棒", new Status(350, 300, 20, 10, 10), bsv);
         players = new List<Player>();
         players.Add(player);
         players.Add(buddy);

@@ -9,6 +9,7 @@ public class DisplayStatus : MonoBehaviour
     private Text hp;
     [SerializeField]
     private Text mp;
+    public Image StatusPanel;
 
     public void SetHpText(string hpText)
     {
