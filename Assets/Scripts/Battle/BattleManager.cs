@@ -47,6 +47,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         commandOrder ++;
     }
 
+    public void SkillButton()
+    {
+        
+    }
+
     public void GuardButton()
     {
         Actor actor = players[commandOrder];
