@@ -31,6 +31,7 @@ public class HealSkillAction : ISkillAction
         if (Actor.IsDead) return;
         int val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
         Target.Status.Hp += val;
+        Actor.Status.Mp -= this.MpCost;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の体力を {val} 回復");
     }
 }
