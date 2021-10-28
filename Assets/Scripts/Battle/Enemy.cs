@@ -5,7 +5,7 @@ using UniRx;
 using UnityEngine.UI;
 
 
-public class EnemyBehaviour : Actor
+public class Enemy : Actor
 {
     [SerializeField]
     private GameObject HealthBarImage;
