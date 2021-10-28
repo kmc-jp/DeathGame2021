@@ -1,12 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class Enemy : Actor
 {
-    public Enemy(string _name, Status _status)
+    [SerializeField]
+    private GameObject HealthBarImage;
+    [SerializeField]
+    private Image EnemyImage;
+    
+    void Start()
     {
-        this.Name = _name;
-        this.Status = _status;
+        this.Name = "ねこちゃん";
+        this.Status = new Status(100, 100, 20, 5, 5);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
+    public override void DealDamage(int value)
+    {
+        base.DealDamage(value);
+        if (value <= 0) return;
+        DamageEffect();
+    }
+
+    public ITurnAction Action()
+    {
+        int index = Random.Range(0, BattleManager.Instance.players.Count);
+        var target = BattleManager.Instance.players[index];
+        return new AttackAction(this, target);
+    }
+
+    public void UpdateHealthBar()
+    {
+        float healthRate = (float)Status.Hp / Status.MaxHp;
+        HealthBarImage.transform.localScale = new Vector3(healthRate, 1.0f, 1.0f);
+    }
+
+    public void DamageEffect()
+    {
+        this.EnemyImage.DOColor(Color.red, 0.2f).SetLoops(4, LoopType.Yoyo);
     }
 }
