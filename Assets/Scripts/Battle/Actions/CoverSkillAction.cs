@@ -27,6 +27,7 @@ public class CoverSkillAction : ISkillAction
         this.Actor = _actor;
         this.Target = _target;
         this.isBreak = _isBreak;
+        this.Priority = this.isBreak ? -1 : 1;
     }
 
     public bool Prepare()

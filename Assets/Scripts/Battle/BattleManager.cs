@@ -81,8 +81,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void GuardButton()
     {
         Actor actor = players[CommandOrder];
-        turnActions.Add(new GuardAction(actor, false, 1));
-        this.AddAction(new GuardAction(actor, true, -1));
+        turnActions.Add(new GuardAction(actor, false));
+        this.AddAction(new GuardAction(actor, true));
     }
 
     public void AddAction(ITurnAction action)

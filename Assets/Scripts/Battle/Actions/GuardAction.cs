@@ -12,11 +12,11 @@ public class GuardAction : ITurnAction
         set;
     }
 
-    public GuardAction(Actor _actor, bool _isBreak, int _priority)
+    public GuardAction(Actor _actor, bool _isBreak)
     {
         this.Actor = _actor;
         this.isBreak = _isBreak;
-        this.Priority = _priority;
+        this.Priority = this.isBreak ? -1 : 1;
     }
 
     public bool Prepare()
