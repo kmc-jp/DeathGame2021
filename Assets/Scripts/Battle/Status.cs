@@ -22,7 +22,7 @@ public class Status
     {
         this.MaxHp = hp;
         this.MaxMp = mp;
-        this.HpReactive = new ReactiveProperty<int>();
+        this.HpReactive = new ReactiveProperty<int>(hp);
         this.Hp = hp;
         this.Mp = mp;
         this.Atk = atk;
