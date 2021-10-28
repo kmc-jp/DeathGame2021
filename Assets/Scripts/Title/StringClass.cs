@@ -14,5 +14,6 @@ public class StringClass : MonoBehaviour
         Text0,
         Text1,
         Text2,
+        Text3
     };
 }

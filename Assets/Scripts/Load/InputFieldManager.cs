@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
  
 public class InputFieldManager : MonoBehaviour
 {
     //InputFieldを格納するための変数
-    InputField inputField;
- 
+    public InputField inputField;
+    public GameObject InputField;
+    public GameObject messageText;
+    public GameObject enterButton;
+    public GameObject backMessageButon;
+
+    public GameObject backTitleButton;
  
     // Start is called before the first frame update
     void Start()
     {
         //InputFieldコンポーネントを取得
+        InputField = GameObject.Find("InputField");
         inputField = GameObject.Find("InputField").GetComponent<InputField>();
+        messageText = GameObject.Find("Canvas/Panel/Text");
+        enterButton.SetActive(false);
+        backMessageButon.SetActive(false);
     }
  
  
@@ -22,9 +32,51 @@ public class InputFieldManager : MonoBehaviour
     {
         //InputFieldからテキスト情報を取得する
         string name = inputField.text;
-        Debug.Log(name);
- 
+    
         //入力フォームのテキストを空にする
         inputField.text = "";
+        if(name.Length > 4)
+        {
+            messageText.GetComponent<Text>().text = "4文字以内で入力してください";
+        }
+        else if(name.Length == 0)
+        {
+           messageText.GetComponent<Text>().text = "何か名前を入力してください";
+        }
+        else
+        {
+            messageText.GetComponent<Text>().text = $"{name}でいいですか？";
+            enterButton.SetActive(true);
+            backMessageButon.SetActive(true);
+            backTitleButton.SetActive(false);
+            InputField.SetActive(false);
+        }
     }
+
+    public void ClickEnter()
+    {
+        SceneManager.LoadScene("Door");
+    }
+
+    public void ClickBackText()
+    {
+        messageText.GetComponent<Text>().text = "名前を入力してくださいね(4文字以内)";
+        enterButton.SetActive(false);
+        backMessageButon.SetActive(false);
+        backTitleButton.SetActive(true);
+        InputField.SetActive(true);
+    }
+
+    public void ClickBackTitle()
+    {
+        if(messageText.GetComponent<Text>().text == "本当に戻りますか？(戻る場合はもう1度押してください)")
+        {
+            SceneManager.LoadScene("Title");
+        }
+        else
+        {
+            messageText.GetComponent<Text>().text = "本当に戻りますか？(戻る場合はもう1度押してください)";
+        }
+    }
+
 }
