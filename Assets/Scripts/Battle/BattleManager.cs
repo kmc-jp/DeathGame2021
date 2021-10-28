@@ -17,8 +17,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public List<Player> players;
     
     [SerializeField]
-    private List<EnemyBehaviour> enemyList;
-    private EnemyBehaviour enemy;
+    private List<Enemy> enemyList;
+    private Enemy enemy;
 
     private List<ITurnAction> turnActions;
 
