@@ -61,6 +61,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         CommandOrder ++;
     }
 
+    public void AddAction(ITurnAction action)
+    {
+        this.turnActions.Add(action);
+        if (CommandOrder >= 1) Execute();
+        CommandOrder ++;
+    }
+
     public void Execute()
     {
         enemyList.ForEach((e) =>
