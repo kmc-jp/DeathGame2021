@@ -621,8 +621,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
-  m_Size: {x: 0.05, y: 0.8}
+  m_Offset: {x: 0, y: -0.15}
+  m_Size: {x: 0.05, y: 0.75}
   m_Direction: 0
 --- !u!95 &894578703
 Animator:
@@ -689,7 +689,7 @@ TilemapCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
+  m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!483693784 &1510187971
