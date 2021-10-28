@@ -104,7 +104,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private IEnumerator ExecuteCore()
     {
-        // agi降順にソート
+        // priority降順 agi降順にソート
         var orderdTurnActions = turnActions
             .OrderByDescending(val => { return val.Priority; })
             .ThenBy(val => { return -val.Actor.Status.Agi; });
