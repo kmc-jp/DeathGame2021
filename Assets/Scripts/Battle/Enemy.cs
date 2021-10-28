@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
-
+using DG.Tweening;
 
 public class Enemy : Actor
 {
@@ -23,6 +23,13 @@ public class Enemy : Actor
     {
     }
 
+    public override void DealDamage(int value)
+    {
+        base.DealDamage(value);
+        if (value <= 0) return;
+        DamageEffect();
+    }
+
     public ITurnAction Action()
     {
         int index = Random.Range(0, BattleManager.Instance.players.Count);
@@ -34,5 +41,10 @@ public class Enemy : Actor
     {
         float healthRate = (float)Status.Hp / Status.MaxHp;
         HealthBarImage.transform.localScale = new Vector3(healthRate, 1.0f, 1.0f);
+    }
+
+    public void DamageEffect()
+    {
+        this.EnemyImage.DOColor(Color.red, 0.2f).SetLoops(4, LoopType.Yoyo);
     }
 }

@@ -35,7 +35,7 @@ public class AttackAction : ITurnAction
         int damage = Actor.Status.Atk - Target.Status.Def;
         if (Target.IsGuard) damage = damage / 3;
         damage = Mathf.Clamp(damage, 0, Target.Status.Hp);
-        Target.Status.Hp -= damage;
+        Target.DealDamage(damage);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
     }
 }

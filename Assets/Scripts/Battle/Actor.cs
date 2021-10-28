@@ -25,4 +25,9 @@ public class Actor: MonoBehaviour
         get;
         set;
     }
+
+    public virtual void DealDamage(int value)
+    {
+        this.Status.Hp -= value;
+    }
 }

@@ -437,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatusView: {fileID: 1823389004}
   buddyStatusView: {fileID: 434438467}
+  players: []
   enemyList:
   - {fileID: 547307986}
 --- !u!1 &547307984
@@ -489,7 +490,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea2109ac7d0b2d43a3ae9a3d5d8553c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   HealthBarImage: {fileID: 603057182}
+  EnemyImage: {fileID: 692881129}
 --- !u!1 &603057182
 GameObject:
   m_ObjectHideFlags: 0
