@@ -18,7 +18,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     
     [SerializeField]
     private List<EnemyBehaviour> enemyList;
-    private Enemy enemy;
+    private EnemyBehaviour enemy;
 
     private List<ITurnAction> turnActions;
 
@@ -37,7 +37,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void AttackButton()
     {
-        enemy = enemyList[0].EnemyCore;
+        enemy = enemyList[0];
         Actor actor = players[commandOrder];
         turnActions.Add(new AttackAction(actor, enemy));
         if (commandOrder >= 1) Execute();
@@ -83,7 +83,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             });
 
             bool clear = true;
-            foreach (var e in enemyList) { clear &= e.EnemyCore.IsDead; }
+            foreach (var e in enemyList) { clear &= e.IsDead; }
             if (clear) 
             {
                 MessageWindow.Instance.MakeWindow("敵をたおした！");

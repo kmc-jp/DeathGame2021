@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor
+public class Actor: MonoBehaviour
 {
     public string Name;
 
@@ -10,11 +10,6 @@ public class Actor
     {
         get;
         set;
-    }
-
-    public virtual void SetHp(int value)
-    {
-
     }
 
     public bool IsDead
