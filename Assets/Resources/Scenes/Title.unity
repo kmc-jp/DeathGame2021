@@ -4035,7 +4035,7 @@ GameObject:
   - component: {fileID: 2078803559}
   - component: {fileID: 2078803558}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4056,7 +4056,7 @@ AudioSource:
   m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
