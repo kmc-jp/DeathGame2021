@@ -32,6 +32,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
+        // TODO: MonoBehaviourなのにnewしてて怒られてる
         player = new Player("主人公", new Status(500, 100, 20, 10, 10), psv);
         buddy = new Player("相棒", new Status(350, 300, 20, 10, 10), bsv);
         players = new List<Player>();
