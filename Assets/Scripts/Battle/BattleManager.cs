@@ -23,7 +23,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private List<ITurnAction> turnActions;
 
-    private int commandOrder = 0;
+    public int CommandOrder = 0;
     
     void Start()
     {
@@ -41,24 +41,24 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AttackButton()
     {
         enemy = enemyList[0];
-        Actor actor = players[commandOrder];
+        Actor actor = players[CommandOrder];
         turnActions.Add(new AttackAction(actor, enemy));
-        if (commandOrder >= 1) Execute();
-        commandOrder ++;
+        if (CommandOrder >= 1) Execute();
+        CommandOrder ++;
     }
 
     public void SkillButton()
     {
-        
+        // スキル一覧を表示する動作をつくる
     }
 
     public void GuardButton()
     {
-        Actor actor = players[commandOrder];
+        Actor actor = players[CommandOrder];
         turnActions.Add(new GuardAction(actor, false, 1));
         turnActions.Add(new GuardAction(actor, true, -1));
-        if (commandOrder >= 1) Execute();
-        commandOrder ++;
+        if (CommandOrder >= 1) Execute();
+        CommandOrder ++;
     }
 
     public void Execute()
@@ -101,7 +101,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
-        commandOrder = 0;
+        CommandOrder = 0;
     }
 
     private void UpdatePlayersStatusView()
