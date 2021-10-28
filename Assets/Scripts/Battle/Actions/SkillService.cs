@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum SkillMaster
 {
@@ -9,6 +10,13 @@ public enum SkillMaster
 
 public class SkillService : SingletonMonoBehaviour<SkillService>
 {
+    public readonly Dictionary<SkillMaster, string> SkillNameMaster = new Dictionary<SkillMaster, string>(){
+        { SkillMaster.Heal, "回復呪文"},
+    };
+
+    public readonly Dictionary<SkillMaster, Type> SkillTypeMaster = new Dictionary<SkillMaster, Type>(){
+        { SkillMaster.Heal, typeof(HealSkillAction)},
+    };
     
     void Start()
     {

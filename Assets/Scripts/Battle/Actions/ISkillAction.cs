@@ -4,6 +4,12 @@ using UnityEngine;
 
 public interface ISkillAction : ITurnAction
 {
-    string Name { get; }
+
+    Actor Target
+    {
+        get;
+        set;
+    }
+    
     int MpCost { get; }
 }

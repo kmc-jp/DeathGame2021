@@ -21,6 +21,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private List<Enemy> enemyList;
     private Enemy enemy;
 
+    [SerializeField]
+    private GameObject skillButtonField;
+
     private List<ITurnAction> turnActions;
 
     public int CommandOrder = 0;
@@ -42,23 +45,44 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         enemy = enemyList[0];
         Actor actor = players[CommandOrder];
-        turnActions.Add(new AttackAction(actor, enemy));
-        if (CommandOrder >= 1) Execute();
-        CommandOrder ++;
+        this.AddAction(new AttackAction(actor, enemy));
     }
 
     public void SkillButton()
     {
         // スキル一覧を表示する動作をつくる
+        Player p = players[CommandOrder];
+        List<SkillMaster> skills = p.Skills;
+        for (int i = 0; i < skills.Count; i++ )
+        {
+            SkillMaster s = skills[i];
+            GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
+            GameObject skillButton = (GameObject)Instantiate(
+                buttonObj, 
+                skillButtonField.transform);
+            skillButton.GetComponent <RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
+            Button buttonComponent = skillButton.GetComponent<Button>();
+            SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
+            skillActionButton.SetLabel(SkillService.Instance.SkillNameMaster[s]);
+            buttonComponent.OnClickAsObservable()
+                .First()
+                .Select(_ => s)
+                .Subscribe(id => 
+                {
+                    ISkillAction action = SkillService.Instance.MakeSkillAction(s);
+                    action.Actor = p;
+                    action.Target = p;
+                    this.AddAction(action);
+                })
+                .AddTo(this);
+        }
     }
 
     public void GuardButton()
     {
         Actor actor = players[CommandOrder];
         turnActions.Add(new GuardAction(actor, false, 1));
-        turnActions.Add(new GuardAction(actor, true, -1));
-        if (CommandOrder >= 1) Execute();
-        CommandOrder ++;
+        this.AddAction(new GuardAction(actor, true, -1));
     }
 
     public void AddAction(ITurnAction action)
@@ -66,6 +90,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         this.turnActions.Add(action);
         if (CommandOrder >= 1) Execute();
         CommandOrder ++;
+        ClearSkillPanel();
     }
 
     public void Execute()
@@ -117,5 +142,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerStatusView.SetMpText(player.Status.Mp.ToString());
         buddyStatusView.SetHpText(buddy.Status.Hp.ToString());
         buddyStatusView.SetMpText(buddy.Status.Mp.ToString());
+    }
+
+    private void ClearSkillPanel()
+    {
+        foreach (Transform t in skillButtonField.transform)
+        {
+            GameObject.Destroy(t.gameObject);
+        }
     }
 }

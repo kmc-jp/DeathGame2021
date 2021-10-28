@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillActionButton : MonoBehaviour
 {
+    [SerializeField]
+    private Text label;
     void Start()
     {
+        
+    }
 
+    public void SetLabel(string value)
+    {
+        label.text = value;
     }
 
     public void OnClick()
     {
-        // 回復で仮組
-        Actor actor = BattleManager.Instance.players[BattleManager.Instance.CommandOrder];
-        BattleManager.Instance.AddAction(new HealSkillAction(actor, actor));
     }
 }

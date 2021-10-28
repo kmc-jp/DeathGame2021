@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class HealSkillAction : ISkillAction
 {
-    public string Name { get; } = "回復呪文";
+    public SkillMaster Id = SkillMaster.Heal;
+    public string Name 
+    { 
+        get
+        {   
+            return SkillService.Instance.SkillNameMaster[Id];
+        }
+    }
     public int MpCost { get; } = 5;
     public int Priority { get; set; } = 0;
     private int healValue = 100;
@@ -13,6 +20,7 @@ public class HealSkillAction : ISkillAction
 
     public Actor Target { get; set; }
 
+    public HealSkillAction() {  }
     public HealSkillAction(Actor _actor, Actor _target)
     {
         this.Actor = _actor;
