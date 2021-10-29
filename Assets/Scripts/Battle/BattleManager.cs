@@ -47,13 +47,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void AttackButton()
     {
-        enemy = enemyList[0];
         Actor actor = playerList[commandOrder];
-        this.AddAction(new AttackAction(actor, enemy));
+        MakeTargetButton(actor, SkillMaster.None, true);
     }
 
     public void SkillButton()
     {
+        ClearSkillPanel();
         Player actor = playerList[commandOrder];
         List<SkillMaster> skills = actor.Skills;
         for (int i = 0; i < skills.Count; i++ )
@@ -73,6 +73,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
     {
+        ClearSkillPanel();
         List<Actor> targets = new List<Actor>();
         if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
             else targets = playerList.Cast<Actor>().ToList();
