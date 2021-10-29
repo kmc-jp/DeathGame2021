@@ -51,8 +51,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void SkillButton()
     {
-        Player p = playerList[CommandOrder];
-        List<SkillMaster> skills = p.Skills;
+        Player actor = playerList[CommandOrder];
+        List<SkillMaster> skills = actor.Skills;
         for (int i = 0; i < skills.Count; i++ )
         {
             SkillMaster s = skills[i];
@@ -66,10 +66,37 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             skillActionButton.SetLabel(SkillService.Instance.SkillNameMaster[s]);
             buttonComponent.OnClickAsObservable()
                 .First()
-                .Select(_ => s)
-                .Subscribe(id => 
+                .Subscribe(_ => 
                 {
-                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(s, p, p);
+                    ClearSkillPanel();
+                    MakeTargetButton(actor, s, false);
+                })
+                .AddTo(this);
+        }
+    }
+
+    public void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
+    {
+        List<Actor> targets = new List<Actor>();
+        if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
+            else targets = playerList.Cast<Actor>().ToList();
+        
+        for (int i = 0; i < targets.Count; i++)
+        {
+            Actor t = targets[i];
+            GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
+            GameObject skillButton = (GameObject)Instantiate(
+                buttonObj, 
+                skillButtonField.transform);
+            skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
+            Button buttonComponent = skillButton.GetComponent<Button>();
+            SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
+            skillActionButton.SetLabel(t.Name);
+            buttonComponent.OnClickAsObservable()
+                .First()
+                .Subscribe(_ => 
+                {
+                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
                     this.AddAction(actions);
                 })
                 .AddTo(this);
