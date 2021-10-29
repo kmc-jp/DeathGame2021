@@ -15,7 +15,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private DisplayStatus buddyStatusView;
     private Player buddy;
 
-    public List<Player> players;
+    public List<Player> playerList;
     
     [SerializeField]
     private List<Enemy> enemyList;
@@ -35,9 +35,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         // TODO: MonoBehaviourなのにnewしてて怒られてる
         player = new Player("主人公", new Status(500, 100, 20, 10, 10), psv);
         buddy = new Player("相棒", new Status(350, 300, 20, 10, 10), bsv);
-        players = new List<Player>();
-        players.Add(player);
-        players.Add(buddy);
+        playerList = new List<Player>();
+        playerList.Add(player);
+        playerList.Add(buddy);
         turnActions = new List<ITurnAction>();
         UpdatePlayersStatusView();
     }
@@ -45,13 +45,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AttackButton()
     {
         enemy = enemyList[0];
-        Actor actor = players[CommandOrder];
+        Actor actor = playerList[CommandOrder];
         this.AddAction(new AttackAction(actor, enemy));
     }
 
     public void SkillButton()
     {
-        Player p = players[CommandOrder];
+        Player p = playerList[CommandOrder];
         List<SkillMaster> skills = p.Skills;
         for (int i = 0; i < skills.Count; i++ )
         {
@@ -78,7 +78,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void GuardButton()
     {
-        Actor actor = players[CommandOrder];
+        Actor actor = playerList[CommandOrder];
         turnActions.Add(new GuardAction(actor, false));
         this.AddAction(new GuardAction(actor, true));
     }

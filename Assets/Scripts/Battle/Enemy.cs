@@ -32,8 +32,9 @@ public class Enemy : Actor
 
     public ITurnAction Action()
     {
-        int index = Random.Range(0, BattleManager.Instance.players.Count);
-        var target = BattleManager.Instance.players[index];
+        int index = Random.Range(0, BattleManager.Instance.playerList.Count);
+        // TODO: 死んでたらターゲットしない
+        var target = BattleManager.Instance.playerList[index];
         return new AttackAction(this, target);
     }
 
