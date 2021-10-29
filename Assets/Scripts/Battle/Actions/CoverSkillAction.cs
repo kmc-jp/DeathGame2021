@@ -44,7 +44,7 @@ public class CoverSkillAction : ISkillAction
             return true;
         }
         Target.CoveredBy = Actor;
-        MessageWindow.Instance.MakeWindow($"{Actor.Name} は身代わりになっている");
+        MessageWindow.Instance.MakeWindow($"{Actor.Name} は {Target.Name} の身代わりになっている");
         return true;
     }
 }
