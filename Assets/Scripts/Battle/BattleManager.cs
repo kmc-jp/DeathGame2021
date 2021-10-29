@@ -56,15 +56,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         for (int i = 0; i < skills.Count; i++ )
         {
             SkillMaster s = skills[i];
-            GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
-            GameObject skillButton = (GameObject)Instantiate(
-                buttonObj, 
-                skillButtonField.transform);
-            skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
-            Button buttonComponent = skillButton.GetComponent<Button>();
-            SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
-            skillActionButton.SetLabel(SkillService.Instance.SkillNameMaster[s]);
-            buttonComponent.OnClickAsObservable()
+            Button button = CreateMiddleButton(SkillService.Instance.SkillNameMaster[s], i);
+            button.OnClickAsObservable()
                 .First()
                 .Subscribe(_ => 
                 {
@@ -84,15 +77,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         for (int i = 0; i < targets.Count; i++)
         {
             Actor t = targets[i];
-            GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
-            GameObject skillButton = (GameObject)Instantiate(
-                buttonObj, 
-                skillButtonField.transform);
-            skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
-            Button buttonComponent = skillButton.GetComponent<Button>();
-            SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
-            skillActionButton.SetLabel(t.Name);
-            buttonComponent.OnClickAsObservable()
+            Button button = CreateMiddleButton(t.Name, i);
+            button.OnClickAsObservable()
                 .First()
                 .Subscribe(_ => 
                 {
@@ -101,6 +87,19 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 })
                 .AddTo(this);
         }
+    }
+
+    private Button CreateMiddleButton(string label, int idx)
+    {
+        GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
+        GameObject skillButton = (GameObject)Instantiate(
+            buttonObj, 
+            skillButtonField.transform);
+        skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * idx, 0.0f);
+        Button buttonComponent = skillButton.GetComponent<Button>();
+        SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
+        skillActionButton.SetLabel(label);
+        return buttonComponent;
     }
 
     public void GuardButton()
