@@ -20,7 +20,6 @@ public class HealSkillAction : ISkillAction
 
     public Actor Target { get; set; }
 
-    public HealSkillAction() {  }
     public HealSkillAction(Actor _actor, Actor _target)
     {
         this.Actor = _actor;

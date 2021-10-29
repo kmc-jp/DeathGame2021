@@ -51,7 +51,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void SkillButton()
     {
-        // スキル一覧を表示する動作をつくる
         Player p = players[CommandOrder];
         List<SkillMaster> skills = p.Skills;
         for (int i = 0; i < skills.Count; i++ )
@@ -61,7 +60,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             GameObject skillButton = (GameObject)Instantiate(
                 buttonObj, 
                 skillButtonField.transform);
-            skillButton.GetComponent <RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
+            skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
             Button buttonComponent = skillButton.GetComponent<Button>();
             SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
             skillActionButton.SetLabel(SkillService.Instance.SkillNameMaster[s]);
@@ -70,10 +69,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 .Select(_ => s)
                 .Subscribe(id => 
                 {
-                    ISkillAction action = SkillService.Instance.MakeSkillAction(s);
-                    action.Actor = p;
-                    action.Target = p;
-                    this.AddAction(action);
+                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(s, p, p);
+                    this.AddAction(actions);
                 })
                 .AddTo(this);
         }
@@ -89,6 +86,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AddAction(ITurnAction action)
     {
         this.turnActions.Add(action);
+        if (CommandOrder >= 1) Execute();
+        CommandOrder ++;
+        ClearSkillPanel();
+    }
+
+    public void AddAction(List<ITurnAction> actions)
+    {
+        this.turnActions.AddRange(actions);
         if (CommandOrder >= 1) Execute();
         CommandOrder ++;
         ClearSkillPanel();

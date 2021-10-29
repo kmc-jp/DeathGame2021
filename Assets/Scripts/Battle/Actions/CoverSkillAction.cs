@@ -20,8 +20,7 @@ public class CoverSkillAction : ISkillAction
     public Actor Target { get; set; }
 
     private bool isBreak;
-
-    public CoverSkillAction() {  }
+    
     public CoverSkillAction(Actor _actor, Actor _target, bool _isBreak)
     {
         this.Actor = _actor;

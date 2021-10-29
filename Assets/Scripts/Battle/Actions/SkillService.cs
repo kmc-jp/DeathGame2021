@@ -26,21 +26,22 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
         
     }
 
-    public ISkillAction MakeSkillAction(SkillMaster skillId)
+    public List<ITurnAction> MakeSkillAction(SkillMaster skillId, Actor actor, Actor target)
     {
-        ISkillAction action = null;
+        List<ITurnAction> actions = new List<ITurnAction>();
         switch(skillId)
         {
             case SkillMaster.Heal:
-                action = new HealSkillAction();
+                actions.Add(new HealSkillAction(actor, target));
                 break;
             case SkillMaster.Cover:
-                action = new CoverSkillAction();
+                actions.Add(new CoverSkillAction(actor, target, false));
+                actions.Add(new CoverSkillAction(actor, target, true));
                 break;
             default:
                 Debug.Log("No Such Skill");
                 break;
         }
-        return action;
+        return actions;
     }
 }
