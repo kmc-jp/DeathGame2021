@@ -9,10 +9,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
     [SerializeField]
     private DisplayStatus playerStatusView;
-    private Player player;
     
     [SerializeField]
     private DisplayStatus buddyStatusView;
+    private Player player;
     private Player buddy;
 
     public List<Player> playerList;
@@ -24,15 +24,18 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     [SerializeField]
     private GameObject skillButtonField;
 
+    // そのターンに実行されるアクション
     private List<ITurnAction> turnActions;
 
-    public int CommandOrder = 0;
+    // 0なら主人公 1なら相棒
+    private int commandOrder = 0;
     
     void Start()
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
         // TODO: MonoBehaviourなのにnewしてて怒られてる
+        // MonoBehaviourにActor(Monobehaviour継承しない)を持たせる方が多分良い
         player = new Player("主人公", new Status(500, 100, 20, 10, 10), psv);
         buddy = new Player("相棒", new Status(350, 300, 20, 10, 10), bsv);
         playerList = new List<Player>();
@@ -45,13 +48,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AttackButton()
     {
         enemy = enemyList[0];
-        Actor actor = playerList[CommandOrder];
+        Actor actor = playerList[commandOrder];
         this.AddAction(new AttackAction(actor, enemy));
     }
 
     public void SkillButton()
     {
-        Player actor = playerList[CommandOrder];
+        Player actor = playerList[commandOrder];
         List<SkillMaster> skills = actor.Skills;
         for (int i = 0; i < skills.Count; i++ )
         {
@@ -104,7 +107,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void GuardButton()
     {
-        Actor actor = playerList[CommandOrder];
+        Actor actor = playerList[commandOrder];
         turnActions.Add(new GuardAction(actor, false));
         this.AddAction(new GuardAction(actor, true));
     }
@@ -112,16 +115,16 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AddAction(ITurnAction action)
     {
         this.turnActions.Add(action);
-        if (CommandOrder >= 1) Execute();
-        CommandOrder ++;
+        if (commandOrder >= 1) Execute();
+        commandOrder ++;
         ClearSkillPanel();
     }
 
     public void AddAction(List<ITurnAction> actions)
     {
         this.turnActions.AddRange(actions);
-        if (CommandOrder >= 1) Execute();
-        CommandOrder ++;
+        if (commandOrder >= 1) Execute();
+        commandOrder ++;
         ClearSkillPanel();
     }
 
@@ -165,7 +168,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
-        CommandOrder = 0;
+        commandOrder = 0;
     }
 
     private void UpdatePlayersStatusView()
