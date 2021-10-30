@@ -30,6 +30,7 @@ public class Player : Actor
         DOTween.Restart(this.StatusPanel);
         this.StatusPanel.DOKill(true);
         this.StatusPanel.DOColor(Color.red, 0.2f).SetLoops(4, LoopType.Yoyo);
+        BattleManager.Instance.PlayDamageSE();
     }
 
     public Tweener SelectCommandEffect()

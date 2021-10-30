@@ -25,7 +25,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private GameObject skillButtonField;
 
     [SerializeField]
-    private AudioSource buttonSE;
+    private GameObject audioManager;
+    private List<AudioSource> sounds;
 
     // そのターンに実行されるアクション
     private List<ITurnAction> turnActions;
@@ -55,6 +56,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(player);
         playerList.Add(buddy);
         turnActions = new List<ITurnAction>();
+        sounds = audioManager.GetComponents<AudioSource>().ToList();
+
         UpdatePlayersStatusView();
         PlayCommandSelectEffect(commandOrder);
     }
@@ -239,6 +242,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     public void PlayButtonSE()
     {
-        buttonSE.PlayOneShot(buttonSE.clip);
+        sounds[0].PlayOneShot(sounds[0].clip);
+    }
+
+    public void PlayDamageSE()
+    {
+        sounds[1].PlayOneShot(sounds[1].clip);
     }
 }
