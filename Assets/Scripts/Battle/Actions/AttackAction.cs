@@ -32,6 +32,8 @@ public class AttackAction : ITurnAction
     public bool Exec()
     {
         if (Actor.IsDead) return false;
+        // CoverSkill
+        if (Target.CoveredBy != null) Target = Target.CoveredBy;
         int damage = Actor.Status.Atk - Target.Status.Def;
         if (Target.IsGuard) damage = damage / 3;
         damage = Mathf.Clamp(damage, 0, Target.Status.Hp);
