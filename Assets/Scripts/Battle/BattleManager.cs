@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
@@ -29,6 +30,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     // 0なら主人公 1なら相棒
     private int commandOrder = 0;
+
+    private Tween commandSelectTween;
     
     void Start()
     {
@@ -51,6 +54,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(buddy);
         turnActions = new List<ITurnAction>();
         UpdatePlayersStatusView();
+        PlayCommandSelectEffect(commandOrder);
     }
 
     public void AttackButton()
@@ -91,6 +95,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         if (commandOrder >= 1) Execute();
         commandOrder ++;
         ClearSkillPanel();
+        PlayCommandSelectEffect(commandOrder);
     }
 
     public void AddAction(List<ITurnAction> actions)
@@ -99,6 +104,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         if (commandOrder >= 1) Execute();
         commandOrder ++;
         ClearSkillPanel();
+        PlayCommandSelectEffect(commandOrder);
     }
 
     public void Execute()
@@ -112,6 +118,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private IEnumerator ExecuteCore()
     {
+        StopCommandSelectEffect();
         // priority降順 agi降順にソート
         var orderdTurnActions = turnActions
             .OrderByDescending(val => { return val.Priority; })
@@ -145,6 +152,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
         commandOrder = 0;
+        PlayCommandSelectEffect(commandOrder);
     }
 
     public void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
@@ -196,6 +204,21 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         foreach (Transform t in skillButtonField.transform)
         {
             GameObject.Destroy(t.gameObject);
+        }
+    }
+
+    private void PlayCommandSelectEffect(int order)
+    {
+        StopCommandSelectEffect();
+        commandSelectTween = playerList[order].SelectCommandEffect();
+    }
+
+    private void StopCommandSelectEffect()
+    {
+        if (commandSelectTween != null) 
+        {
+            commandSelectTween.Restart();
+            commandSelectTween.Kill();
         }
     }
 }
