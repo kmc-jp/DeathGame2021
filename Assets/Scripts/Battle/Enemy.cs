@@ -46,6 +46,8 @@ public class Enemy : Actor
 
     public void DamageEffect()
     {
+        DOTween.Restart(this.EnemyImage);
+        this.EnemyImage.DOKill(true);
         this.EnemyImage.DOColor(Color.red, 0.2f).SetLoops(4, LoopType.Yoyo);
     }
 }

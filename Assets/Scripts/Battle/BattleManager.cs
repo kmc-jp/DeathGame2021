@@ -92,18 +92,26 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AddAction(ITurnAction action)
     {
         this.turnActions.Add(action);
-        if (commandOrder >= 1) Execute();
-        commandOrder ++;
         ClearSkillPanel();
+        if (commandOrder >= 1) 
+        {
+            Execute();
+            return;
+        }
+        commandOrder ++;
         PlayCommandSelectEffect(commandOrder);
     }
 
     public void AddAction(List<ITurnAction> actions)
     {
         this.turnActions.AddRange(actions);
-        if (commandOrder >= 1) Execute();
-        commandOrder ++;
         ClearSkillPanel();
+        if (commandOrder >= 1) 
+        {
+            Execute();
+            return;
+        }
+        commandOrder ++;
         PlayCommandSelectEffect(commandOrder);
     }
 

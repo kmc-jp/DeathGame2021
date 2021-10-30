@@ -27,11 +27,15 @@ public class Player : Actor
 
     public void DamageEffect()
     {
+        DOTween.Restart(this.StatusPanel);
+        this.StatusPanel.DOKill(true);
         this.StatusPanel.DOColor(Color.red, 0.2f).SetLoops(4, LoopType.Yoyo);
     }
 
     public Tweener SelectCommandEffect()
     {
+        DOTween.Restart(this.StatusPanel);
+        this.StatusPanel.DOKill(true);
         return this.StatusPanel.DOColor(new Color(1.0f, 1.0f, 0.6f, 1.0f), 0.7f).SetLoops(-1, LoopType.Yoyo);
     }
 }
