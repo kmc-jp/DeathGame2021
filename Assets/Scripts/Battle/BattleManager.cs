@@ -78,42 +78,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 .AddTo(this);
         }
     }
-
-    public void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
-    {
-        ClearSkillPanel();
-        List<Actor> targets = new List<Actor>();
-        if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
-            else targets = playerList.Cast<Actor>().ToList();
-        
-        for (int i = 0; i < targets.Count; i++)
-        {
-            Actor t = targets[i];
-            Button button = CreateMiddleButton(t.Name, i);
-            button.OnClickAsObservable()
-                .First()
-                .Subscribe(_ => 
-                {
-                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
-                    this.AddAction(actions);
-                })
-                .AddTo(this);
-        }
-    }
-
-    private Button CreateMiddleButton(string label, int idx)
-    {
-        GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
-        GameObject skillButton = (GameObject)Instantiate(
-            buttonObj, 
-            skillButtonField.transform);
-        skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * idx, 0.0f);
-        Button buttonComponent = skillButton.GetComponent<Button>();
-        SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
-        skillActionButton.SetLabel(label);
-        return buttonComponent;
-    }
-
     public void GuardButton()
     {
         Actor actor = playerList[commandOrder];
@@ -182,6 +146,42 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         turnActions.Clear();
         commandOrder = 0;
     }
+
+    public void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
+    {
+        ClearSkillPanel();
+        List<Actor> targets = new List<Actor>();
+        if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
+            else targets = playerList.Cast<Actor>().ToList();
+        
+        for (int i = 0; i < targets.Count; i++)
+        {
+            Actor t = targets[i];
+            Button button = CreateMiddleButton(t.Name, i);
+            button.OnClickAsObservable()
+                .First()
+                .Subscribe(_ => 
+                {
+                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
+                    this.AddAction(actions);
+                })
+                .AddTo(this);
+        }
+    }
+
+    private Button CreateMiddleButton(string label, int idx)
+    {
+        GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
+        GameObject skillButton = (GameObject)Instantiate(
+            buttonObj, 
+            skillButtonField.transform);
+        skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * idx, 0.0f);
+        Button buttonComponent = skillButton.GetComponent<Button>();
+        SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
+        skillActionButton.SetLabel(label);
+        return buttonComponent;
+    }
+
 
     private void UpdatePlayersStatusView()
     {
