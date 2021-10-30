@@ -12,11 +12,11 @@ public class GuardAction : ITurnAction
         set;
     }
 
-    public GuardAction(Actor _actor, bool _isBreak, int _priority)
+    public GuardAction(Actor _actor, bool _isBreak)
     {
         this.Actor = _actor;
         this.isBreak = _isBreak;
-        this.Priority = _priority;
+        this.Priority = this.isBreak ? -1 : 1;
     }
 
     public bool Prepare()
@@ -24,16 +24,17 @@ public class GuardAction : ITurnAction
         return false;
     }
 
-    public void Exec()
+    public bool Exec()
     {
-        if (Actor.IsDead) return;
+        if (Actor.IsDead) return false;
         if (isBreak)
         {
             Actor.IsGuard = false;
             MessageWindow.Instance.MakeWindow($"{Actor.Name} はぼうぎょをといた");
-            return;
+            return true;
         }
         Actor.IsGuard = true;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} はぼうぎょしている！");
+        return true;
     }
 }

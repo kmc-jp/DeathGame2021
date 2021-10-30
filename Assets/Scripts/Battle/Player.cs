@@ -10,15 +10,12 @@ public class Player : Actor
 
     public List<SkillMaster> Skills;
 
-    public Player(string _name, Status _status, Image _statusPanel)
+    public Player(string _name, Status _status, Image _statusPanel, List<SkillMaster> _skills)
     {
         this.Name = _name;
         this.Status = _status;
         this.StatusPanel = _statusPanel;
-        this.Skills = new List<SkillMaster>();
-        // 回復を入れてテスト
-        this.Skills.Add(SkillMaster.Heal);
-        this.Skills.Add(SkillMaster.Heal);
+        this.Skills = _skills;
     }
 
     public override void DealDamage(int value)
@@ -30,6 +27,15 @@ public class Player : Actor
 
     public void DamageEffect()
     {
+        DOTween.Restart(this.StatusPanel);
+        this.StatusPanel.DOKill(true);
         this.StatusPanel.DOColor(Color.red, 0.2f).SetLoops(4, LoopType.Yoyo);
+    }
+
+    public Tweener SelectCommandEffect()
+    {
+        DOTween.Restart(this.StatusPanel);
+        this.StatusPanel.DOKill(true);
+        return this.StatusPanel.DOColor(new Color(1.0f, 1.0f, 0.6f, 1.0f), 0.7f).SetLoops(-1, LoopType.Yoyo);
     }
 }
