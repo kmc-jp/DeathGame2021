@@ -30,9 +30,9 @@ public class InputFieldManager : MonoBehaviour
     //入力された名前情報を読み取ってコンソールに出力する関数
     public void GetInputName()
     {
-        //InputFieldからテキスト情報を取得する
         string name = inputField.text;
-    
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
         //入力フォームのテキストを空にする
         inputField.text = "";
         if(name.Length > 4)
@@ -51,6 +51,8 @@ public class InputFieldManager : MonoBehaviour
             backTitleButton.SetActive(false);
             InputField.SetActive(false);
         }
+        }
+
     }
 
     public void ClickEnter()
