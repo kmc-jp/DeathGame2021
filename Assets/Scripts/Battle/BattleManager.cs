@@ -158,8 +158,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             }
-            a.Exec();
-            yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+            if (a.Exec())
+            {
+                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+            }
             UpdatePlayersStatusView();
             enemyList.ForEach((e) => 
             {
@@ -170,6 +172,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             foreach (var e in enemyList) { clear &= e.IsDead; }
             if (clear) 
             {
+                // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
                 break;
