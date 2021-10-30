@@ -20,7 +20,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     
     [SerializeField]
     private List<Enemy> enemyList;
-    private Enemy enemy;
 
     [SerializeField]
     private GameObject skillButtonField;
@@ -89,7 +88,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         this.AddAction(new GuardAction(actor, true));
     }
 
-    public void AddAction(ITurnAction action)
+    private void AddAction(ITurnAction action)
     {
         this.turnActions.Add(action);
         ClearSkillPanel();
@@ -102,7 +101,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         PlayCommandSelectEffect(commandOrder);
     }
 
-    public void AddAction(List<ITurnAction> actions)
+    private void AddAction(List<ITurnAction> actions)
     {
         this.turnActions.AddRange(actions);
         ClearSkillPanel();
@@ -115,7 +114,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         PlayCommandSelectEffect(commandOrder);
     }
 
-    public void Execute()
+    private void Execute()
     {
         enemyList.ForEach((e) =>
         {
@@ -163,7 +162,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         PlayCommandSelectEffect(commandOrder);
     }
 
-    public void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
+    private void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
     {
         ClearSkillPanel();
         List<Actor> targets = new List<Actor>();
