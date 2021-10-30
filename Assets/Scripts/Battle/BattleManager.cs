@@ -24,6 +24,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     [SerializeField]
     private GameObject skillButtonField;
 
+    [SerializeField]
+    private AudioSource buttonSE;
+
     // そのターンに実行されるアクション
     private List<ITurnAction> turnActions;
 
@@ -59,12 +62,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void AttackButton()
     {
         Actor actor = playerList[commandOrder];
+        PlayButtonSE();
         MakeTargetButton(actor, SkillMaster.None, true);
     }
 
     public void SkillButton()
     {
         ClearSkillPanel();
+        PlayButtonSE();
         Player actor = playerList[commandOrder];
         List<SkillMaster> skills = actor.Skills;
         for (int i = 0; i < skills.Count; i++ )
@@ -75,6 +80,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 .First()
                 .Subscribe(_ => 
                 {
+                    PlayButtonSE();
                     ClearSkillPanel();
                     MakeTargetButton(actor, s, false);
                 })
@@ -83,6 +89,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     }
     public void GuardButton()
     {
+        PlayButtonSE();
         Actor actor = playerList[commandOrder];
         turnActions.Add(new GuardAction(actor, false));
         this.AddAction(new GuardAction(actor, true));
@@ -177,6 +184,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 .First()
                 .Subscribe(_ => 
                 {
+                    PlayButtonSE();
                     List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
                     this.AddAction(actions);
                 })
@@ -227,5 +235,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             commandSelectTween.Restart();
             commandSelectTween.Kill();
         }
+    }
+
+    public void PlayButtonSE()
+    {
+        buttonSE.PlayOneShot(buttonSE.clip);
     }
 }
