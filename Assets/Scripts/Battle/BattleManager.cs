@@ -42,7 +42,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         Image bsv = buddyStatusView.StatusPanel;
         // TODO: MonoBehaviourなのにnewしてて怒られてる
         // MonoBehaviourにActor(Monobehaviour継承しない)を持たせる方が多分良い
-        player = new Player("主人公",
+        player = new Player(PlayerPrefs.GetString("PLAYER_NAME"),
                 new Status(500, 100, 20, 10, 10),
                 psv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
