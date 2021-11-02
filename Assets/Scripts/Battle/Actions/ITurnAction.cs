@@ -20,5 +20,5 @@ public interface ITurnAction
     // ウィンドウを開かないときはfalse
     bool Prepare();
     
-    void Exec();
+    bool Exec();
 }

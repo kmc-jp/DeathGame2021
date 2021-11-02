@@ -4,96 +4,127 @@ using System.Linq;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
     [SerializeField]
     private DisplayStatus playerStatusView;
-    private Player player;
     
     [SerializeField]
     private DisplayStatus buddyStatusView;
+    private Player player;
     private Player buddy;
 
-    public List<Player> players;
+    public List<Player> playerList;
     
     [SerializeField]
     private List<Enemy> enemyList;
-    private Enemy enemy;
 
     [SerializeField]
     private GameObject skillButtonField;
 
+    [SerializeField]
+    private GameObject audioManager;
+    private List<AudioSource> sounds;
+
+    // そのターンに実行されるアクション
     private List<ITurnAction> turnActions;
 
-    public int CommandOrder = 0;
+    // 0なら主人公 1なら相棒
+    private int commandOrder = 0;
+
+    private Tween commandSelectTween;
     
     void Start()
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
-        player = new Player(PlayerPrefs.GetString("PLAYER_NAME"), new Status(500, 100, 20, 10, 10), psv);
-        buddy = new Player("相棒", new Status(350, 300, 20, 10, 10), bsv);
-        players = new List<Player>();
-        players.Add(player);
-        players.Add(buddy);
+        // TODO: MonoBehaviourなのにnewしてて怒られてる
+        // MonoBehaviourにActor(Monobehaviour継承しない)を持たせる方が多分良い
+        player = new Player("主人公",
+                new Status(500, 100, 20, 10, 10),
+                psv,
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
+                );
+        buddy = new Player("相棒",
+                new Status(350, 300, 20, 10, 10),
+                bsv,
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
+                );
+        playerList = new List<Player>();
+        playerList.Add(player);
+        playerList.Add(buddy);
         turnActions = new List<ITurnAction>();
+        sounds = audioManager.GetComponents<AudioSource>().ToList();
+
         UpdatePlayersStatusView();
+        PlayCommandSelectEffect(commandOrder);
     }
 
     public void AttackButton()
     {
-        enemy = enemyList[0];
-        Actor actor = players[CommandOrder];
-        this.AddAction(new AttackAction(actor, enemy));
+        Actor actor = playerList[commandOrder];
+        PlayButtonSE();
+        MakeTargetButton(actor, SkillMaster.None, true);
     }
 
     public void SkillButton()
     {
-        // スキル一覧を表示する動作をつくる
-        Player p = players[CommandOrder];
-        List<SkillMaster> skills = p.Skills;
+        ClearSkillPanel();
+        PlayButtonSE();
+        Player actor = playerList[commandOrder];
+        List<SkillMaster> skills = actor.Skills;
         for (int i = 0; i < skills.Count; i++ )
         {
             SkillMaster s = skills[i];
-            GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
-            GameObject skillButton = (GameObject)Instantiate(
-                buttonObj, 
-                skillButtonField.transform);
-            skillButton.GetComponent <RectTransform>().localPosition += new Vector3(0.0f, -50.0f * i, 0.0f);
-            Button buttonComponent = skillButton.GetComponent<Button>();
-            SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
-            skillActionButton.SetLabel(SkillService.Instance.SkillNameMaster[s]);
-            buttonComponent.OnClickAsObservable()
+            Button button = CreateMiddleButton(SkillService.Instance.SkillNameMaster[s], i);
+            button.OnClickAsObservable()
                 .First()
-                .Select(_ => s)
-                .Subscribe(id => 
+                .Subscribe(_ => 
                 {
-                    ISkillAction action = SkillService.Instance.MakeSkillAction(s);
-                    action.Actor = p;
-                    action.Target = p;
-                    this.AddAction(action);
+                    PlayButtonSE();
+                    ClearSkillPanel();
+                    MakeTargetButton(actor, s, false);
                 })
                 .AddTo(this);
         }
     }
-
     public void GuardButton()
     {
-        Actor actor = players[CommandOrder];
-        turnActions.Add(new GuardAction(actor, false, 1));
-        this.AddAction(new GuardAction(actor, true, -1));
+        PlayButtonSE();
+        Actor actor = playerList[commandOrder];
+        turnActions.Add(new GuardAction(actor, false));
+        this.AddAction(new GuardAction(actor, true));
     }
 
-    public void AddAction(ITurnAction action)
+    private void AddAction(ITurnAction action)
     {
         this.turnActions.Add(action);
-        if (CommandOrder >= 1) Execute();
-        CommandOrder ++;
         ClearSkillPanel();
+        if (commandOrder >= 1) 
+        {
+            Execute();
+            return;
+        }
+        commandOrder ++;
+        PlayCommandSelectEffect(commandOrder);
     }
 
-    public void Execute()
+    private void AddAction(List<ITurnAction> actions)
+    {
+        this.turnActions.AddRange(actions);
+        ClearSkillPanel();
+        if (commandOrder >= 1) 
+        {
+            Execute();
+            return;
+        }
+        commandOrder ++;
+        PlayCommandSelectEffect(commandOrder);
+    }
+
+    private void Execute()
     {
         enemyList.ForEach((e) =>
         {
@@ -104,7 +135,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
     private IEnumerator ExecuteCore()
     {
-        // agi降順にソート
+        StopCommandSelectEffect();
+        // priority降順 agi降順にソート
         var orderdTurnActions = turnActions
             .OrderByDescending(val => { return val.Priority; })
             .ThenBy(val => { return -val.Actor.Status.Agi; });
@@ -114,8 +146,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             }
-            a.Exec();
-            yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+            if (a.Exec())
+            {
+                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+            }
             UpdatePlayersStatusView();
             enemyList.ForEach((e) => 
             {
@@ -126,6 +160,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             foreach (var e in enemyList) { clear &= e.IsDead; }
             if (clear) 
             {
+                // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
                 break;
@@ -133,8 +168,46 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
-        CommandOrder = 0;
+        commandOrder = 0;
+        PlayCommandSelectEffect(commandOrder);
     }
+
+    private void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
+    {
+        ClearSkillPanel();
+        List<Actor> targets = new List<Actor>();
+        if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
+            else targets = playerList.Cast<Actor>().ToList();
+        
+        for (int i = 0; i < targets.Count; i++)
+        {
+            Actor t = targets[i];
+            Button button = CreateMiddleButton(t.Name, i);
+            button.OnClickAsObservable()
+                .First()
+                .Subscribe(_ => 
+                {
+                    PlayButtonSE();
+                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
+                    this.AddAction(actions);
+                })
+                .AddTo(this);
+        }
+    }
+
+    private Button CreateMiddleButton(string label, int idx)
+    {
+        GameObject buttonObj = (GameObject)Resources.Load("Prefabs/SkillButton");
+        GameObject skillButton = (GameObject)Instantiate(
+            buttonObj, 
+            skillButtonField.transform);
+        skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * idx, 0.0f);
+        Button buttonComponent = skillButton.GetComponent<Button>();
+        SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
+        skillActionButton.SetLabel(label);
+        return buttonComponent;
+    }
+
 
     private void UpdatePlayersStatusView()
     {
@@ -150,5 +223,30 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         {
             GameObject.Destroy(t.gameObject);
         }
+    }
+
+    private void PlayCommandSelectEffect(int order)
+    {
+        StopCommandSelectEffect();
+        commandSelectTween = playerList[order].SelectCommandEffect();
+    }
+
+    private void StopCommandSelectEffect()
+    {
+        if (commandSelectTween != null) 
+        {
+            commandSelectTween.Restart();
+            commandSelectTween.Kill();
+        }
+    }
+
+    public void PlayButtonSE()
+    {
+        sounds[0].PlayOneShot(sounds[0].clip);
+    }
+
+    public void PlayDamageSE()
+    {
+        sounds[1].PlayOneShot(sounds[1].clip);
     }
 }
