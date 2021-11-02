@@ -12,6 +12,7 @@ public class InputFieldManager : MonoBehaviour
     public GameObject messageText;
     public GameObject enterButton;
     public GameObject backMessageButon;
+    private string username;
 
     public GameObject backTitleButton;
  
@@ -30,22 +31,22 @@ public class InputFieldManager : MonoBehaviour
     //入力された名前情報を読み取ってコンソールに出力する関数
     public void GetInputName()
     {
-        string name = inputField.text;
+        username = inputField.text;
         if(Input.GetKeyDown(KeyCode.Return))
         {
         //入力フォームのテキストを空にする
         inputField.text = "";
-        if(name.Length > 4)
+        if(username.Length > 4)
         {
             messageText.GetComponent<Text>().text = "4文字以内で入力してください";
         }
-        else if(name.Length == 0)
+        else if(username.Length == 0)
         {
            messageText.GetComponent<Text>().text = "何か名前を入力してください";
         }
         else
         {
-            messageText.GetComponent<Text>().text = $"{name}でいいですか？";
+            messageText.GetComponent<Text>().text = $"{username}でいいですか？";
             enterButton.SetActive(true);
             backMessageButon.SetActive(true);
             backTitleButton.SetActive(false);
@@ -57,6 +58,7 @@ public class InputFieldManager : MonoBehaviour
 
     public void ClickEnter()
     {
+        PlayerPrefs.SetString("PLAYER_NAME", username);
         SceneManager.LoadScene("Door");
     }
 
