@@ -11,7 +11,7 @@ public class Kanban_Hyouji1 : MonoBehaviour
     void OnCollisionStay2D(Collision2D collison)
     {
         Panel.SetActive(true);
-        Dialog.GetComponent<Text>().text = StringClass.Text0;
+        Dialog.GetComponent<Text>().text = "あ";
     }
 
     void OnCollisionExit2D(Collision2D collision)

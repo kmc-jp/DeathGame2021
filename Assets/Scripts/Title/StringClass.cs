@@ -9,11 +9,14 @@ public class StringClass : MonoBehaviour
     public static readonly string Text2 = "冒険をはじめる→";
 
     public static readonly string Text3 = "いやな予感がする...今はやめておこう";
+
+    public static readonly string Text4 = "ここはステ振り屋です";
     public static readonly string[] Texts =
     {
         Text0,
         Text1,
         Text2,
-        Text3
+        Text3,
+        Text4
     };
 }
