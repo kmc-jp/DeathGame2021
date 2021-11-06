@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DoorDialogue : MonoBehaviour
 {
     public GameObject panel;
+    public GameObject window_stat;
     public GameObject Message;
     public MoveController moveController;
     private bool isMove;
@@ -16,12 +17,13 @@ public class DoorDialogue : MonoBehaviour
        Message = GameObject.Find("Canvas/WindowMessage/Message");
        panel.SetActive(false);
        moveController = GameObject.Find("Player").GetComponent<MoveController>();
+       window_stat.SetActive(false);
     }
 
     void Update()
     {
         Maine(textid);
-        //パネルが出ている間プレイヤーが動かないようにする
+        //メッセージが出ている間プレイヤーが動かないようにする
         if(panel.activeSelf)
         {
             moveController.PlayerSpeedfixed(0);

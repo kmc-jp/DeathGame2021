@@ -18,9 +18,8 @@ public class StringClass : MonoBehaviour
     public static readonly string Text8 = "8:わざを見る/ステータスを振り分ける";
      public static readonly string Text9 = "9:それではいってらっしゃいませ";
     public static readonly string Text10 = "";
-
-
-
+    public static readonly string Text11 = "";
+    public static readonly string Text12= "このまま進んでよろしいですか？";
     public static readonly string[] Texts =
     {
         Text0,
@@ -33,6 +32,8 @@ public class StringClass : MonoBehaviour
         Text7,
         Text8,
         Text9,
-        Text10
+        Text10,
+        Text11,
+        Text12
     };
 }
