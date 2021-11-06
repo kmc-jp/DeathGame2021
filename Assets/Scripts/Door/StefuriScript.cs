@@ -7,23 +7,74 @@ public class StefuriScript : MonoBehaviour
 {
     public GameObject panel;
     public GameObject Message;
-    public int textid = 4;
+    public MoveController moveController;
+    private bool isMove;
+    private bool isStay;
+    private int textid = 3;
     void Start()
     {
-       panel.SetActive(false);
        Message = GameObject.Find("Canvas/WindowMessage/Message");
+       panel.SetActive(false);
+       moveController = GameObject.Find("Player").GetComponent<MoveController>();
     }
-  void OnTriggerStay2D(Collider2D collider2)
-  {
-      if(Input.GetKeyUp(KeyCode.Z))
-      {
-        panel.SetActive(true);
-        
-      }
-  }
 
-  void OnTriggerExit2D(Collider2D collide2)
+    void Update()
+    {
+        Maine(textid);
+        if(panel.activeSelf)
+        {
+            moveController.PlayerSpeedfixed(0);
+           GameObject.Find("Player").GetComponent<AnimationStateController>().isMove = false;
+        }
+        else 
+        {
+            moveController.PlayerSpeedfixed(2.0f);
+            GameObject.Find("Player").GetComponent<AnimationStateController>().isMove = true;
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collider2)
+    {
+        isStay = true;
+    }
+  void OnCollisionExit2D(Collision2D collide2)
   {
       panel.SetActive(false);
+      isStay = false;
+      textid = 3;
+  }
+  public void ChangeDoorText(int id)
+    {
+        Message.GetComponent<Text>().text = StringClass.Texts[id];
+    }
+  void Maine(int n)
+  {
+          switch(n)
+          {
+              case 3:
+              if(Input.GetKeyUp(KeyCode.Z) && isStay)
+               {
+                   panel.SetActive(true);
+                   ChangeDoorText(n + 1);
+                   textid += 1;
+               }
+               break;
+
+              case 10:
+              panel.SetActive(false);
+              textid = 3;
+              break;
+
+              default:
+              
+               if(Input.GetKeyUp(KeyCode.Z) && panel.activeSelf)
+               {
+                   ChangeDoorText(n + 1);
+                   textid += 1;
+               }
+
+               break;
+          }
+
   }
 }
