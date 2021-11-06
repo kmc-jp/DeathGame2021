@@ -52,31 +52,39 @@ public class DoorDialogue : MonoBehaviour
     }
   void Maine(int n)
   {
-          switch(n)
-          {
-              case 3:
-              if(Input.GetKeyUp(KeyCode.Z) && isStay)
-               {
-                   panel.SetActive(true);
-                   ChangeDoorText(n + 1);
-                   textid += 1;
-               }
-               break;
+        switch(n)
+        {
+            case 3:
+            if(Input.GetKeyUp(KeyCode.Z) && isStay)
+            {
+                panel.SetActive(true);
+                ChangeDoorText(n + 1);
+                textid += 1;
+            }
+            break;
 
-              case 10:
-              panel.SetActive(false);
-              textid = 3;
-              break;
+            case 9:
+            window_stat.SetActive(true);
+            if(Input.GetKeyUp(KeyCode.Z))
+            {
+                window_stat.SetActive(false);
+                ChangeDoorText(n + 1);
+                textid += 1;
+            }
+            break;
 
-              default:
-              
-               if(Input.GetKeyUp(KeyCode.Z) && panel.activeSelf)
-               {
-                   ChangeDoorText(n + 1);
-                   textid += 1;
-               }
+            case 11:
+            panel.SetActive(false);
+            textid = 3;
+            break;
 
-               break;
+            default:
+            if(Input.GetKeyUp(KeyCode.Z) && panel.activeSelf)
+            {
+                ChangeDoorText(n + 1);
+                textid += 1;
+            }
+             break;
           }
 
   }

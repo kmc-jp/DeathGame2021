@@ -10,14 +10,14 @@ public class StringClass : MonoBehaviour
 
     public static readonly string Text3 = "いやな予感がする...今はやめておこう";
 
-    public static readonly string Text4 = "ここはステ振り屋です。";
+    public static readonly string Text4 = "ここはステ振り屋です";
 
     public static readonly string Text5 = "あなたの力を調整いたしましょうか";
-    public static readonly string Text6 = "6";
-    public static readonly string Text7 = "7";
-    public static readonly string Text8 = "8:わざを見る/ステータスを振り分ける";
-     public static readonly string Text9 = "9:それではいってらっしゃいませ";
-    public static readonly string Text10 = "";
+    public static readonly string Text6 = $"ステータスを変更する/{PlayerPrefs.GetString("PLAYER_NAME")}のわざを変更する";
+    public static readonly string Text7 = "どなたのステータスを変更しますか？";
+    public static readonly string Text8 = $"{PlayerPrefs.GetString("PLAYER_NAME")}さんの振り分けをします";
+     public static readonly string Text9 = "";
+    public static readonly string Text10 = "それではいってらっしゃいませ";
     public static readonly string Text11 = "";
     public static readonly string Text12= "このまま進んでよろしいですか？";
     public static readonly string[] Texts =
