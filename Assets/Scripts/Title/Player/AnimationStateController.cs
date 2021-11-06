@@ -7,6 +7,7 @@ using UnityEngine;
  */
 public class AnimationStateController : MonoBehaviour {
     Animator animator;
+    public bool isMove = true;
 
     void Start() {
         // 初期化
@@ -20,8 +21,11 @@ public class AnimationStateController : MonoBehaviour {
      * https://docs.unity3d.com/ja/current/ScriptReference/MonoBehaviour.Update.html
      */
     void Update() {
-
-        if (Input.anyKeyDown) {
+        if(!isMove)
+        {
+           return; 
+        }
+        else if (Input.anyKeyDown) {
             Vector2? action = this.actionKeyDown();
             if (action.HasValue) {
                 // キー入力があればAnimatorにstateをセットする

@@ -27,4 +27,11 @@ public class MoveController : MonoBehaviour {
         // 速度を代入する
         rigidBody.velocity = inputAxis.normalized * SPEED;
     }
+
+    public void PlayerSpeedfixed(float s)
+    {
+        SPEED = s;
+    }
+
+
 }
