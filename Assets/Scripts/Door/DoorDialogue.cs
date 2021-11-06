@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StefuriScript : MonoBehaviour
+public class DoorDialogue : MonoBehaviour
 {
     public GameObject panel;
     public GameObject Message;
@@ -21,6 +21,7 @@ public class StefuriScript : MonoBehaviour
     void Update()
     {
         Maine(textid);
+        //パネルが出ている間プレイヤーが動かないようにする
         if(panel.activeSelf)
         {
             moveController.PlayerSpeedfixed(0);
