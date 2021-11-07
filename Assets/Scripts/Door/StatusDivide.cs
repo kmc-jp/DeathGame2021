@@ -21,9 +21,14 @@ public class StatusDivide : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            rest = System.Math.Min(rest + 1, 9);
+            rest = System.Math.Min(rest + 1, 10);
         }
         RestText.text = $"残り:{rest.ToString()}";
 
+    }
+
+    public void Rest_Reset()
+    {
+        rest = 10;
     }
 }

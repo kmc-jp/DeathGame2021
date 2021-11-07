@@ -19,7 +19,7 @@ public class StringClass : MonoBehaviour
      public static readonly string Text9 = "";
     public static readonly string Text10 = "それではいってらっしゃいませ";
     public static readonly string Text11 = "";
-    public static readonly string Text12= "このまま進んでよろしいですか？";
+    public static readonly string Text12= "このまま進んでよろしいですか？(進む場合はzキーを押してください)";
     public static readonly string[] Texts =
     {
         Text0,
