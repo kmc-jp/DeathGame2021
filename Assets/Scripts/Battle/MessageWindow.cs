@@ -31,7 +31,7 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
 
     public void CloseWindow()
     {
-        // 一旦これで
+        // SE一旦これで
         BattleManager.Instance.PlayButtonSE();
         this.textField.text = "";
         this.background.gameObject.SetActive(false);

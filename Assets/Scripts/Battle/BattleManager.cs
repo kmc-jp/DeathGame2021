@@ -5,6 +5,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : SingletonMonoBehaviour<BattleManager>
 {
@@ -32,7 +33,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private List<ITurnAction> turnActions;
 
     // 0なら主人公 1なら相棒
-    private int commandOrder = 0;
+    private int commandOrder;
 
     private Tween commandSelectTween;
     
@@ -56,6 +57,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(player);
         playerList.Add(buddy);
         turnActions = new List<ITurnAction>();
+        commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
 
         UpdatePlayersStatusView();
@@ -163,7 +165,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
-                break;
+                yield return new WaitForSeconds(0.3f);
+                SceneManager.LoadScene("Door");
+                yield break;
             }
         }
         yield return new WaitForSeconds(0.5f);
