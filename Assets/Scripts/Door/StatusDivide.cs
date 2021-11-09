@@ -26,7 +26,7 @@ public class StatusDivide : MonoBehaviour
         RestText.text = $"残り:{rest.ToString()}";
 
     }
-
+//リセットボタン用関数 
     public void Rest_Reset()
     {
         rest = 10;
