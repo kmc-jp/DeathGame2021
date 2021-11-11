@@ -26,7 +26,7 @@ public class Actor : IActor
         set;
     }
 
-    public Actor CoveredBy
+    public IActor CoveredBy
     {
         get;
         set;

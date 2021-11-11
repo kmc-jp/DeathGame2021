@@ -20,7 +20,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public List<Player> playerList;
     
     [SerializeField]
-    private List<Enemy> enemyList;
+    private GameObject topPanel;
+
+    private List<IEnemy> enemyList;
 
     [SerializeField]
     private GameObject skillButtonField;
@@ -56,6 +58,13 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList = new List<Player>();
         playerList.Add(player);
         playerList.Add(buddy);
+        enemyList = new List<IEnemy>();
+        GameObject enemyPre = (GameObject)Resources.Load("Prefabs/SampleEnemy");
+        GameObject enemyObj = (GameObject)Instantiate(
+            enemyPre, 
+            topPanel.transform);
+        enemyList.Add(enemyObj.GetComponent<SampleEnemyBehaviour>().EnemyCore);
+        
         turnActions = new List<ITurnAction>();
         commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
@@ -95,7 +104,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void GuardButton()
     {
         PlayButtonSE();
-        Actor actor = playerList[commandOrder];
+        IActor actor = playerList[commandOrder];
         turnActions.Add(new GuardAction(actor, false));
         this.AddAction(new GuardAction(actor, true));
     }
@@ -172,16 +181,16 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         PlayCommandSelectEffect(commandOrder);
     }
 
-    private void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
+    private void MakeTargetButton(IActor actor, SkillMaster skill, bool isToEnemy)
     {
         ClearSkillPanel();
-        List<Actor> targets = new List<Actor>();
-        if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
-            else targets = playerList.Cast<Actor>().ToList();
+        List<IActor> targets = new List<IActor>();
+        if (isToEnemy)  targets = enemyList.Cast<IActor>().ToList();
+            else targets = playerList.Cast<IActor>().ToList();
         
         for (int i = 0; i < targets.Count; i++)
         {
-            Actor t = targets[i];
+            IActor t = targets[i];
             Button button = CreateMiddleButton(t.Name, i);
             button.OnClickAsObservable()
                 .First()

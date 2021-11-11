@@ -11,7 +11,7 @@ public interface ITurnAction
         set;
     }
 
-    Actor Actor
+    IActor Actor
     {
         get;
         set;

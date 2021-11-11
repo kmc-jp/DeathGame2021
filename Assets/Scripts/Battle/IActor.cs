@@ -12,7 +12,7 @@ public interface IActor
     
     bool IsGuard { get; set; }
 
-    Actor CoveredBy { get; set; }
+    IActor CoveredBy { get; set; }
 
     void DealDamage(int value);
 }

@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class SampleEnemyBehaviour : EnemyBehaviour
 {
-    void Start()
+    void Awake()
     {
         this.EnemyCore = new SampleEnemy(this);
     }

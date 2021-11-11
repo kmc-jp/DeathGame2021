@@ -31,7 +31,7 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
         
     }
 
-    public List<ITurnAction> MakeSkillAction(SkillMaster skillId, Actor actor, Actor target)
+    public List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
     {
         List<ITurnAction> actions = new List<ITurnAction>();
         switch(skillId)
