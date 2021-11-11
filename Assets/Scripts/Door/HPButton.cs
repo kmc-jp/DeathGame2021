@@ -8,12 +8,11 @@ public class HPButton : MonoBehaviour
  public Text Hp_Text; 
  public Button button_hp;
  public GameObject hp_status_panel;
- public StatusDivide statusDivide;
  private int status_hp = 0;
+ private string rest;
  //private bool ischeckb;
 void Start()
 {
-   statusDivide = new StatusDivide();
    button_hp = GameObject.Find("Canvas/StatusPanel/Status_Select/HP").GetComponent<Button>();
    button_hp.Select();
    Hp_Text = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/Counter").GetComponent<Text>();
@@ -22,14 +21,22 @@ void Start()
 
 public void HPbuttonOperation()
     {
-        int rest = statusDivide.GetRest();
+        if(status_hp==0)
+        {
+            GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<StatusDivide>().Setstop_count(false);
+        }
+        else
+        {
+            GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<StatusDivide>().Setstop_count(true);
+        }
+        rest = GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<Text>().text;
         if(Input.GetKeyUp(KeyCode.LeftArrow) && status_hp != 0)
         {
             GameObject.Find($"Canvas/StatusPanel/Status_Select/HP/StatusHPPanel/{status_hp}").SetActive(false);
             status_hp = System.Math.Max(status_hp - 1, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.RightArrow) && rest != 0) 
+        if(Input.GetKeyDown(KeyCode.RightArrow) && rest != "残り:0") 
         {
             status_hp = System.Math.Min(status_hp + 1, 10);
             GameObject.Find($"Canvas/StatusPanel/Status_Select/HP/StatusHPPanel/{status_hp}").SetActive(true);
