@@ -11,7 +11,7 @@ public class DoorDialogue : MonoBehaviour
     public MoveController moveController;
     private bool isMove;
     private bool isStay;
-    private int textid = 3;
+    private int textid = 0;
     void Start()
     {
        Message = GameObject.Find("Canvas/WindowMessage/Message");
@@ -44,17 +44,17 @@ public class DoorDialogue : MonoBehaviour
   {
       panel.SetActive(false);
       isStay = false;
-      textid = 3;
+      textid = 0;
   }
   public void ChangeDoorText(int id)
     {
-        Message.GetComponent<Text>().text = StringClass.Texts[id];
+        Message.GetComponent<Text>().text = StringClass.SutefuriyaTexts[id];
     }
   void Maine(int n)
   {
         switch(n)
         {
-            case 3:
+            case 0:
             if(Input.GetKeyUp(KeyCode.Z) && isStay)
             {
                 panel.SetActive(true);
@@ -63,7 +63,7 @@ public class DoorDialogue : MonoBehaviour
             }
             break;
 
-            case 9:
+            case 4:
             window_stat.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {
@@ -73,9 +73,9 @@ public class DoorDialogue : MonoBehaviour
             }
             break;
 
-            case 11:
+            case 6:
             panel.SetActive(false);
-            textid = 3;
+            textid = 0;
             break;
 
             default:
