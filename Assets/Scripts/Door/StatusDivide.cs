@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class StatusDivide : MonoBehaviour
 {
     public Text RestText;
-    public int rest = 10;
-        void Start()
+    private int rest = 10;
+    void Start()
     {
         RestText = GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<Text>();
     }
 
-
+    public int GetRest()
+    {
+        return rest;
+    }
     void Update()
     {  //割り振り可能な残りステータスの表示
         if(Input.GetKeyUp(KeyCode.RightArrow))
