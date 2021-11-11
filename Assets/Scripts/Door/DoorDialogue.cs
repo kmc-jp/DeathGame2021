@@ -63,7 +63,7 @@ public class DoorDialogue : MonoBehaviour
             }
             break;
 
-            case 4:
+            case 5:
             window_stat.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {
@@ -73,7 +73,7 @@ public class DoorDialogue : MonoBehaviour
             }
             break;
 
-            case 6:
+            case 7:
             panel.SetActive(false);
             textid = 0;
             break;

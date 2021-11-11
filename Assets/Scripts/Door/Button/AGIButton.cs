@@ -22,6 +22,7 @@ void Start()
 
 public void AGIbuttonOperation()
     {
+        GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "素早さに関するステータス";
         if(status_agi==0)
         {
             Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);

@@ -22,6 +22,7 @@ void Start()
 
 public void DEFbuttonOperation()
     {
+        GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "防御に関するステータス";
         if(status_def==0)
         {
             Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);

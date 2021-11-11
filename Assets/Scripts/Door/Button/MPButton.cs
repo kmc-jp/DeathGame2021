@@ -21,7 +21,8 @@ public class MPButton : MonoBehaviour
 }
 
 public void MPbuttonOperation()
-    { 
+    {
+        GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "MPに関するステータス";
         if(status_mp==0)
         {
            Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
