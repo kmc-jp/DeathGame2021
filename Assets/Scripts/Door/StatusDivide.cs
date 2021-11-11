@@ -23,7 +23,7 @@ public class StatusDivide : MonoBehaviour
     {
         this.stop_count = value;
     }
-    void Update()
+    public void RestOperation()
     {  //割り振り可能な残りステータスの表示
         if(Input.GetKeyUp(KeyCode.RightArrow))
         {

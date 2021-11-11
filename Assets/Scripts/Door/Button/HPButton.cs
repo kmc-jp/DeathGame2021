@@ -2,34 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class HPButton : MonoBehaviour
 {
  public Text Hp_Text; 
  public Button button_hp;
  public GameObject hp_status_panel;
+ public GameObject Status_Rest;
  private int status_hp = 0;
  private string rest;
- //private bool ischeckb;
+
+private EventSystem ev;
+
+private void Awake()
+{
+    ev = EventSystem.current;
+    ev.firstSelectedGameObject = GameObject.Find("Canvas/StatusPanel/Status_Select/HP");
+}
 void Start()
 {
    button_hp = GameObject.Find("Canvas/StatusPanel/Status_Select/HP").GetComponent<Button>();
-   button_hp.Select();
+   
    Hp_Text = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/Counter").GetComponent<Text>();
    hp_status_panel = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/StatusHPPanel");
+   Status_Rest = GameObject.Find("Canvas/StatusPanel/Status_Rest");
 }
 
 public void HPbuttonOperation()
     {
         if(status_hp==0)
         {
-            GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<StatusDivide>().Setstop_count(false);
+            Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
         }
         else
         {
-            GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<StatusDivide>().Setstop_count(true);
+            Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
         }
-        rest = GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<Text>().text;
+        rest = Status_Rest.GetComponent<Text>().text;
         if(Input.GetKeyUp(KeyCode.LeftArrow) && status_hp != 0)
         {
             GameObject.Find($"Canvas/StatusPanel/Status_Select/HP/StatusHPPanel/{status_hp}").SetActive(false);

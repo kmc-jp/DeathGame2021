@@ -10,25 +10,28 @@ public class MPButton : MonoBehaviour
  public Button button_mp;
  private string rest;
  public GameObject mp_status_panel;
+
+ public GameObject Status_Rest;
  void Start()
 {
    button_mp = GameObject.Find("Canvas/StatusPanel/Status_Select/MP").GetComponent<Button>();
    Mp_Text = GameObject.Find("Canvas/StatusPanel/Status_Select/MP/Counter").GetComponent<Text>();
    mp_status_panel = GameObject.Find("Canvas/StatusPanel/Status_Select/MP/StatusMPPanel");
+   Status_Rest = GameObject.Find("Canvas/StatusPanel/Status_Rest");
 }
 
 public void MPbuttonOperation()
     { 
         if(status_mp==0)
         {
-            GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<StatusDivide>().Setstop_count(false);
+           Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
         }
         else
         {
-            GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<StatusDivide>().Setstop_count(true);
+           Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
         }
 
-            rest = GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<Text>().text;
+            rest = Status_Rest.GetComponent<Text>().text;
             if(Input.GetKeyUp(KeyCode.LeftArrow) && status_mp != 0)
             {
                 GameObject.Find($"Canvas/StatusPanel/Status_Select/MP/StatusMPPanel/{status_mp}").SetActive(false);
