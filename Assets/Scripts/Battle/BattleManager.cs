@@ -153,10 +153,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             }
             UpdatePlayersStatusView();
-            enemyList.ForEach((e) => 
-            {
-                e.UpdateHealthBar();
-            });
 
             bool clear = true;
             foreach (var e in enemyList) { clear &= e.IsDead; }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor: MonoBehaviour
+public class Actor : IActor
 {
-    public string Name;
+    public string Name { get; protected set; }
 
     public Status Status
     {
