@@ -18,19 +18,6 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
         { SkillMaster.Cover, "身代わり"},
     };
 
-    /* 使わないかも
-    public readonly Dictionary<SkillMaster, Type> SkillTypeMaster = new Dictionary<SkillMaster, Type>(){
-        { SkillMaster.None, typeof(AttackAction) },
-        { SkillMaster.Heal, typeof(HealSkillAction)},
-        { SkillMaster.Cover, typeof(CoverSkillAction)},
-    };
-    */
-    
-    void Start()
-    {
-        
-    }
-
     public List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
     {
         List<ITurnAction> actions = new List<ITurnAction>();
@@ -51,5 +38,18 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
                 break;
         }
         return actions;
+    }
+
+    /* 使わないかも
+    public readonly Dictionary<SkillMaster, Type> SkillTypeMaster = new Dictionary<SkillMaster, Type>(){
+        { SkillMaster.None, typeof(AttackAction) },
+        { SkillMaster.Heal, typeof(HealSkillAction)},
+        { SkillMaster.Cover, typeof(CoverSkillAction)},
+    };
+    */
+    
+    void Start()
+    {
+        
     }
 }
