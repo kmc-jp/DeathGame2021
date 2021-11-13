@@ -20,7 +20,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public List<Player> playerList;
     
     [SerializeField]
-    private List<Enemy> enemyList;
+    private GameObject topPanel;
+
+    private List<IEnemy> enemyList;
 
     [SerializeField]
     private GameObject skillButtonField;
@@ -41,8 +43,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
-        // TODO: MonoBehaviourなのにnewしてて怒られてる
-        // MonoBehaviourにActor(Monobehaviour継承しない)を持たせる方が多分良い
         player = new Player(PlayerPrefs.GetString("PLAYER_NAME"),
                 new Status(500, 100, 20, 10, 10),
                 psv,
@@ -56,6 +56,16 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList = new List<Player>();
         playerList.Add(player);
         playerList.Add(buddy);
+        enemyList = new List<IEnemy>();
+        int stage = 0;
+        List<GameObject> enemys = StageMaster.GetEnemyObjects(stage);
+        foreach (var e in enemys)
+        {
+            GameObject enemyObj = (GameObject)Instantiate(
+                e, 
+                topPanel.transform);
+            enemyList.Add(enemyObj.GetComponent<EnemyBehaviour>().EnemyCore);
+        }
         turnActions = new List<ITurnAction>();
         commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
@@ -95,7 +105,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void GuardButton()
     {
         PlayButtonSE();
-        Actor actor = playerList[commandOrder];
+        IActor actor = playerList[commandOrder];
         turnActions.Add(new GuardAction(actor, false));
         this.AddAction(new GuardAction(actor, true));
     }
@@ -153,10 +163,6 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
             }
             UpdatePlayersStatusView();
-            enemyList.ForEach((e) => 
-            {
-                e.UpdateHealthBar();
-            });
 
             bool clear = true;
             foreach (var e in enemyList) { clear &= e.IsDead; }
@@ -176,16 +182,16 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         PlayCommandSelectEffect(commandOrder);
     }
 
-    private void MakeTargetButton(Actor actor, SkillMaster skill, bool isToEnemy)
+    private void MakeTargetButton(IActor actor, SkillMaster skill, bool isToEnemy)
     {
         ClearSkillPanel();
-        List<Actor> targets = new List<Actor>();
-        if (isToEnemy)  targets = enemyList.Cast<Actor>().ToList();
-            else targets = playerList.Cast<Actor>().ToList();
+        List<IActor> targets = new List<IActor>();
+        if (isToEnemy)  targets = enemyList.Cast<IActor>().ToList();
+            else targets = playerList.Cast<IActor>().ToList();
         
         for (int i = 0; i < targets.Count; i++)
         {
-            Actor t = targets[i];
+            IActor t = targets[i];
             Button button = CreateMiddleButton(t.Name, i);
             button.OnClickAsObservable()
                 .First()

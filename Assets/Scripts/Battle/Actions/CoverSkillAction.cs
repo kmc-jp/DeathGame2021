@@ -15,13 +15,13 @@ public class CoverSkillAction : ISkillAction
     public int MpCost { get; } = 0;
     public int Priority { get; set; } = 1;
 
-    public Actor Actor { get; set; }
+    public IActor Actor { get; set; }
 
-    public Actor Target { get; set; }
+    public IActor Target { get; set; }
 
     private bool isBreak;
     
-    public CoverSkillAction(Actor _actor, Actor _target, bool _isBreak)
+    public CoverSkillAction(IActor _actor, IActor _target, bool _isBreak)
     {
         this.Actor = _actor;
         this.Target = _target;
