@@ -14,6 +14,14 @@ public class SampleEnemy : Actor, IEnemy
         this.behaviour = _behaviour;
     }
 
+    public override void DealDamage(int value)
+    {
+        base.DealDamage(value);
+        if (value <= 0) return;
+        behaviour.DamageEffect();
+        behaviour.UpdateHealthBar();
+    }
+
     public ITurnAction Action()
     {
         int index = Random.Range(0, BattleManager.Instance.playerList.Count);

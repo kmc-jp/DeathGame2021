@@ -57,12 +57,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(player);
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
-        GameObject enemyPre = (GameObject)Resources.Load("Prefabs/SampleEnemy");
-        GameObject enemyObj = (GameObject)Instantiate(
-            enemyPre, 
-            topPanel.transform);
-        enemyList.Add(enemyObj.GetComponent<SampleEnemyBehaviour>().EnemyCore);
-        
+        int stage = 0;
+        List<GameObject> enemys = StageMaster.GetEnemyObjects(stage);
+        foreach (var e in enemys)
+        {
+            GameObject enemyObj = (GameObject)Instantiate(
+                e, 
+                topPanel.transform);
+            enemyList.Add(enemyObj.GetComponent<EnemyBehaviour>().EnemyCore);
+        }
         turnActions = new List<ITurnAction>();
         commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
