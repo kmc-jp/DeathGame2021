@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class SampleEnemy : Actor, IEnemy
+public class SampleEnemy : Enemy, IEnemy
 {
-    private EnemyBehaviour behaviour;
-    
     public SampleEnemy(EnemyBehaviour _behaviour)
     {
         this.Name = "ねこちゃん";
         this.Status = new Status(100, 100, 20, 5, 5);
         this.behaviour = _behaviour;
-    }
-
-    public override void DealDamage(int value)
-    {
-        base.DealDamage(value);
-        if (value <= 0) return;
-        behaviour.DamageEffect();
-        behaviour.UpdateHealthBar();
     }
 
     public ITurnAction Action()
