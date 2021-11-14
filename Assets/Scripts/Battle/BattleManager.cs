@@ -110,6 +110,16 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         this.AddAction(new GuardAction(actor, true));
     }
 
+    public void EscapeButton()
+    {
+        PlayButtonSE();
+        MessageWindow.Instance.MakeWindow("敵から逃げ切った");
+        Observable.Timer(System.TimeSpan.FromSeconds(0.3))
+            .Subscribe(_ => SceneManager.LoadScene("Door"))
+            .AddTo(this);
+        
+    }
+
     private void AddAction(ITurnAction action)
     {
         this.turnActions.Add(action);
