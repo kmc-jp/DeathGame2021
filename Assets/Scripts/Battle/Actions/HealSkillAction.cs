@@ -16,11 +16,11 @@ public class HealSkillAction : ISkillAction
     public int Priority { get; set; } = 0;
     private int healValue = 100;
 
-    public Actor Actor { get; set; }
+    public IActor Actor { get; set; }
 
-    public Actor Target { get; set; }
+    public IActor Target { get; set; }
 
-    public HealSkillAction(Actor _actor, Actor _target)
+    public HealSkillAction(IActor _actor, IActor _target)
     {
         this.Actor = _actor;
         this.Target = _target;

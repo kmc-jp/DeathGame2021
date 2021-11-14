@@ -6,13 +6,13 @@ public class GuardAction : ITurnAction
 {
     public int Priority { get; set; }
     private bool isBreak;
-    public Actor Actor
+    public IActor Actor
     {
         get;
         set;
     }
 
-    public GuardAction(Actor _actor, bool _isBreak)
+    public GuardAction(IActor _actor, bool _isBreak)
     {
         this.Actor = _actor;
         this.isBreak = _isBreak;

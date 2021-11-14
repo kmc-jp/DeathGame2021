@@ -20,8 +20,8 @@ public class Player : Actor
 
     public override void DealDamage(int value)
     {
-        base.DealDamage(value);
         if (value <= 0) return;
+        base.DealDamage(value);
         DamageEffect();
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ISkillAction : ITurnAction
 {
 
-    Actor Target
+    IActor Target
     {
         get;
         set;

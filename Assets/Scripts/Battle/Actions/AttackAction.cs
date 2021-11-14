@@ -5,18 +5,18 @@ using UnityEngine;
 public class AttackAction : ITurnAction
 {
     public int Priority { get; set; } = 0;
-    public Actor Actor
+    public IActor Actor
     {
         get;
         set;
     }
-    public Actor Target
+    public IActor Target
     {
         get;
         set;
     }
 
-    public AttackAction(Actor _actor, Actor _target)
+    public AttackAction(IActor _actor, IActor _target)
     {
         this.Actor = _actor;
         this.Target = _target;
