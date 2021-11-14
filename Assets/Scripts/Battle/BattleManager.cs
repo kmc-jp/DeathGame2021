@@ -114,10 +114,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         PlayButtonSE();
         MessageWindow.Instance.MakeWindow("敵から逃げ切った");
-        Observable.Timer(System.TimeSpan.FromSeconds(0.3))
+        MessageWindow.Instance.CloseButton.OnClickAsObservable()
+            .First()
             .Subscribe(_ => SceneManager.LoadScene("Door"))
             .AddTo(this);
-        
     }
 
     private void AddAction(ITurnAction action)
