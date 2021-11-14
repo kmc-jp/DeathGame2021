@@ -18,14 +18,17 @@ public class Player : Actor
         this.Skills = _skills;
     }
 
-    public override void DealDamage(int value)
+    public override int DealDamage(int value)
     {
-        if (value <= 0) return;
+        int damage = value - this.Status.Def;
+        if (this.IsGuard) damage = damage / 3;
+        damage = Mathf.Clamp(damage, 0, this.Status.Hp);
         base.DealDamage(value);
         DamageEffect();
+        return damage;
     }
 
-    public void DamageEffect()
+    private void DamageEffect()
     {
         DOTween.Restart(this.StatusPanel);
         this.StatusPanel.DOKill(true);
