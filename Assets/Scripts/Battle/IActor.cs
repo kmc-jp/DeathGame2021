@@ -14,5 +14,5 @@ public interface IActor
 
     IActor CoveredBy { get; set; }
 
-    void DealDamage(int value);
+    int DealDamage(int value);
 }

@@ -32,8 +32,9 @@ public class Actor : IActor
         set;
     }
 
-    public virtual void DealDamage(int value)
+    public virtual int DealDamage(int value)
     {
         this.Status.Hp -= value;
+        return value;
     }
 }

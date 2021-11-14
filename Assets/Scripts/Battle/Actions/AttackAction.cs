@@ -34,10 +34,7 @@ public class AttackAction : ITurnAction
         if (Actor.IsDead) return false;
         // CoverSkill
         if (Target.CoveredBy != null) Target = Target.CoveredBy;
-        int damage = Actor.Status.Atk - Target.Status.Def;
-        if (Target.IsGuard) damage = damage / 3;
-        damage = Mathf.Clamp(damage, 0, Target.Status.Hp);
-        Target.DealDamage(damage);
+        int damage = Target.DealDamage(Actor.Status.Atk);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
         return true;
     }

@@ -8,11 +8,14 @@ public abstract class Enemy : Actor, IEnemy
     
     public abstract ITurnAction Action();
     
-    public override void DealDamage(int value)
+    public override int DealDamage(int value)
     {
-        base.DealDamage(value);
-        if (value <= 0) return;
+        int damage = value - this.Status.Def;
+        if (this.IsGuard) damage = damage / 3;
+        damage = Mathf.Clamp(damage, 0, this.Status.Hp);
+        base.DealDamage(damage);
         behaviour.DamageEffect();
         behaviour.UpdateHealthBar();
+        return damage;
     }
 }
