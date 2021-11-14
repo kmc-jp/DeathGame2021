@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Actor
+public abstract class Enemy : Actor, IEnemy
 {
     protected EnemyBehaviour behaviour;
+    
+    public abstract ITurnAction Action();
     
     public override void DealDamage(int value)
     {
