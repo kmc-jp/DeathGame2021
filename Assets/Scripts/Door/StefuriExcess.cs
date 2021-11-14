@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class StatusDivide : MonoBehaviour
+public class StefuriExcess : MonoBehaviour
 {
     public Text RestText;
     private int rest = 10;

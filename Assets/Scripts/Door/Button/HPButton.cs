@@ -33,11 +33,11 @@ public void HPbuttonOperation()
         GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "HPに関するステータス";
         if(status_hp==0)
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(false);
         }
         else
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(true);
         }
         rest = Status_Rest.GetComponent<Text>().text;
         if(Input.GetKeyUp(KeyCode.LeftArrow) && status_hp != 0)

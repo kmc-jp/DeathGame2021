@@ -25,11 +25,11 @@ public void ATKbuttonOperation()
         GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "攻撃に関するステータス";
         if(status_atk==0)
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(false);
         }
         else
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(true);
         }
         rest = Status_Rest.GetComponent<Text>().text;
         if(Input.GetKeyUp(KeyCode.LeftArrow) && status_atk != 0)
