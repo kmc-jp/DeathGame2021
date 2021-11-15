@@ -20,7 +20,7 @@ void Start()
    Status_Rest = GameObject.Find("Canvas/StatusPanel/Status_Rest");
 }
 
-public void AGIbuttonOperation()
+public void AGIbuttonOperation()//選択されているとき
     {
         GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "素早さに関するステータス";
         if(status_agi==0)
