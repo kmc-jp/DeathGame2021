@@ -40,13 +40,13 @@ public class StringClass : MonoBehaviour
 
     public static readonly string SutefuriyaText0 = "";
     public static readonly string SutefuriyaText1 = "あなたの力を調整いたしましょうか";
-    public static readonly string SutefuriyaText2 = "ステータスを変更する/相棒のわざを変更する";
+    public static readonly string SutefuriyaText2 = $"1:ステータスを変更する/2:{PlayerPrefs.GetString("PLAYER_NAME")}のわざを変更する";
     public static readonly string SutefuriyaText3 = "どなたのステータスを変更しますか？";
-    public static readonly string SutefuriyaText4 = $"{PlayerPrefs.GetString("PLAYER_NAME")}さんの振り分けをします";
+    public static readonly string SutefuriyaText4 = $"{PlayerPrefs.GetString("PLAYER_NAME")}さんの振り分けをします";//以下主人公ステータス変更のテキスト
     public static readonly string SutefuriyaText5 = "";
     public static readonly string SutefuriyaText6 = "それではいってらっしゃいませ";
     public static readonly string SutefuriyaText7 = "";
-    
+    public static readonly string SutefuriyaText8 = $"{PlayerPrefs.GetString("PLAYER_NAME")}さんのわざを変更します";//以下技変更のテキスト
 
     public static readonly string[] SutefuriyaTexts =
     {
@@ -57,7 +57,8 @@ public class StringClass : MonoBehaviour
         SutefuriyaText4,
         SutefuriyaText5,
         SutefuriyaText6,
-        SutefuriyaText7
+        SutefuriyaText7,
+        SutefuriyaText8
     };
 
 }

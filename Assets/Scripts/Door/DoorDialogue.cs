@@ -7,6 +7,7 @@ public class DoorDialogue : MonoBehaviour
 {
     public GameObject panel;
     public GameObject window_stat;
+    public GameObject window_skil;
     public GameObject Message;
     public MoveController moveController;
     private bool isMove;
@@ -18,11 +19,13 @@ public class DoorDialogue : MonoBehaviour
        panel.SetActive(false);
        moveController = GameObject.Find("Player").GetComponent<MoveController>();
        window_stat.SetActive(false);
+       window_skil.SetActive(false);
     }
 
     void Update()
-    {
+    {　 //表示メッセージを更新
         Maine(textid);
+
         //メッセージが出ている間プレイヤーが動かないようにする
         if(panel.activeSelf)
         {
@@ -60,6 +63,19 @@ public class DoorDialogue : MonoBehaviour
                 panel.SetActive(true);
                 ChangeDoorText(n + 1);
                 textid += 1;
+            }
+            break;
+
+            case 2:
+            if(Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                ChangeDoorText(n + 1);
+                textid += 1;
+            }
+            else if(Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                ChangeDoorText(8);
+                textid = 8;
             }
             break;
 
