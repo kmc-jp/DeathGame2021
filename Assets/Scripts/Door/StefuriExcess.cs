@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class StatusDivide : MonoBehaviour
+public class StefuriExcess : MonoBehaviour
 {
     public Text RestText;
     private int rest = 10;
     private bool stop_count = true;
+    
     void Start()
     {
         RestText = GameObject.Find("Canvas/StatusPanel/Status_Rest").GetComponent<Text>();

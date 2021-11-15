@@ -23,7 +23,6 @@ private void Awake()
 void Start()
 {
    button_hp = GameObject.Find("Canvas/StatusPanel/Status_Select/HP").GetComponent<Button>();
-   
    Hp_Text = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/Counter").GetComponent<Text>();
    hp_status_panel = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/StatusHPPanel");
    Status_Rest = GameObject.Find("Canvas/StatusPanel/Status_Rest");
@@ -31,13 +30,14 @@ void Start()
 
 public void HPbuttonOperation()
     {
+        GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "HPに関するステータス";
         if(status_hp==0)
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(false);
         }
         else
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(true);
         }
         rest = Status_Rest.GetComponent<Text>().text;
         if(Input.GetKeyUp(KeyCode.LeftArrow) && status_hp != 0)

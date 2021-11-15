@@ -21,14 +21,15 @@ public class MPButton : MonoBehaviour
 }
 
 public void MPbuttonOperation()
-    { 
+    {
+        GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "MPに関するステータス";
         if(status_mp==0)
         {
-           Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
+           Status_Rest.GetComponent<StefuriExcess>().Setstop_count(false);
         }
         else
         {
-           Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
+           Status_Rest.GetComponent<StefuriExcess>().Setstop_count(true);
         }
 
             rest = Status_Rest.GetComponent<Text>().text;

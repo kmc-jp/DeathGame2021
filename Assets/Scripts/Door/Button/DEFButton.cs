@@ -22,13 +22,14 @@ void Start()
 
 public void DEFbuttonOperation()
     {
+        GameObject.Find("Canvas/WindowMessage/Message").GetComponent<Text>().text = "防御に関するステータス";
         if(status_def==0)
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(false);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(false);
         }
         else
         {
-            Status_Rest.GetComponent<StatusDivide>().Setstop_count(true);
+            Status_Rest.GetComponent<StefuriExcess>().Setstop_count(true);
         }
         rest = Status_Rest.GetComponent<Text>().text;
         if(Input.GetKeyUp(KeyCode.LeftArrow) && status_def != 0)

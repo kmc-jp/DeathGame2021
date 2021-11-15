@@ -7,22 +7,25 @@ public class DoorDialogue : MonoBehaviour
 {
     public GameObject panel;
     public GameObject window_stat;
+    public GameObject window_skil;
     public GameObject Message;
     public MoveController moveController;
     private bool isMove;
     private bool isStay;
-    private int textid = 3;
+    private int textid = 0;
     void Start()
     {
        Message = GameObject.Find("Canvas/WindowMessage/Message");
        panel.SetActive(false);
        moveController = GameObject.Find("Player").GetComponent<MoveController>();
        window_stat.SetActive(false);
+       window_skil.SetActive(false);
     }
 
     void Update()
-    {
+    {　 //表示メッセージを更新
         Maine(textid);
+
         //メッセージが出ている間プレイヤーが動かないようにする
         if(panel.activeSelf)
         {
@@ -44,17 +47,17 @@ public class DoorDialogue : MonoBehaviour
   {
       panel.SetActive(false);
       isStay = false;
-      textid = 3;
+      textid = 0;
   }
   public void ChangeDoorText(int id)
     {
-        Message.GetComponent<Text>().text = StringClass.Texts[id];
+        Message.GetComponent<Text>().text = StringClass.SutefuriyaTexts[id];
     }
   void Maine(int n)
   {
         switch(n)
         {
-            case 3:
+            case 0:
             if(Input.GetKeyUp(KeyCode.Z) && isStay)
             {
                 panel.SetActive(true);
@@ -63,7 +66,20 @@ public class DoorDialogue : MonoBehaviour
             }
             break;
 
-            case 9:
+            case 2:
+            if(Input.GetKeyUp(KeyCode.Alpha1))//ステータス割り振りへ
+            {
+                ChangeDoorText(n + 1);
+                textid += 1;
+            }
+            else if(Input.GetKeyUp(KeyCode.Alpha2))//わざ決定へ
+            {
+                ChangeDoorText(8);
+                textid = 8;
+            }
+            break;
+
+            case 5://ステータス割り振りの画面を表示
             window_stat.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {
@@ -73,9 +89,19 @@ public class DoorDialogue : MonoBehaviour
             }
             break;
 
-            case 11:
+            case 7://ステ振り屋との会話を抜ける
             panel.SetActive(false);
-            textid = 3;
+            textid = 0;
+            break;
+
+            case 9://わざ画面を表示
+            window_skil.SetActive(true);
+            if(Input.GetKeyUp(KeyCode.Z))
+            {
+                window_skil.SetActive(false);
+                ChangeDoorText(6);
+                textid = 6;
+            }
             break;
 
             default:
