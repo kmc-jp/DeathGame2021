@@ -46,12 +46,12 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         player = new Player(PlayerPrefs.GetString("PLAYER_NAME"),
                 new Status(500, 100, 20, 10, 10),
                 psv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
         buddy = new Player("相棒",
                 new Status(350, 300, 20, 10, 10),
                 bsv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
         playerList = new List<Player>();
         playerList.Add(player);
@@ -78,7 +78,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Actor actor = playerList[commandOrder];
         PlayButtonSE();
-        MakeTargetButton(actor, SkillMaster.None, true);
+        MakeTargetButton(actor, SkillMaster.NormalAttack, true);
     }
 
     public void SkillButton()

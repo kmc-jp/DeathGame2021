@@ -5,7 +5,8 @@ using System;
 
 public enum SkillMaster
 {
-    None,
+    NormalAttack,
+    EnhancedAttack,
     Heal,
     Cover,
 }
@@ -13,9 +14,10 @@ public enum SkillMaster
 public class SkillService : SingletonMonoBehaviour<SkillService>
 {
     public readonly Dictionary<SkillMaster, string> SkillNameMaster = new Dictionary<SkillMaster, string>(){
-        { SkillMaster.None, "通常攻撃" },
-        { SkillMaster.Heal, "回復呪文"},
-        { SkillMaster.Cover, "身代わり"},
+        { SkillMaster.NormalAttack,   "通常攻撃" },
+        { SkillMaster.EnhancedAttack, "属性攻撃" },
+        { SkillMaster.Heal,           "回復呪文" },
+        { SkillMaster.Cover,          "身代わり" },
     };
 
     public List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
@@ -23,8 +25,11 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
         List<ITurnAction> actions = new List<ITurnAction>();
         switch(skillId)
         {
-            case SkillMaster.None:
+            case SkillMaster.NormalAttack:
                 actions.Add(new AttackAction(actor, target));
+                break;
+            case SkillMaster.EnhancedAttack:
+                actions.Add(new EnhancedAttackSkillAction(actor, target));
                 break;
             case SkillMaster.Heal:
                 actions.Add(new HealSkillAction(actor, target));
