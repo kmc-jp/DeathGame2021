@@ -11,7 +11,7 @@ public abstract class Enemy : Actor, IEnemy
     public override int DealDamage(int value)
     {
         int damage = value - this.Status.Def;
-        if (this.IsGuard) damage = damage / 3;
+        if (this.Buffs.IsGuard) damage = damage / 3;
         damage = Mathf.Clamp(damage, 0, this.Status.Hp);
         base.DealDamage(damage);
         behaviour.DamageEffect();

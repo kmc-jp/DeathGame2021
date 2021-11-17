@@ -11,10 +11,6 @@ public interface IActor
     Buffs Buffs { get; set; }
 
     bool IsDead { get; }
-    
-    bool IsGuard { get; set; }
-
-    IActor CoveredBy { get; set; }
 
     int DealDamage(int value);
 }

@@ -18,15 +18,11 @@ public class CoverSkillAction : ISkillAction
     public IActor Actor { get; set; }
 
     public IActor Target { get; set; }
-
-    private bool isBreak;
     
-    public CoverSkillAction(IActor _actor, IActor _target, bool _isBreak)
+    public CoverSkillAction(IActor _actor, IActor _target)
     {
         this.Actor = _actor;
         this.Target = _target;
-        this.isBreak = _isBreak;
-        this.Priority = this.isBreak ? -1 : 1;
     }
 
     public bool Prepare()
@@ -37,13 +33,7 @@ public class CoverSkillAction : ISkillAction
     public bool Exec()
     {
         if (Actor.IsDead) return false;
-        if (isBreak)
-        {
-            Target.CoveredBy = null;
-            MessageWindow.Instance.MakeWindow($"{Actor.Name} は身代わりをやめた");
-            return true;
-        }
-        Target.CoveredBy = Actor;
+        Target.Buffs.CoveredBy = Actor;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} は {Target.Name} の身代わりになっている");
         return true;
     }

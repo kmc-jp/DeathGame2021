@@ -106,8 +106,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         PlayButtonSE();
         IActor actor = playerList[commandOrder];
-        turnActions.Add(new GuardAction(actor, false));
-        this.AddAction(new GuardAction(actor, true));
+        this.AddAction(new GuardAction(actor));
     }
 
     public void EscapeButton()
@@ -185,6 +184,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 SceneManager.LoadScene("Door");
                 yield break;
             }
+        }
+        foreach (var p in playerList)
+        {
+            p.Buffs.ProcessBuffs();
+        }
+        foreach (var e in enemyList)
+        {
+            e.Buffs.ProcessBuffs();
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();

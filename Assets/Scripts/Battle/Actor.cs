@@ -25,18 +25,6 @@ public class Actor : IActor
             return this.Status.Hp <= 0;
         }
     }
-    
-    public bool IsGuard
-    {
-        get;
-        set;
-    }
-
-    public IActor CoveredBy
-    {
-        get;
-        set;
-    }
 
     public virtual int DealDamage(int value)
     {

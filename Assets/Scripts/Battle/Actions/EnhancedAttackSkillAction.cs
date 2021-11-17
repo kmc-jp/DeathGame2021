@@ -35,7 +35,7 @@ public class EnhancedAttackSkillAction : ISkillAction
     public bool Exec()
     {
         if (Actor.IsDead) return false;
-        if (Target.CoveredBy != null) Target = Target.CoveredBy;
+        if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         Actor.Status.Mp -= this.MpCost;
         int damage = Target.DealDamage(Actor.Status.Atk + 100);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");

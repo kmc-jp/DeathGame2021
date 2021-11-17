@@ -50,8 +50,7 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
                 actions.Add(new HealSkillAction(actor, target));
                 break;
             case SkillMaster.Cover:
-                actions.Add(new CoverSkillAction(actor, target, false));
-                actions.Add(new CoverSkillAction(actor, target, true));
+                actions.Add(new CoverSkillAction(actor, target));
                 break;
             default:
                 Debug.Log("No Such Skill");
