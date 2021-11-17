@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class AttackAction : ITurnAction
@@ -32,15 +34,16 @@ public class AttackAction : ITurnAction
         return true;
     }
 
-    public bool Exec()
+    public async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
+        if (Actor.IsDead) return;
         // CoverSkill
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         int damage = damageCalculator.Calc(Actor, Target);
         int actualDamage = Target.DealDamage(damage);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {actualDamage} ダメージを与えた！");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }
 

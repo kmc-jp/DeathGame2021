@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public interface ITurnAction
@@ -19,5 +20,5 @@ public interface ITurnAction
     // ウィンドウを開かないときはfalse
     bool Prepare();
     
-    bool Exec();
+    UniTask Exec();
 }

@@ -173,10 +173,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
-            if (a.Exec())
-            {
-                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
-            }
+
+            yield return a.Exec();
+            
             UpdatePlayersStatusView();
 
             bool clear = true;

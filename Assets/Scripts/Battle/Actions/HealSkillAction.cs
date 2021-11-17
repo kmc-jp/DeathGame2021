@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class HealSkillAction : SkillAction
@@ -20,13 +22,14 @@ public class HealSkillAction : SkillAction
         return true;
     }
     
-    public override bool Exec()
+    public override async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
+        if (Actor.IsDead) return;
         int val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
         Target.Status.Hp += val;
         Actor.Status.Mp -= this.Info.Cost;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の体力を {val} 回復");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }

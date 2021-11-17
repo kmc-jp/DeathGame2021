@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class EnhancedAttackSkillAction : SkillAction
@@ -20,13 +22,14 @@ public class EnhancedAttackSkillAction : SkillAction
         return true;
     }
     
-    public override bool Exec()
+    public override async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
+        if (Actor.IsDead) return;
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         Actor.Status.Mp -= this.Info.Cost;
         int damage = Target.DealDamage(Actor.Status.Atk + influence);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }
