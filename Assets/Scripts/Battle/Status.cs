@@ -22,4 +22,9 @@ public class Status
         this.Def = def;
         this.Agi = agi;
     }
+
+    public static Status GenerateNormalEnemyStatus()
+    {
+        return new Status(4000, -1, -1, 0, 0); //HP以外仮
+    }
 }

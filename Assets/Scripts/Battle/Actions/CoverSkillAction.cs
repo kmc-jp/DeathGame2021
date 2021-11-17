@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class CoverSkillAction : SkillAction
@@ -16,11 +18,12 @@ public class CoverSkillAction : SkillAction
         return false;
     }
     
-    public override bool Exec()
+    public override async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
+        if (Actor.IsDead) return;
         Target.Buffs.CoveredBy = Actor;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} は {Target.Name} の身代わりになっている");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }

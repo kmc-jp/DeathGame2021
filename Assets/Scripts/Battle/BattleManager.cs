@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
@@ -173,10 +174,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
-            if (a.Exec())
+
+            yield return a.Exec().ToCoroutine();
+
+            if (a is AttackAction || a is AttacksInARowAction || a is EnhancedAttackSkillAction)
             {
-                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
+                a.Actor.Buffs.AttackRate = 1;
             }
+            
             UpdatePlayersStatusView();
 
             bool clear = true;
@@ -246,7 +251,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     }
 
 
-    private void UpdatePlayersStatusView()
+    public void UpdatePlayersStatusView()
     {
         playerStatusView.SetHpText(player.Status.Hp.ToString());
         playerStatusView.SetMpText(player.Status.Mp.ToString());

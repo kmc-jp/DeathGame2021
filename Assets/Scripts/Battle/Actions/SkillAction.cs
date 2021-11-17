@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public abstract class SkillAction : ISkillAction
@@ -18,5 +19,5 @@ public abstract class SkillAction : ISkillAction
     public IActor Target { get; set; }
 
     public abstract bool Prepare();
-    public abstract bool Exec();
+    public abstract UniTask Exec();
 }

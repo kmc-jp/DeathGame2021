@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class GuardAction : ITurnAction
@@ -22,11 +24,12 @@ public class GuardAction : ITurnAction
         return false;
     }
 
-    public bool Exec()
+    public async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
+        if (Actor.IsDead) return;
         Actor.Buffs.IsGuard = true;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} はぼうぎょしている！");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }

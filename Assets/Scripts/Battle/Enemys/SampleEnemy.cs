@@ -17,6 +17,6 @@ public class SampleEnemy : Enemy
         int index = Random.Range(0, BattleManager.Instance.playerList.Count);
         // TODO: 死んでたらターゲットしない
         var target = BattleManager.Instance.playerList[index];
-        return new AttackAction(this, target);
+        return new AttackAction(this, target, new AttackDamageFromStatus());
     }
 }

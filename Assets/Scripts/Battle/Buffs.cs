@@ -6,6 +6,13 @@ public class Buffs
 {
     private IActor Actor;
 
+    public float AttackRate
+    {
+        get;
+        set;
+    }
+        = 1;
+
     public bool IsGuard
     {
         get;
