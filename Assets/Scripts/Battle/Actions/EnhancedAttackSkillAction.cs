@@ -18,6 +18,8 @@ public class EnhancedAttackSkillAction : ISkillAction
     public IActor Actor { get; set; }
 
     public IActor Target { get; set; }
+
+    private int influence = 100;
     
     public EnhancedAttackSkillAction(IActor _actor, IActor _target)
     {
@@ -37,7 +39,7 @@ public class EnhancedAttackSkillAction : ISkillAction
         if (Actor.IsDead) return false;
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         Actor.Status.Mp -= this.MpCost;
-        int damage = Target.DealDamage(Actor.Status.Atk + 100);
+        int damage = Target.DealDamage(Actor.Status.Atk + influence);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
         return true;
     }
