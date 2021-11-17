@@ -11,6 +11,21 @@ public enum SkillMaster
     Cover,
 }
 
+public struct SkillInfo
+{
+    public string Name;
+    public int Cost;
+    public int Priority;
+    public bool IsToEnemy;
+    public SkillInfo(string name, int cost, int priority, bool isToEnemy)
+    {
+        Name = name;
+        Cost = cost;
+        Priority = priority;
+        IsToEnemy = isToEnemy;
+    }
+}
+
 public class SkillService : SingletonMonoBehaviour<SkillService>
 {
     public readonly Dictionary<SkillMaster, string> SkillNameMaster = new Dictionary<SkillMaster, string>(){
