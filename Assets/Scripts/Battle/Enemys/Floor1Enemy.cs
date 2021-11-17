@@ -41,6 +41,8 @@ public class Floor1Enemy : RoutinedEnemy
 
                 yield return new AttacksInARowAction(this, target, new ConstDamage((int) (damageBase * Buffs.AttackRate)), 4);
             }
+            
+            yield return new ChargeAction(2.5f, this);
         }
     }
 
