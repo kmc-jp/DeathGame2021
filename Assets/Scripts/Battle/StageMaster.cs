@@ -7,7 +7,7 @@ public static class StageMaster
     private static string PrefabPath = "Prefabs/Enemys/";
     // ステージごとに生成するEnemyプレハブ
     private static readonly Dictionary<int, List<string>> Stage = new Dictionary<int, List<string>>{
-        { 0, new List<string>() {"SampleEnemy"} },
+        { 0, new List<string>() {"Floor1"} },
     };
 
     public static List<GameObject> GetEnemyObjects(int stage)

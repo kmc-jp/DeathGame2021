@@ -16,10 +16,13 @@ public class AttackAction : ITurnAction
         set;
     }
 
-    public AttackAction(IActor _actor, IActor _target)
+    readonly IAttackDamageCalculator damageCalculator;
+
+    public AttackAction(IActor _actor, IActor _target, IAttackDamageCalculator damageCalculator)
     {
         this.Actor = _actor;
         this.Target = _target;
+        this.damageCalculator = damageCalculator;
     }
 
     public bool Prepare()
@@ -34,8 +37,36 @@ public class AttackAction : ITurnAction
         if (Actor.IsDead) return false;
         // CoverSkill
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
-        int damage = Target.DealDamage(Actor.Status.Atk);
-        MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
+        int damage = damageCalculator.Calc(Actor, Target);
+        int actualDamage = Target.DealDamage(damage);
+        MessageWindow.Instance.MakeWindow($"{Target.Name} に {actualDamage} ダメージを与えた！");
         return true;
+    }
+}
+
+public interface IAttackDamageCalculator
+{
+    int Calc(IActor attacker, IActor target);
+}
+
+public class AttackDamageFromStatus : IAttackDamageCalculator
+{
+    public int Calc(IActor attacker, IActor target)
+    {
+        return attacker.Status.Atk;
+    }
+}
+
+public class ConstDamage : IAttackDamageCalculator
+{
+    readonly int damage;
+    public ConstDamage(int damage)
+    {
+        this.damage = damage;
+    }
+    
+    public int Calc(IActor attacker, IActor target)
+    {
+        return damage;
     }
 }

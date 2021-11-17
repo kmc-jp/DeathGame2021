@@ -42,7 +42,7 @@ public static class SkillService
         switch(skillId)
         {
             case SkillMaster.NormalAttack:
-                actions.Add(new AttackAction(actor, target));
+                actions.Add(new AttackAction(actor, target, new AttackDamageFromStatus()));
                 break;
             case SkillMaster.EnhancedAttack:
                 actions.Add(new EnhancedAttackSkillAction(actor, target));
