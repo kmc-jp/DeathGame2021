@@ -49,6 +49,7 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
         {
             this.textField.text = "";
             this.background.gameObject.SetActive(false);
+            closeSubject.OnNext(Unit.Default);
         }
         UpdateMessage();
     }
