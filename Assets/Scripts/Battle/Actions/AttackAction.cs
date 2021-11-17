@@ -56,7 +56,7 @@ public class AttackDamageFromStatus : IAttackDamageCalculator
 {
     public int Calc(IActor attacker, IActor target)
     {
-        return attacker.Status.Atk;
+        return (int) (attacker.Status.Atk * attacker.Buffs.AttackRate);
     }
 }
 

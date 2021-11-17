@@ -176,6 +176,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             }
 
             yield return a.Exec().ToCoroutine();
+
+            if (a is AttackAction || a is AttacksInARowAction || a is EnhancedAttackSkillAction)
+            {
+                a.Actor.Buffs.AttackRate = 1;
+            }
             
             UpdatePlayersStatusView();
 

@@ -27,7 +27,7 @@ public class EnhancedAttackSkillAction : SkillAction
         if (Actor.IsDead) return;
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         Actor.Status.Mp -= this.Info.Cost;
-        int damage = Target.DealDamage(Actor.Status.Atk + influence);
+        int damage = Target.DealDamage((int) ((Actor.Status.Atk + influence) * Actor.Buffs.AttackRate));
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
 
         await MessageWindow.Instance.CloseObservable.First();
