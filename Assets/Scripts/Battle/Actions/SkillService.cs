@@ -29,9 +29,9 @@ public struct SkillInfo
 public static class SkillService
 {
     public static readonly Dictionary<SkillMaster, SkillInfo> SkillInfoMaster = new Dictionary<SkillMaster, SkillInfo>(){
-        { SkillMaster.NormalAttack,   new SkillInfo("通常攻撃", 0, 1, true) },
-        { SkillMaster.EnhancedAttack, new SkillInfo("属性攻撃", 0, 1, true) },
-        { SkillMaster.Heal,           new SkillInfo("回復呪文", 0, 1, false) },
+        { SkillMaster.NormalAttack,   new SkillInfo("通常攻撃", 0, 0, true) },
+        { SkillMaster.EnhancedAttack, new SkillInfo("属性攻撃", 5, 0, true) },
+        { SkillMaster.Heal,           new SkillInfo("回復呪文", 5, 0, false) },
         { SkillMaster.Cover,          new SkillInfo("身代わり", 0, 1, false) },
     };
 
