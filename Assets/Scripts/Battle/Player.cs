@@ -31,7 +31,7 @@ public class Player : Actor
         int damage = value - this.Status.Def;
         if (this.Buffs.IsGuard) damage = damage / 3;
         damage = Mathf.Clamp(damage, 0, this.Status.Hp);
-        base.DealDamage(value);
+        base.DealDamage(damage);
         DamageEffect();
         return damage;
     }
