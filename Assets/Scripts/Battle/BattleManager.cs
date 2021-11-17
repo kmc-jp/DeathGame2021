@@ -43,12 +43,16 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
-        player = new Player(PlayerPrefs.GetString("PLAYER_NAME"),
+        player = new Player(
+                PlayerId.Player,
+                PlayerPrefs.GetString("PLAYER_NAME"),
                 new Status(500, 100, 20, 10, 10),
                 psv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
-        buddy = new Player("相棒",
+        buddy = new Player(
+                PlayerId.Buddy,
+                "相棒",
                 new Status(350, 300, 20, 10, 10),
                 bsv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }

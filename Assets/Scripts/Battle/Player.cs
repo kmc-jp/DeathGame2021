@@ -4,14 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+public enum PlayerId
+{
+    Player,
+    Buddy
+}
+
 public class Player : Actor
 {
+    public PlayerId Id;
     private Image StatusPanel;
 
     public List<SkillMaster> Skills;
 
-    public Player(string _name, Status _status, Image _statusPanel, List<SkillMaster> _skills)
+    public Player(PlayerId _id, string _name, Status _status, Image _statusPanel, List<SkillMaster> _skills)
     {
+        this.Id = _id;
         this.Name = _name;
         this.Status = _status;
         this.StatusPanel = _statusPanel;
