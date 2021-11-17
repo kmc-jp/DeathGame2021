@@ -28,12 +28,12 @@ public class Buffs
 
         if (IsGuard)
         {
-            MessageWindow.Instance.MakeWindow($"{Actor.Name} はぼうぎょをといた");
+            MessageWindow.Instance.AddMessage($"{Actor.Name} はぼうぎょをといた");
             IsGuard = false;
         }
         if (CoveredBy != null)
         {
-            MessageWindow.Instance.MakeWindow($"{CoveredBy.Name} は身代わりをやめた");
+            MessageWindow.Instance.AddMessage($"{CoveredBy.Name} は身代わりをやめた");
             CoveredBy = null;
         }
         return false;

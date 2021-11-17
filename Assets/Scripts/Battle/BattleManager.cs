@@ -193,6 +193,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         {
             e.Buffs.ProcessBuffs();
         }
+        if (MessageWindow.Instance.MakeWindow())
+        {
+            yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
+        }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
         commandOrder = 0;

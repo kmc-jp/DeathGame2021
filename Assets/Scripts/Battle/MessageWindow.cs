@@ -28,9 +28,11 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
         this.background.gameObject.SetActive(false);
     }
 
-    public void MakeWindow()
+    public bool MakeWindow()
     {
-        UpdateMessage();
+        ConsumeMessage();
+        if (texts.Count == 0) return false;
+        return true;
     }
 
     public void MakeWindow(string message)
@@ -51,6 +53,11 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
         this.texts.AddRange(messages);
     }
 
+    public void AddMessage(string messages)
+    {
+        this.texts.Add(messages);
+    }
+
     public void CloseWindow()
     {
         // SE一旦これで
@@ -67,6 +74,7 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
     private void ConsumeMessage()
     {
         UpdateMessage();
+        if (texts.Count == 0) return;
         texts.RemoveAt(0);
     }
 

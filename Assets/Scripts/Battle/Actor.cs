@@ -26,6 +26,11 @@ public class Actor : IActor
         }
     }
 
+    public Actor()
+    {
+        this.Buffs = new Buffs(this);
+    }
+
     public virtual int DealDamage(int value)
     {
         this.Status.Hp -= value;
