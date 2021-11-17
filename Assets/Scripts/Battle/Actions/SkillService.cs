@@ -38,6 +38,7 @@ public static class SkillService
     public static List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
     {
         List<ITurnAction> actions = new List<ITurnAction>();
+        // あとで何とかするかも
         switch(skillId)
         {
             case SkillMaster.NormalAttack:
