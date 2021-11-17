@@ -8,6 +8,8 @@ public interface IActor
 
     Status Status { get; set; }
 
+    Buffs Buffs { get; set; }
+
     bool IsDead { get; }
     
     bool IsGuard { get; set; }
