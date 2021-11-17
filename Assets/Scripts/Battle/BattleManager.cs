@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
@@ -174,7 +175,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
 
-            yield return a.Exec();
+            yield return a.Exec().ToCoroutine();
             
             UpdatePlayersStatusView();
 

@@ -16,16 +16,31 @@ public class Floor1Enemy : RoutinedEnemy
     {
         while (true)
         {
-            Player target = SelectTarget();
+            //{
+            //    Player target = SelectTarget();
+//
+            //    int damage = target.Id switch
+            //    {
+            //        PlayerId.Player => 250,
+            //        PlayerId.Buddy => 180,
+            //        _ => throw new NotImplementedException()
+            //    };
+//
+            //    yield return new AttackAction(this, target, new ConstDamage(damage));
+            //}
 
-            int damage = target.Id switch
             {
-                PlayerId.Player => 250,
-                PlayerId.Buddy => 180,
-                _ => throw new NotImplementedException()
-            };
-            
-            yield return new AttackAction(this, target, new ConstDamage(damage));
+                Player target = SelectTarget();
+
+                int damage = target.Id switch
+                {
+                    PlayerId.Player => 90,
+                    PlayerId.Buddy => 70,
+                    _ => throw new NotImplementedException()
+                };
+
+                yield return new AttacksInARowAction(this, target, new ConstDamage(damage), 4);
+            }
         }
     }
 
