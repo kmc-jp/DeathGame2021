@@ -166,11 +166,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         {
             if (a.Prepare())
             {
-                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
             if (a.Exec())
             {
-                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
             UpdatePlayersStatusView();
 
@@ -180,7 +180,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
-                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
                 SceneManager.LoadScene("Door");
                 yield break;
