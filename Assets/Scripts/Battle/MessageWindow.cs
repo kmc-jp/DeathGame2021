@@ -28,6 +28,11 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
         this.background.gameObject.SetActive(false);
     }
 
+    public void MakeWindow()
+    {
+        UpdateMessage();
+    }
+
     public void MakeWindow(string message)
     {
         this.textField.text = message;
@@ -41,6 +46,11 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
         this.background.gameObject.SetActive(true);
     }
 
+    public void AddMessage(List<string> messages)
+    {
+        this.texts.AddRange(messages);
+    }
+
     public void CloseWindow()
     {
         // SE一旦これで
@@ -51,14 +61,19 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
             this.background.gameObject.SetActive(false);
             closeSubject.OnNext(Unit.Default);
         }
+        ConsumeMessage();
+    }
+
+    private void ConsumeMessage()
+    {
         UpdateMessage();
+        texts.RemoveAt(0);
     }
 
     private void UpdateMessage()
     {
-        this.background.gameObject.SetActive(true);
         if (texts.Count == 0) return;
+        this.background.gameObject.SetActive(true);
         this.textField.text = texts[0];
-        texts.RemoveAt(0);
     }
 }
