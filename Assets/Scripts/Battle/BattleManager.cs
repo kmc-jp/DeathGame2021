@@ -95,14 +95,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         for (int i = 0; i < skills.Count; i++ )
         {
             SkillMaster s = skills[i];
-            Button button = CreateMiddleButton(SkillService.SkillNameMaster[s], i);
+            SkillInfo info = SkillService.SkillInfoMaster[s];
+            Button button = CreateMiddleButton(info.Name, i);
             button.OnClickAsObservable()
                 .First()
                 .Subscribe(_ => 
                 {
                     PlayButtonSE();
                     ClearSkillPanel();
-                    MakeTargetButton(actor, s, false);
+                    MakeTargetButton(actor, s, info.IsToEnemy);
                 })
                 .AddTo(this);
         }
