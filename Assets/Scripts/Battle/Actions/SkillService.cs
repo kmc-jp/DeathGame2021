@@ -26,16 +26,22 @@ public struct SkillInfo
     }
 }
 
-public class SkillService : SingletonMonoBehaviour<SkillService>
+public static class SkillService
 {
-    public readonly Dictionary<SkillMaster, string> SkillNameMaster = new Dictionary<SkillMaster, string>(){
+    public static readonly Dictionary<SkillMaster, string> SkillNameMaster = new Dictionary<SkillMaster, string>(){
         { SkillMaster.NormalAttack,   "通常攻撃" },
         { SkillMaster.EnhancedAttack, "属性攻撃" },
         { SkillMaster.Heal,           "回復呪文" },
         { SkillMaster.Cover,          "身代わり" },
     };
+    public static readonly Dictionary<SkillMaster, SkillInfo> SkillInfoMaster = new Dictionary<SkillMaster, SkillInfo>(){
+        { SkillMaster.NormalAttack,   new SkillInfo("通常攻撃", 0, 1, true) },
+        { SkillMaster.EnhancedAttack, new SkillInfo("属性攻撃", 0, 1, true) },
+        { SkillMaster.Heal,           new SkillInfo("回復呪文", 0, 1, false) },
+        { SkillMaster.Cover,          new SkillInfo("身代わり", 0, 1, false) },
+    };
 
-    public List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
+    public static List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
     {
         List<ITurnAction> actions = new List<ITurnAction>();
         switch(skillId)
@@ -66,9 +72,4 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
         { SkillMaster.Cover, typeof(CoverSkillAction)},
     };
     */
-    
-    void Start()
-    {
-        
-    }
 }

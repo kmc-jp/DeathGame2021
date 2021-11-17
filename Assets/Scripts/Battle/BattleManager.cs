@@ -95,7 +95,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         for (int i = 0; i < skills.Count; i++ )
         {
             SkillMaster s = skills[i];
-            Button button = CreateMiddleButton(SkillService.Instance.SkillNameMaster[s], i);
+            Button button = CreateMiddleButton(SkillService.SkillNameMaster[s], i);
             button.OnClickAsObservable()
                 .First()
                 .Subscribe(_ => 
@@ -224,7 +224,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 .Subscribe(_ => 
                 {
                     PlayButtonSE();
-                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
+                    List<ITurnAction> actions = SkillService.MakeSkillAction(skill, actor, t);
                     this.AddAction(actions);
                 })
                 .AddTo(this);
