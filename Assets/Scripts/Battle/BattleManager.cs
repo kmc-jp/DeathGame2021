@@ -43,20 +43,25 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
-        player = new Player(PlayerPrefs.GetString("PLAYER_NAME"),
-                new Status(500, 100, 20, 10, 10),
+        player = new Player(
+                PlayerId.Player,
+                PlayerPrefs.GetString("PLAYER_NAME"),
+                new Status(500, 100, 100, 10, 10),
                 psv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
-        buddy = new Player("相棒",
-                new Status(350, 300, 20, 10, 10),
+        buddy = new Player(
+                PlayerId.Buddy,
+                "相棒",
+                new Status(350, 300, 150, 10, 10),
                 bsv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover }
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
         playerList = new List<Player>();
         playerList.Add(player);
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
+        // ここにステージ進捗を参照する処理
         int stage = 0;
         List<GameObject> enemys = StageMaster.GetEnemyObjects(stage);
         foreach (var e in enemys)
@@ -78,7 +83,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Actor actor = playerList[commandOrder];
         PlayButtonSE();
-        MakeTargetButton(actor, SkillMaster.None, true);
+        MakeTargetButton(actor, SkillMaster.NormalAttack, true);
     }
 
     public void SkillButton()
@@ -90,14 +95,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         for (int i = 0; i < skills.Count; i++ )
         {
             SkillMaster s = skills[i];
-            Button button = CreateMiddleButton(SkillService.Instance.SkillNameMaster[s], i);
+            SkillInfo info = SkillService.SkillInfoMaster[s];
+            Button button = CreateMiddleButton(info.Name, i);
             button.OnClickAsObservable()
                 .First()
                 .Subscribe(_ => 
                 {
                     PlayButtonSE();
                     ClearSkillPanel();
-                    MakeTargetButton(actor, s, false);
+                    MakeTargetButton(actor, s, info.IsToEnemy);
                 })
                 .AddTo(this);
         }
@@ -106,8 +112,17 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         PlayButtonSE();
         IActor actor = playerList[commandOrder];
-        turnActions.Add(new GuardAction(actor, false));
-        this.AddAction(new GuardAction(actor, true));
+        this.AddAction(new GuardAction(actor));
+    }
+
+    public void EscapeButton()
+    {
+        PlayButtonSE();
+        MessageWindow.Instance.MakeWindow("敵から逃げ切った");
+        MessageWindow.Instance.CloseButton.OnClickAsObservable()
+            .First()
+            .Subscribe(_ => SceneManager.LoadScene("Door"))
+            .AddTo(this);
     }
 
     private void AddAction(ITurnAction action)
@@ -156,11 +171,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         {
             if (a.Prepare())
             {
-                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
             if (a.Exec())
             {
-                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
             }
             UpdatePlayersStatusView();
 
@@ -170,11 +185,23 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
-                yield return MessageWindow.Instance.CloseButton.OnClickAsObservable().First().ToYieldInstruction();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
                 SceneManager.LoadScene("Door");
                 yield break;
             }
+        }
+        foreach (var p in playerList)
+        {
+            p.Buffs.ProcessBuffs();
+        }
+        foreach (var e in enemyList)
+        {
+            e.Buffs.ProcessBuffs();
+        }
+        if (MessageWindow.Instance.MakeWindow())
+        {
+            yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
@@ -198,7 +225,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 .Subscribe(_ => 
                 {
                     PlayButtonSE();
-                    List<ITurnAction> actions = SkillService.Instance.MakeSkillAction(skill, actor, t);
+                    List<ITurnAction> actions = SkillService.MakeSkillAction(skill, actor, t);
                     this.AddAction(actions);
                 })
                 .AddTo(this);

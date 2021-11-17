@@ -5,33 +5,53 @@ using System;
 
 public enum SkillMaster
 {
-    None,
+    NormalAttack,
+    EnhancedAttack,
     Heal,
     Cover,
 }
 
-public class SkillService : SingletonMonoBehaviour<SkillService>
+public struct SkillInfo
 {
-    public readonly Dictionary<SkillMaster, string> SkillNameMaster = new Dictionary<SkillMaster, string>(){
-        { SkillMaster.None, "通常攻撃" },
-        { SkillMaster.Heal, "回復呪文"},
-        { SkillMaster.Cover, "身代わり"},
+    public string Name;
+    public int Cost;
+    public int Priority;
+    public bool IsToEnemy;
+    public SkillInfo(string name, int cost, int priority, bool isToEnemy)
+    {
+        Name = name;
+        Cost = cost;
+        Priority = priority;
+        IsToEnemy = isToEnemy;
+    }
+}
+
+public static class SkillService
+{
+    public static readonly Dictionary<SkillMaster, SkillInfo> SkillInfoMaster = new Dictionary<SkillMaster, SkillInfo>(){
+        { SkillMaster.NormalAttack,   new SkillInfo("通常攻撃", 0, 0, true) },
+        { SkillMaster.EnhancedAttack, new SkillInfo("属性攻撃", 5, 0, true) },
+        { SkillMaster.Heal,           new SkillInfo("回復呪文", 5, 0, false) },
+        { SkillMaster.Cover,          new SkillInfo("身代わり", 0, 1, false) },
     };
 
-    public List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
+    public static List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
     {
         List<ITurnAction> actions = new List<ITurnAction>();
+        // あとで何とかするかも
         switch(skillId)
         {
-            case SkillMaster.None:
+            case SkillMaster.NormalAttack:
                 actions.Add(new AttackAction(actor, target));
+                break;
+            case SkillMaster.EnhancedAttack:
+                actions.Add(new EnhancedAttackSkillAction(actor, target));
                 break;
             case SkillMaster.Heal:
                 actions.Add(new HealSkillAction(actor, target));
                 break;
             case SkillMaster.Cover:
-                actions.Add(new CoverSkillAction(actor, target, false));
-                actions.Add(new CoverSkillAction(actor, target, true));
+                actions.Add(new CoverSkillAction(actor, target));
                 break;
             default:
                 Debug.Log("No Such Skill");
@@ -47,9 +67,4 @@ public class SkillService : SingletonMonoBehaviour<SkillService>
         { SkillMaster.Cover, typeof(CoverSkillAction)},
     };
     */
-    
-    void Start()
-    {
-        
-    }
 }

@@ -8,7 +8,6 @@ public interface ITurnAction
     int Priority
     {
         get;
-        set;
     }
 
     IActor Actor
