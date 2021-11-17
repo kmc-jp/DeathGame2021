@@ -4,12 +4,14 @@ using UnityEngine;
 
 public interface ISkillAction : ITurnAction
 {
-
     IActor Target
     {
         get;
         set;
     }
-    
-    int MpCost { get; }
+
+    SkillInfo Info
+    {
+        get;
+    }
 }
