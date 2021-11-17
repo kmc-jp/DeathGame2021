@@ -251,7 +251,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     }
 
 
-    private void UpdatePlayersStatusView()
+    public void UpdatePlayersStatusView()
     {
         playerStatusView.SetHpText(player.Status.Hp.ToString());
         playerStatusView.SetMpText(player.Status.Mp.ToString());

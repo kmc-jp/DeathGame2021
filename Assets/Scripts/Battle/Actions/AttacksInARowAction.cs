@@ -42,6 +42,7 @@ public class AttacksInARowAction : ITurnAction
             int actualDamage = Target.DealDamage(damage);
             
             MessageWindow.Instance.MakeWindow($"{Target.Name} に {actualDamage} ダメージを与えた！");
+            BattleManager.Instance.UpdatePlayersStatusView();
             await MessageWindow.Instance.CloseObservable.First();
         }
     }
