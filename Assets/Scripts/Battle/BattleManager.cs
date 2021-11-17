@@ -46,14 +46,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         player = new Player(
                 PlayerId.Player,
                 PlayerPrefs.GetString("PLAYER_NAME"),
-                new Status(500, 100, 20, 10, 10),
+                new Status(500, 100, 100, 10, 10),
                 psv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
         buddy = new Player(
                 PlayerId.Buddy,
                 "相棒",
-                new Status(350, 300, 20, 10, 10),
+                new Status(350, 300, 150, 10, 10),
                 bsv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
@@ -61,6 +61,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(player);
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
+        // ここにステージ進捗を参照する処理
         int stage = 0;
         List<GameObject> enemys = StageMaster.GetEnemyObjects(stage);
         foreach (var e in enemys)
