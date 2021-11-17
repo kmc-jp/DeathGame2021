@@ -11,6 +11,12 @@ public class Actor : IActor
         get;
         set;
     }
+    
+    public Buffs Buffs
+    {
+        get;
+        set;
+    }
 
     public bool IsDead
     {
