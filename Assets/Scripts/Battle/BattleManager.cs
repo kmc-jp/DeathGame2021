@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private int commandOrder;
 
     private Tween commandSelectTween;
+
+    [SerializeField] int debugFloor;
+    
+    readonly List<Func<UniTask>> onTurnEnd = new List<Func<UniTask>>();
+    public IDisposable OnTurnEnd(Func<UniTask> task)
+    {
+        onTurnEnd.Add(task);
+        return Disposable.Create(() => onTurnEnd.Remove(task));
+    }
     
     void Start()
     {
@@ -63,8 +73,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
         // ここにステージ進捗を参照する処理
-        int stage = 0;
-        List<GameObject> enemys = StageMaster.GetEnemyObjects(stage);
+        
+        List<GameObject> enemys = StageMaster.GetEnemyObjects(debugFloor);
         foreach (var e in enemys)
         {
             GameObject enemyObj = (GameObject)Instantiate(
@@ -177,7 +187,11 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
 
             yield return a.Exec().ToCoroutine();
 
-            if (a is AttackAction || a is AttacksInARowAction || a is EnhancedAttackSkillAction)
+            if (a is AttackAction
+                || a is AttacksInARowAction
+                || a is EnhancedAttackSkillAction
+                || a is AttackToAllAction
+                || a is FatalAttackAction)
             {
                 a.Actor.Buffs.AttackRate = 1;
             }
@@ -207,6 +221,10 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         if (MessageWindow.Instance.MakeWindow())
         {
             yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
+        }
+        foreach (Func<UniTask> task in onTurnEnd)
+        {
+            yield return task?.Invoke().ToCoroutine();
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();

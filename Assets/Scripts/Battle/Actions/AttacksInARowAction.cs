@@ -30,20 +30,9 @@ public class AttacksInARowAction : ITurnAction
 
     public async UniTask Exec()
     {
-        if (Actor.IsDead) return;
-        // CoverSkill
-        if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
-
         foreach (var _ in Enumerable.Range(0, numAttacks))
         {
-            if (Actor.IsDead) return;
-            
-            int damage = damageCalculator.Calc(Actor, Target);
-            int actualDamage = Target.DealDamage(damage);
-            
-            MessageWindow.Instance.MakeWindow($"{Target.Name} に {actualDamage} ダメージを与えた！");
-            BattleManager.Instance.UpdatePlayersStatusView();
-            await MessageWindow.Instance.CloseObservable.First();
+            await Attack.AttackExec(Actor, Target, damageCalculator);
         }
     }
 }
