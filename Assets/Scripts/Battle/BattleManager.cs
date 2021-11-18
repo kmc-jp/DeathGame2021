@@ -40,8 +40,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private int commandOrder;
 
     private Tween commandSelectTween;
-
-    [SerializeField] int debugFloor;
+    
+    [SerializeField] bool debugMode;
+    [SerializeField] int Floor;
     
     readonly List<Func<UniTask>> onTurnEnd = new List<Func<UniTask>>();
     public IDisposable OnTurnEnd(Func<UniTask> task)
@@ -72,9 +73,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(player);
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
-        // ここにステージ進捗を参照する処理
         
-        List<GameObject> enemys = StageMaster.GetEnemyObjects(debugFloor);
+        if (!debugMode) Floor = PrefsUtil.GetStageProgress();
+        List<GameObject> enemys = StageMaster.GetEnemyObjects(Floor);
         foreach (var e in enemys)
         {
             GameObject enemyObj = (GameObject)Instantiate(
@@ -206,6 +207,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             {
                 // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
+                PrefsUtil.UpdateStageProgress();
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
                 SceneManager.LoadScene("Door");
