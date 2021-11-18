@@ -56,7 +56,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         Image bsv = buddyStatusView.StatusPanel;
         player = new Player(
                 PlayerId.Player,
-                PlayerPrefs.GetString("PLAYER_NAME"),
+                PrefsUtil.GetPlayerName(),
                 new Status(500, 100, 100, 10, 10),
                 psv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
