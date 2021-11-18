@@ -7,10 +7,10 @@ public class DoorDialogue : MonoBehaviour
 {
     public GameObject panel;
     public GameObject window_stat;
+    public GameObject Bwindow_stat;
     public GameObject window_skil;
     public GameObject Message;
     public MoveController moveController;
-    private bool isMove;
     private bool isStay;
     private int textid = 0;
     void Start()
@@ -20,6 +20,7 @@ public class DoorDialogue : MonoBehaviour
        moveController = GameObject.Find("Player").GetComponent<MoveController>();
        window_stat.SetActive(false);
        window_skil.SetActive(false);
+       Bwindow_stat.SetActive(false);
     }
 
     void Update()
@@ -78,7 +79,20 @@ public class DoorDialogue : MonoBehaviour
                 textid = 8;
             }
             break;
+            
 
+            case 3:
+            if(Input.GetKeyUp(KeyCode.Alpha1))//主人公へ
+            {
+                ChangeDoorText(n + 1);
+                textid += 1;
+            }
+            else if(Input.GetKeyUp(KeyCode.Alpha2))//相棒へ
+            {
+                ChangeDoorText(10);
+                textid = 10;
+            }
+            break;
             case 5://ステータス割り振りの画面を表示
             window_stat.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
@@ -99,6 +113,16 @@ public class DoorDialogue : MonoBehaviour
             if(Input.GetKeyUp(KeyCode.Z))
             {
                 window_skil.SetActive(false);
+                ChangeDoorText(6);
+                textid = 6;
+            }
+            break;
+
+            case 11://相棒のステータス画面を表示
+             Bwindow_stat.SetActive(true);
+            if(Input.GetKeyUp(KeyCode.Z))
+            {
+                Bwindow_stat.SetActive(false);
                 ChangeDoorText(6);
                 textid = 6;
             }
