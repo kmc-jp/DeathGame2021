@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class GuardAction : ITurnAction
 {
-    public int Priority { get; set; }
+    public int Priority { get; set; } = 1;
     private bool isBreak;
     public IActor Actor
     {
@@ -12,11 +14,9 @@ public class GuardAction : ITurnAction
         set;
     }
 
-    public GuardAction(IActor _actor, bool _isBreak)
+    public GuardAction(IActor _actor)
     {
         this.Actor = _actor;
-        this.isBreak = _isBreak;
-        this.Priority = this.isBreak ? -1 : 1;
     }
 
     public bool Prepare()
@@ -24,17 +24,12 @@ public class GuardAction : ITurnAction
         return false;
     }
 
-    public bool Exec()
+    public async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
-        if (isBreak)
-        {
-            Actor.IsGuard = false;
-            MessageWindow.Instance.MakeWindow($"{Actor.Name} はぼうぎょをといた");
-            return true;
-        }
-        Actor.IsGuard = true;
+        if (Actor.IsDead) return;
+        Actor.Buffs.IsGuard = true;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} はぼうぎょしている！");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }

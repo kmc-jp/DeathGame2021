@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class SampleEnemy : Enemy, IEnemy
+public class SampleEnemy : Enemy
 {
     public SampleEnemy(EnemyBehaviour _behaviour)
     {
@@ -12,11 +12,11 @@ public class SampleEnemy : Enemy, IEnemy
         this.behaviour = _behaviour;
     }
 
-    public ITurnAction Action()
+    public override ITurnAction Action()
     {
         int index = Random.Range(0, BattleManager.Instance.playerList.Count);
         // TODO: 死んでたらターゲットしない
         var target = BattleManager.Instance.playerList[index];
-        return new AttackAction(this, target);
+        return new AttackAction(this, target, new AttackDamageFromStatus());
     }
 }

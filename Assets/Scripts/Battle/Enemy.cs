@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Actor
+public abstract class Enemy : Actor, IEnemy
 {
     protected EnemyBehaviour behaviour;
     
-    public override void DealDamage(int value)
+    public abstract ITurnAction Action();
+    
+    public override int DealDamage(int value)
     {
-        base.DealDamage(value);
-        if (value <= 0) return;
+        int damage = value - this.Status.Def;
+        if (this.Buffs.IsGuard) damage = damage / 3;
+        damage = Mathf.Clamp(damage, 0, this.Status.Hp);
+        base.DealDamage(damage);
         behaviour.DamageEffect();
         behaviour.UpdateHealthBar();
+        return damage;
     }
 }

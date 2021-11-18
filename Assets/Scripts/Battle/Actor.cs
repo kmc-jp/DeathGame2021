@@ -11,6 +11,12 @@ public class Actor : IActor
         get;
         set;
     }
+    
+    public Buffs Buffs
+    {
+        get;
+        set;
+    }
 
     public bool IsDead
     {
@@ -19,21 +25,15 @@ public class Actor : IActor
             return this.Status.Hp <= 0;
         }
     }
-    
-    public bool IsGuard
+
+    public Actor()
     {
-        get;
-        set;
+        this.Buffs = new Buffs(this);
     }
 
-    public IActor CoveredBy
-    {
-        get;
-        set;
-    }
-
-    public virtual void DealDamage(int value)
+    public virtual int DealDamage(int value)
     {
         this.Status.Hp -= value;
+        return value;
     }
 }

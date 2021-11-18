@@ -1,45 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
-public class HealSkillAction : ISkillAction
+public class HealSkillAction : SkillAction
 {
-    public SkillMaster Id = SkillMaster.Heal;
-    public string Name 
-    { 
-        get
-        {   
-            return SkillService.Instance.SkillNameMaster[Id];
-        }
-    }
-    public int MpCost { get; } = 5;
-    public int Priority { get; set; } = 0;
     private int healValue = 100;
-
-    public IActor Actor { get; set; }
-
-    public IActor Target { get; set; }
 
     public HealSkillAction(IActor _actor, IActor _target)
     {
+        Id = SkillMaster.Heal;
         this.Actor = _actor;
         this.Target = _target;
     }
 
-    public bool Prepare()
+    public override bool Prepare()
     {
         if (Actor.IsDead) return false;
-        MessageWindow.Instance.MakeWindow($"{Actor.Name} の {Name}");
+        MessageWindow.Instance.MakeWindow($"{Actor.Name} の {Info.Name}");
         return true;
     }
     
-    public bool Exec()
+    public override async UniTask Exec()
     {
-        if (Actor.IsDead) return false;
+        if (Actor.IsDead) return;
         int val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
         Target.Status.Hp += val;
-        Actor.Status.Mp -= this.MpCost;
+        Actor.Status.Mp -= this.Info.Cost;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の体力を {val} 回復");
-        return true;
+
+        await MessageWindow.Instance.CloseObservable.First();
     }
 }

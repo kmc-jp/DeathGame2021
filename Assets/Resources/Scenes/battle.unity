@@ -1113,6 +1113,7 @@ MonoBehaviour:
   topPanel: {fileID: 1844667595}
   skillButtonField: {fileID: 1001681314}
   audioManager: {fileID: 2090497124}
+  debugFloor: 5
 --- !u!1 &581949367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,7 +1407,6 @@ GameObject:
   - component: {fileID: 630793833}
   - component: {fileID: 630793835}
   - component: {fileID: 630793834}
-  - component: {fileID: 630793836}
   m_Layer: 5
   m_Name: Skill
   m_TagString: Untagged
@@ -1472,18 +1472,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630793832}
   m_CullTransparentMesh: 1
---- !u!114 &630793836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630793832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee58a434d90cb44d8477431c52d4258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &677202495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,7 +3634,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2126248060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 510501942}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+        m_MethodName: EscapeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &2126248063
 CanvasRenderer:
   m_ObjectHideFlags: 0

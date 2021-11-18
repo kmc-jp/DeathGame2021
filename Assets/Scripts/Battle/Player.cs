@@ -4,28 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+public enum PlayerId
+{
+    Player,
+    Buddy
+}
+
 public class Player : Actor
 {
+    public PlayerId Id;
     private Image StatusPanel;
 
     public List<SkillMaster> Skills;
 
-    public Player(string _name, Status _status, Image _statusPanel, List<SkillMaster> _skills)
+    public Player(PlayerId _id, string _name, Status _status, Image _statusPanel, List<SkillMaster> _skills)
     {
+        this.Id = _id;
         this.Name = _name;
         this.Status = _status;
         this.StatusPanel = _statusPanel;
         this.Skills = _skills;
     }
 
-    public override void DealDamage(int value)
+    public override int DealDamage(int value)
     {
-        if (value <= 0) return;
-        base.DealDamage(value);
+        int damage = value - this.Status.Def;
+        if (this.Buffs.IsGuard) damage = damage / 3;
+        damage = Mathf.Clamp(damage, 0, this.Status.Hp);
+        base.DealDamage(damage);
         DamageEffect();
+        return damage;
     }
 
-    public void DamageEffect()
+    private void DamageEffect()
     {
         DOTween.Restart(this.StatusPanel);
         this.StatusPanel.DOKill(true);

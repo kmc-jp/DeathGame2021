@@ -8,11 +8,9 @@ public interface IActor
 
     Status Status { get; set; }
 
+    Buffs Buffs { get; set; }
+
     bool IsDead { get; }
-    
-    bool IsGuard { get; set; }
 
-    IActor CoveredBy { get; set; }
-
-    void DealDamage(int value);
+    int DealDamage(int value);
 }

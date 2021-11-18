@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 
 public class AttackAction : ITurnAction
@@ -16,10 +18,13 @@ public class AttackAction : ITurnAction
         set;
     }
 
-    public AttackAction(IActor _actor, IActor _target)
+    readonly IAttackDamageCalculator damageCalculator;
+
+    public AttackAction(IActor _actor, IActor _target, IAttackDamageCalculator damageCalculator)
     {
         this.Actor = _actor;
         this.Target = _target;
+        this.damageCalculator = damageCalculator;
     }
 
     public bool Prepare()
@@ -29,16 +34,35 @@ public class AttackAction : ITurnAction
         return true;
     }
 
-    public bool Exec()
+    public UniTask Exec() => Attack.AttackExec(Actor, Target, damageCalculator);
+}
+
+public interface IAttackDamageCalculator
+{
+    int Calc(IActor attacker, IActor target);
+}
+
+public class AttackDamageFromStatus : IAttackDamageCalculator
+{
+    public int Calc(IActor attacker, IActor target)
     {
-        if (Actor.IsDead) return false;
-        // CoverSkill
-        if (Target.CoveredBy != null) Target = Target.CoveredBy;
-        int damage = Actor.Status.Atk - Target.Status.Def;
-        if (Target.IsGuard) damage = damage / 3;
-        damage = Mathf.Clamp(damage, 0, Target.Status.Hp);
-        Target.DealDamage(damage);
-        MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
-        return true;
+        return (int) (attacker.Status.Atk * attacker.Buffs.AttackRate);
+    }
+}
+
+public class ConstDamage : IAttackDamageCalculator
+{
+    readonly int damageToPlayer;
+    readonly int damageToBuddy;
+    public ConstDamage(int damageToPlayer, int damageToBuddy)
+    {
+        this.damageToPlayer = damageToPlayer;
+        this.damageToBuddy = damageToBuddy;
+    }
+    
+    public int Calc(IActor attacker, IActor target)
+    {
+        float damageBase = (target as Player).Id == PlayerId.Player ? damageToPlayer : damageToBuddy;
+        return (int) (damageBase * attacker.Buffs.AttackRate);
     }
 }
