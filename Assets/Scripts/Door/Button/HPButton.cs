@@ -7,6 +7,7 @@ public class HPButton : MonoBehaviour
 {
  public Text Hp_Text; 
  public Button button_hp;
+ public GameObject HPb;
  public GameObject hp_status_panel;
  public GameObject Status_Rest;
  private int status_hp = 0;
@@ -17,11 +18,11 @@ private EventSystem ev;
 private void Awake()
 {
     ev = EventSystem.current;
-    ev.firstSelectedGameObject = GameObject.Find("Canvas/StatusPanel/Status_Select/HP");
+    ev.firstSelectedGameObject = HPb;
 }
 void Start()
 {
-   button_hp = GameObject.Find("Canvas/StatusPanel/Status_Select/HP").GetComponent<Button>();
+   button_hp = HPb.GetComponent<Button>();
    Hp_Text = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/Counter").GetComponent<Text>();
    hp_status_panel = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/StatusHPPanel");
    Status_Rest = GameObject.Find("Canvas/StatusPanel/Status_Rest");
