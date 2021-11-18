@@ -17,6 +17,7 @@ public class NormalEnemyBehaviour : EnemyBehaviour
                 2 => new Floor3EnemyB(this),
                 _ => throw new NotImplementedException()
             },
+            4 => new Floor4Enemy(this),
             _ => throw new NotImplementedException()
         };
     }
