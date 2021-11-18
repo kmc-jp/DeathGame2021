@@ -9,6 +9,7 @@ public static class StageMaster
     private static readonly Dictionary<int, List<string>> Stage = new Dictionary<int, List<string>>{
         { 0, new List<string>() {"Floor1"} },
         { 1, new List<string>() {"Floor2"} },
+        { 2, new List<string>() {"Floor3A", "Floor3B"} },
     };
 
     public static List<GameObject> GetEnemyObjects(int stage)

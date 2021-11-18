@@ -1113,7 +1113,7 @@ MonoBehaviour:
   topPanel: {fileID: 1844667595}
   skillButtonField: {fileID: 1001681314}
   audioManager: {fileID: 2090497124}
-  debugFloor: 1
+  debugFloor: 2
 --- !u!1 &581949367
 GameObject:
   m_ObjectHideFlags: 0
