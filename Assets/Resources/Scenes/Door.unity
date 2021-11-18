@@ -656,6 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &138466421
@@ -3189,7 +3190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 2015818358}
-  button_hp: {fileID: 467312173}
+  button_hp: {fileID: 0}
+  HPb: {fileID: 467312171}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!114 &467312177
@@ -4552,6 +4554,7 @@ GameObject:
   - component: {fileID: 658192618}
   - component: {fileID: 658192619}
   - component: {fileID: 658192620}
+  - component: {fileID: 658192624}
   m_Layer: 5
   m_Name: BHP
   m_TagString: Untagged
@@ -4595,6 +4598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPButtonB: {fileID: 658192616}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!114 &658192619
@@ -4733,6 +4737,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658192616}
   m_CullTransparentMesh: 1
+--- !u!114 &658192624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658192616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe8b0b0e2925664f85730bca905b8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp_Text: {fileID: 0}
+  button_hp: {fileID: 0}
+  HPButtonB: {fileID: 658192616}
+  hp_status_panel: {fileID: 0}
+  Status_Rest: {fileID: 0}
 --- !u!1 &661566180
 GameObject:
   m_ObjectHideFlags: 0
@@ -8058,6 +8079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &949231322
@@ -9651,6 +9673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &1215835441
@@ -12540,6 +12563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &1549316662
@@ -12718,6 +12742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &1587810352
@@ -13266,6 +13291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &1660942456
@@ -14176,6 +14202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &1860494341
@@ -14553,6 +14580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &1897653752
@@ -15120,6 +15148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!1 &2030555540
@@ -17511,6 +17540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
   button_hp: {fileID: 0}
+  HPb: {fileID: 0}
   hp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
 --- !u!212 &2063157085
