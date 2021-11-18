@@ -85,7 +85,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         turnActions = new List<ITurnAction>();
         commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
-
+        
+        string message = String.Join(" と ", enemyList.Select(e => e.Name)) + " があらわれた！";
+        MessageWindow.Instance.MakeWindow(message);
         UpdatePlayersStatusView();
         PlayCommandSelectEffect(commandOrder);
     }
