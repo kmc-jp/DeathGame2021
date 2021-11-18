@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 237987581}
   - component: {fileID: 237987580}
   m_Layer: 5
-  m_Name: BCounter
+  m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4549,9 +4549,9 @@ GameObject:
   - component: {fileID: 658192623}
   - component: {fileID: 658192622}
   - component: {fileID: 658192621}
+  - component: {fileID: 658192618}
   - component: {fileID: 658192619}
   - component: {fileID: 658192620}
-  - component: {fileID: 658192618}
   m_Layer: 5
   m_Name: BHP
   m_TagString: Untagged
@@ -4822,7 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 663236297}
   m_Layer: 5
-  m_Name: StatusBHPPanel
+  m_Name: StatusHPPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

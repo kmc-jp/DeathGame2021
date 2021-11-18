@@ -20,7 +20,7 @@ public class BuddyStefuriExcess : MonoBehaviour
         return rest;
     }
 
-    public void Setstop_count(bool value)
+    public void Setstop_count(bool value)//各ステータスが0のとき入力で値が動かないようにする
     {
         this.stop_count = value;
     }
