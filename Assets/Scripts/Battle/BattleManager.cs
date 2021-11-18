@@ -205,9 +205,17 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             foreach (var e in enemyList) { clear &= e.IsDead; }
             if (clear) 
             {
-                // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
                 PrefsUtil.UpdateStageProgress();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
+                yield return new WaitForSeconds(0.3f);
+                SceneManager.LoadScene("Door");
+                yield break;
+            }
+            bool defeat = playerList.Where(ally => !ally.IsDead).Count() == 0;
+            if (defeat)
+            {
+                MessageWindow.Instance.MakeWindow("ぜんめつしてしまった");
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
                 SceneManager.LoadScene("Door");
