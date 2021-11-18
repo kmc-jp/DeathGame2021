@@ -34,17 +34,7 @@ public class AttackAction : ITurnAction
         return true;
     }
 
-    public async UniTask Exec()
-    {
-        if (Actor.IsDead) return;
-        // CoverSkill
-        if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
-        int damage = damageCalculator.Calc(Actor, Target);
-        int actualDamage = Target.DealDamage(damage);
-        MessageWindow.Instance.MakeWindow($"{Target.Name} に {actualDamage} ダメージを与えた！");
-
-        await MessageWindow.Instance.CloseObservable.First();
-    }
+    public UniTask Exec() => Attack.AttackExec(Actor, Target, damageCalculator);
 }
 
 public interface IAttackDamageCalculator

@@ -25,6 +25,12 @@ public class Buffs
         set;
     }
 
+    public int Counter
+    {
+        get;
+        set;
+    }
+
     public Buffs(IActor _actor)
     {
         this.Actor = _actor;
@@ -42,6 +48,11 @@ public class Buffs
         {
             MessageWindow.Instance.AddMessage($"{CoveredBy.Name} は身代わりをやめた");
             CoveredBy = null;
+        }
+        if (Counter > 0)
+        {
+            MessageWindow.Instance.AddMessage($"{Actor.Name} はカウンターの構えをやめた");
+            Counter = 0;
         }
         return false;
     }

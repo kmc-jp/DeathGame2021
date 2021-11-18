@@ -15,6 +15,11 @@ public class Floor2Enemy : RoutinedEnemy
     {
         while (true)
         {
+            yield return new CounterAction(this, 250);
+        }
+        
+        while (true)
+        {
             int zero_one = Random.Range(0, 2);
             if (zero_one == 0)
             {
@@ -29,9 +34,7 @@ public class Floor2Enemy : RoutinedEnemy
             }
             else
             {
-                // カウンター
-                // todo
-                yield return new ChargeAction(2.5f, this);
+                yield return new CounterAction(this, 250);
             }
             
             zero_one = Random.Range(0, 2);

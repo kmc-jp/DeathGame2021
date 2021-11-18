@@ -34,12 +34,8 @@ public class AttackToAllAction : ITurnAction
         foreach (IActor target in targets)
         {
             if(target.IsDead) continue;
-            
-            int damage = damageCalculator.Calc(Actor, target);
-            int actualDamage = target.DealDamage(damage);
-            MessageWindow.Instance.MakeWindow($"{target.Name} に {actualDamage} ダメージを与えた！");
 
-            await MessageWindow.Instance.CloseObservable.First();
+            await Attack.AttackExec(Actor, target, damageCalculator);
         }
     }
 }
