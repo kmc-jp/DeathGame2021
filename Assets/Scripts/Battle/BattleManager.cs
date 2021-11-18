@@ -248,8 +248,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         ClearSkillPanel();
         List<IActor> targets = new List<IActor>();
-        if (isToEnemy)  targets = enemyList.Cast<IActor>().ToList();
-            else targets = playerList.Cast<IActor>().ToList();
+        if (isToEnemy)  targets = enemyList.Where(ally => !ally.IsDead).Cast<IActor>().ToList();
+            else targets = playerList.Where(ally => !ally.IsDead).Cast<IActor>().ToList();
         
         for (int i = 0; i < targets.Count; i++)
         {
