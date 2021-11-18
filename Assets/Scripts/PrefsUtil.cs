@@ -19,7 +19,7 @@ public static class PrefsUtil
 
     private static void SetStageProgress(int stage)
     {
-        PlayerPrefs.GetInt("STAGE_PROGRESS", stage);
+        PlayerPrefs.SetInt("STAGE_PROGRESS", stage);
     }
 
     public static string GetPlayerName()
