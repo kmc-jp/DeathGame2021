@@ -9,6 +9,7 @@ public class NormalEnemyBehaviour : EnemyBehaviour
         this.EnemyCore = floor switch
         {
             1 => new Floor1Enemy(this),
+            2 => new Floor2Enemy(this),
             _ => throw new NotImplementedException()
         };
     }

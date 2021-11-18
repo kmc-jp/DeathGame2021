@@ -62,14 +62,17 @@ public class AttackDamageFromStatus : IAttackDamageCalculator
 
 public class ConstDamage : IAttackDamageCalculator
 {
-    readonly int damage;
-    public ConstDamage(int damage)
+    readonly int damageToPlayer;
+    readonly int damageToBuddy;
+    public ConstDamage(int damageToPlayer, int damageToBuddy)
     {
-        this.damage = damage;
+        this.damageToPlayer = damageToPlayer;
+        this.damageToBuddy = damageToBuddy;
     }
     
     public int Calc(IActor attacker, IActor target)
     {
-        return damage;
+        float damageBase = (target as Player).Id == PlayerId.Player ? damageToPlayer : damageToBuddy;
+        return (int) (damageBase * attacker.Buffs.AttackRate);
     }
 }

@@ -39,6 +39,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private int commandOrder;
 
     private Tween commandSelectTween;
+
+    [SerializeField] int debugFloor;
     
     void Start()
     {
@@ -63,8 +65,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
         // ここにステージ進捗を参照する処理
-        int stage = 0;
-        List<GameObject> enemys = StageMaster.GetEnemyObjects(stage);
+        
+        List<GameObject> enemys = StageMaster.GetEnemyObjects(debugFloor);
         foreach (var e in enemys)
         {
             GameObject enemyObj = (GameObject)Instantiate(

@@ -17,41 +17,29 @@ public class Floor1Enemy : RoutinedEnemy
         while (true)
         {
             {
-                Player target = SelectTarget();
+                Player target = EnemyActionUtil.SelectTarget();
 
-                int damageBase = target.Id switch
-                {
-                    PlayerId.Player => 250,
-                    PlayerId.Buddy => 180,
-                    _ => throw new NotImplementedException()
-                };
-
-                yield return new AttackAction(this, target, new ConstDamage((int) (damageBase * Buffs.AttackRate)));
+                yield return new AttackAction
+                (
+                    this,
+                    target,
+                    new ConstDamage(250, 180)
+                );
             }
 
             {
-                Player target = SelectTarget();
+                Player target = EnemyActionUtil.SelectTarget();
 
-                int damageBase = target.Id switch
-                {
-                    PlayerId.Player => 90,
-                    PlayerId.Buddy => 70,
-                    _ => throw new NotImplementedException()
-                };
-
-                yield return new AttacksInARowAction(this, target, new ConstDamage((int) (damageBase * Buffs.AttackRate)), 4);
+                yield return new AttacksInARowAction
+                (
+                    this,
+                    target,
+                    new ConstDamage(90, 70),
+                    4
+                );
             }
             
             yield return new ChargeAction(2.5f, this);
         }
-    }
-
-    Player SelectTarget()
-    {
-        Player[] liveTargets = BattleManager.Instance.playerList
-            .Where(ally => !ally.IsDead)
-            .ToArray();
-        int targetIdx = Random.Range(0, liveTargets.Length);
-        return liveTargets[targetIdx];
     }
 }
