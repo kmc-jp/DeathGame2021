@@ -10,6 +10,10 @@ public static class StageMaster
         { 0, new List<string>() {"Floor1"} },
         { 1, new List<string>() {"Floor2"} },
         { 2, new List<string>() {"Floor3A", "Floor3B"} },
+        { 3, new List<string>() {"Floor4"} },
+        { 4, new List<string>() {"Floor5"} },
+        { 5, new List<string>() {"Floor6"} },
+        { 6, new List<string>() {"Boss"} },
     };
 
     public static List<GameObject> GetEnemyObjects(int stage)
