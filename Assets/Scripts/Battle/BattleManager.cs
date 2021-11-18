@@ -65,7 +65,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         buddy = new Player(
                 PlayerId.Buddy,
                 "相棒",
-                new Status(350, 300, 150, 10, 10),
+                new Status(35, 300, 150, 10, 10),
                 bsv,
                 new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
                 );
@@ -143,26 +143,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         this.turnActions.Add(action);
         ClearSkillPanel();
-        if (commandOrder >= 1) 
-        {
-            Execute();
-            return;
-        }
-        commandOrder ++;
-        PlayCommandSelectEffect(commandOrder);
+        UpdateCommandOrder(commandOrder + 1);
     }
 
     private void AddAction(List<ITurnAction> actions)
     {
         this.turnActions.AddRange(actions);
         ClearSkillPanel();
-        if (commandOrder >= 1) 
-        {
-            Execute();
-            return;
-        }
-        commandOrder ++;
-        PlayCommandSelectEffect(commandOrder);
+        UpdateCommandOrder(commandOrder + 1);
     }
 
     private void Execute()
@@ -240,8 +228,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
-        commandOrder = 0;
-        PlayCommandSelectEffect(commandOrder);
+        UpdateCommandOrder(0);
     }
 
     private void MakeTargetButton(IActor actor, SkillMaster skill, bool isToEnemy)
@@ -320,5 +307,21 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void PlayDamageSE()
     {
         sounds[1].PlayOneShot(sounds[1].clip);
+    }
+
+    private void UpdateCommandOrder(int _order)
+    {
+        if (_order >= 2) 
+        {
+            Execute();
+            return;
+        }
+        if (playerList[_order].IsDead)
+        {
+            UpdateCommandOrder(_order + 1);
+            return;
+        }
+        commandOrder = _order;
+        PlayCommandSelectEffect(commandOrder);
     }
 }
