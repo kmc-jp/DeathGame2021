@@ -9,7 +9,7 @@ public class BAGI : MonoBehaviour
  public Button button_agi;
  public GameObject agi_status_panel;
  public GameObject Status_Rest;
- private int status_agi = 0;
+ public int status_agi = 0;
  private string rest;
 
 void Start()

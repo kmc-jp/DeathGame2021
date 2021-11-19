@@ -8,7 +8,7 @@ public class HPButton : MonoBehaviour
  public Text Hp_Text; 
  public GameObject hp_status_panel;
  public GameObject Status_Rest;
- private int status_hp = 0;
+ public int status_hp = 0;
  private string rest;
 
 //private EventSystem ev;

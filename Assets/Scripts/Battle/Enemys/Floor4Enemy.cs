@@ -9,7 +9,7 @@ public class Floor4Enemy : RoutinedEnemy
 {
     public Floor4Enemy(EnemyBehaviour behaviour) : base(behaviour)
     {
-        this.Name = "仮";
+        this.Name = "ジガルド";
         this.Status = Status.GenerateNormalEnemyStatus();
 
         BattleManager.Instance.OnTurnEnd(async () =>

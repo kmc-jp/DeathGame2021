@@ -32,4 +32,30 @@ public static class PrefsUtil
     {
         PlayerPrefs.SetString("PLAYER_NAME", name);
     }
+
+    public static void SetPlayerStatus(int hp, int mp, int atk, int def, int agi )
+    {
+         string status = JsonUtility.ToJson(new AdditionalStatus(hp, mp, atk, def, agi));
+         PlayerPrefs.SetString("PLAYER_STATUS", status);
+    }
+
+    public static AdditionalStatus GetPlayerStatus()
+    {
+        string json = PlayerPrefs.GetString("PLAYER_STATUS", JsonUtility.ToJson(new AdditionalStatus(0, 0, 0, 0, 0)));
+        AdditionalStatus status = JsonUtility.FromJson<AdditionalStatus>(json);
+        return status;
+    }
+
+    public static void SetBuddyStatus(int hp, int mp, int atk, int def, int agi )
+    {
+         string status = JsonUtility.ToJson(new AdditionalStatus(hp, mp, atk, def, agi));
+         PlayerPrefs.SetString("BUDDY_STATUS", status);
+    }
+
+    public static AdditionalStatus GetBuddyStatus()
+    {
+        string json = PlayerPrefs.GetString("BUDDY_STATUS", JsonUtility.ToJson(new AdditionalStatus(0, 0, 0, 0, 0)));
+        AdditionalStatus status = JsonUtility.FromJson<AdditionalStatus>(json);
+        return status;
+    }
 }

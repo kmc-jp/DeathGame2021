@@ -55,25 +55,33 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         Image psv = playerStatusView.StatusPanel;
         Image bsv = buddyStatusView.StatusPanel;
+        AdditionalStatus padds = PrefsUtil.GetPlayerStatus();
+        Status pStatus = new Status(500, 100, 100, 0, 0);
+        pStatus.ApplyAdditionalStatus(padds);
+        AdditionalStatus badds = PrefsUtil.GetBuddyStatus();
+        Status bStatus = new Status(350, 300, 150, 0, 0);
+        pStatus.ApplyAdditionalStatus(badds);
         player = new Player(
                 PlayerId.Player,
                 PrefsUtil.GetPlayerName(),
-                new Status(500, 100, 100, 10, 10),
+                pStatus,
                 psv,
                 new List<SkillMaster>(){ 
                     SkillMaster.Heal,
                     SkillMaster.Cover,
                     SkillMaster.EnhancedAttackP,
-                    SkillMaster.HighHeal
+                    SkillMaster.AtkBuff,
+                    SkillMaster.HealBuff
                     }
                 );
         buddy = new Player(
                 PlayerId.Buddy,
                 "相棒",
-                new Status(35, 300, 150, 10, 10),
+                bStatus,
                 bsv,
                 new List<SkillMaster>(){
                     SkillMaster.Heal,
+                    SkillMaster.HighHeal,
                     SkillMaster.FullHeal,
                     SkillMaster.Cover,
                     SkillMaster.EnhancedAttackB,
@@ -271,6 +279,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             buttonObj, 
             skillButtonField.transform);
         skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * idx, 0.0f);
+        if (idx >= 4) skillButton.GetComponent<RectTransform>().localPosition += new Vector3(220.0f, 200.0f, 0.0f);
         Button buttonComponent = skillButton.GetComponent<Button>();
         SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
         skillActionButton.SetLabel(label);

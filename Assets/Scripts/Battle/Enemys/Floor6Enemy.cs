@@ -9,7 +9,7 @@ public class Floor6Enemy : RoutinedEnemy
 {
     public Floor6Enemy(EnemyBehaviour behaviour) : base(behaviour)
     {
-        this.Name = "仮";
+        this.Name = "キャットシー";
         this.Status = Status.GenerateNormalEnemyStatus();
     }
 
