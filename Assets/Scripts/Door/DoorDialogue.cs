@@ -60,7 +60,7 @@ public class DoorDialogue : MonoBehaviour
   }
   public void ChangeDoorText(int id)
     {
-        Message.GetComponent<Text>().text = StringClass.SutefuriyaTexts[id];
+        Message.GetComponent<Text>().text = DoorStringClass.SutefuriyaTexts[id];
     }
   void Maine(int n)
   {
