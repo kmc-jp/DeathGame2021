@@ -72,6 +72,11 @@ public static class PrefsUtil
         SkillHolder skills = JsonUtility.FromJson<SkillHolder>(json);
         return skills.Skills;
     }
+
+    public static void ClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
 
 // JSONUtilityのためのwrapper
