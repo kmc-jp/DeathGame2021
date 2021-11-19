@@ -12,9 +12,15 @@ public class ClearMessage : MonoBehaviour
         "ここまで遊んでいただき本当にありがとうございます。",
         "タイトルへもどります。"
     };
-    void Start()
-    {
-        StartCoroutine(ShowMessage());
+
+    bool firstTime = true;
+    void Update()
+    {   
+        if (firstTime)
+        {
+            firstTime = false;
+            StartCoroutine(ShowMessage());
+        }
     }
 
     private IEnumerator ShowMessage()
