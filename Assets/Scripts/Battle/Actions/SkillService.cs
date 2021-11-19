@@ -41,8 +41,8 @@ public static class SkillService
         { SkillMaster.HighHeal,        new SkillInfo("ケアル", 7, 0, false) },
         { SkillMaster.FullHeal,        new SkillInfo("ケアルガ", 10, 0, false) },
         { SkillMaster.Cover,           new SkillInfo("身代わり", 0, 1, false) },
-        { SkillMaster.AtkBuff,         new SkillInfo("攻撃バフ", 30, 1, false) },
-        { SkillMaster.HealBuff,        new SkillInfo("回復バフ", 30, 1, false) },
+        { SkillMaster.AtkBuff,         new SkillInfo("バイカジャ", 30, 1, false) },
+        { SkillMaster.HealBuff,        new SkillInfo("インカジャ", 30, 1, false) },
     };
 
     public static List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
