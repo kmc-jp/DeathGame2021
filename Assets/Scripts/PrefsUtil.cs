@@ -58,4 +58,17 @@ public static class PrefsUtil
         AdditionalStatus status = JsonUtility.FromJson<AdditionalStatus>(json);
         return status;
     }
+
+    public static void SetPlayerSkill(List<SkillMaster> skills)
+    {
+        string skill = JsonUtility.ToJson(skills);
+        PlayerPrefs.SetString("PLAYER_SKILL", skill);
+    }
+
+    public static List<SkillMaster> GetPlayerSkill()
+    {
+        string json = PlayerPrefs.GetString("PLAYER_SKILL", JsonUtility.ToJson(new List<SkillMaster>()));
+        List<SkillMaster> skills = JsonUtility.FromJson<List<SkillMaster>>(json);
+        return skills;
+    }
 }

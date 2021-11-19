@@ -8,7 +8,9 @@ public class BSkillButton : MonoBehaviour
     private bool ischeck_select = false;
     public Text bbtext;
     private int skillcount;
-
+    private List<SkillMaster> skillMasters = new List<SkillMaster>(){
+        SkillMaster.AtkBuff, SkillMaster.HealBuff
+    };
     public int Getskillcount()
     {
         return skillcount;
@@ -24,7 +26,7 @@ public class BSkillButton : MonoBehaviour
         {
            bbtext.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
            ischeck_select = true;
-           skillcount = 0;
+           skillcount = 1;
         }
         else if(ischeck_select)
         {
@@ -33,5 +35,15 @@ public class BSkillButton : MonoBehaviour
             skillcount = 0;
         }
         
+    }
+
+    public List<SkillMaster> GetSkillList()
+    {
+        if(ischeck_select)
+        {
+            return skillMasters;
+        }
+        
+        return new List<SkillMaster>();
     }
 }
