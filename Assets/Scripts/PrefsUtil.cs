@@ -45,4 +45,17 @@ public static class PrefsUtil
         AdditionalStatus status = JsonUtility.FromJson<AdditionalStatus>(json);
         return status;
     }
+
+    public static void SetBuddyStatus(int hp, int mp, int atk, int def, int agi )
+    {
+         string status = JsonUtility.ToJson(new AdditionalStatus(hp, mp, atk, def, agi));
+         PlayerPrefs.SetString("BUDDY_STATUS", status);
+    }
+
+    public static AdditionalStatus GetBuddyStatus()
+    {
+        string json = PlayerPrefs.GetString("BUDDY_STATUS", null);
+        AdditionalStatus status = JsonUtility.FromJson<AdditionalStatus>(json);
+        return status;
+    }
 }
