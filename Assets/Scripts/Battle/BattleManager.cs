@@ -98,6 +98,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         turnActions = new List<ITurnAction>();
         commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
+        PlayBGM();
         
         string message = String.Join(" と ", enemyList.Select(e => e.Name)) + " があらわれた！";
         MessageWindow.Instance.MakeWindow(message);
@@ -322,6 +323,26 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void PlayDamageSE()
     {
         sounds[1].PlayOneShot(sounds[1].clip);
+    }
+
+    private void PlayBGM()
+    {
+        switch (Floor)
+        {
+            case 0:
+            case 1:
+            case 2:
+                sounds[2].Play();
+                break;
+            case 3:
+            case 4:
+            case 5:
+                sounds[3].Play();
+                break;
+            case 6:
+                sounds[4].Play();
+                break;
+        }
     }
 
     private void UpdateCommandOrder(int _order)
