@@ -2111,6 +2111,8 @@ MonoBehaviour:
   window_skil: {fileID: 1666721756}
   Message: {fileID: 898703780}
   moveController: {fileID: 0}
+  HpbP: {fileID: 467312171}
+  HpbB: {fileID: 658192616}
 --- !u!61 &309515222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3157,8 +3159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
-  button_hp: {fileID: 0}
-  HPb: {fileID: 467312171}
   hp_status_panel: {fileID: 2126947590}
   Status_Rest: {fileID: 836063549}
 --- !u!114 &467312177
@@ -4521,9 +4521,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp_Text: {fileID: 0}
-  HPb: {fileID: 658192616}
-  hp_status_panel: {fileID: 0}
-  Status_Rest: {fileID: 0}
+  hp_status_panel: {fileID: 663236296}
+  Status_Rest: {fileID: 1228366248}
 --- !u!114 &658192619
 MonoBehaviour:
   m_ObjectHideFlags: 0
