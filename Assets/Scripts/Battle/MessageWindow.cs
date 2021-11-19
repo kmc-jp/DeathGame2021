@@ -8,15 +8,15 @@ using UniRx;
 public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
 {
     [SerializeField]
-    private GameObject background;
+    protected GameObject background;
     [SerializeField]
-    private Text textField;
+    protected Text textField;
 
-    private List<string> texts;
+    protected List<string> texts;
 
     public Button CloseButton;
     
-    private Subject<Unit> closeSubject = new Subject<Unit>();
+    protected Subject<Unit> closeSubject = new Subject<Unit>();
     public IObservable<Unit> CloseObservable
     {
         get { return closeSubject; }
@@ -71,7 +71,7 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
         ConsumeMessage();
     }
 
-    private void ConsumeMessage()
+    protected void ConsumeMessage()
     {
         UpdateMessage();
         if (texts.Count == 0) return;
