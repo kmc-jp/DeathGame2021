@@ -5215,6 +5215,10 @@ MonoBehaviour:
   batkButton: {fileID: 968256523}
   bdefButton: {fileID: 491689332}
   bagiButton: {fileID: 918453161}
+  bSkillButton: {fileID: 1253559776}
+  eSkillButton: {fileID: 1253559775}
+  hSkillButton: {fileID: 1253559774}
+  sSkillButton: {fileID: 1253559773}
 --- !u!82 &696549431
 AudioSource:
   m_ObjectHideFlags: 0

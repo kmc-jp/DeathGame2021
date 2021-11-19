@@ -40,6 +40,15 @@ public class Load_Battle : MonoBehaviour
     [SerializeField]
     BAGI bagiButton;
 
+    [SerializeField]
+    private BSkillButton bSkillButton;
+    [SerializeField]
+    private ESkillButton eSkillButton;
+    [SerializeField]
+    private HSkillButton hSkillButton;
+    [SerializeField]
+    private SSkillButton sSkillButton;
+
     void Start()
     {
         Lpanel = GameObject.Find("Canvas/LoadPanel");
@@ -55,6 +64,8 @@ public class Load_Battle : MonoBehaviour
         {
             doorsound.PlayOneShot(doorsound.clip);
             SavePlayerStatus();
+            SaveBuddyStatus();
+            SavePlayerSkill();
             StartCoroutine("WaitForFive");
             int floor = PrefsUtil.GetStageProgress();
             if (floor >= 7)
@@ -97,4 +108,15 @@ public class Load_Battle : MonoBehaviour
             bagiButton.status_agi
         );
     }
+
+    private void SavePlayerSkill()
+    {
+        List<SkillMaster> playerskill = new List<SkillMaster>();
+        playerskill.AddRange(bSkillButton.GetSkillList());
+        playerskill.AddRange(eSkillButton.GetSkillList());
+        playerskill.AddRange(hSkillButton.GetSkillList());
+        playerskill.AddRange(sSkillButton.GetSkillList());
+        PrefsUtil.SetPlayerSkill(playerskill);           
+    } 
+
 }

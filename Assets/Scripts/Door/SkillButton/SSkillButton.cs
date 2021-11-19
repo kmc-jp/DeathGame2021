@@ -8,7 +8,9 @@ public class SSkillButton : MonoBehaviour
     private bool ischeck_select = false;
     public Text sbtext;
     private int skillcount;
-
+    private List<SkillMaster> skillMasters = new List<SkillMaster>(){
+        SkillMaster.Cover
+    };
     public int Getskillcount()
     {
         return skillcount;
@@ -35,5 +37,15 @@ public class SSkillButton : MonoBehaviour
             skillcount = 0;
         }
         
+    }
+
+    public List<SkillMaster> GetSkillList()
+    {
+        if(skillcount != 0)
+        {
+            return skillMasters;
+        }
+        
+        return new List<SkillMaster>();
     }
 }

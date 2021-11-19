@@ -8,6 +8,9 @@ public class HSkillButton : MonoBehaviour
     private bool ischeck_select = false;
     public Text hbtext;
     private int skillcount;
+    private List<SkillMaster> skillMasters = new List<SkillMaster>(){
+        SkillMaster.Heal, SkillMaster.HighHeal, SkillMaster.FullHeal
+    };
 
     public int Getskillcount()
     {
@@ -34,5 +37,15 @@ public class HSkillButton : MonoBehaviour
             skillcount = 0;
         }
         
+    }
+
+    public List<SkillMaster> GetSkillList()
+    {
+        if(skillcount != 0)
+        {
+            return skillMasters;
+        }
+        
+        return new List<SkillMaster>();
     }
 }
