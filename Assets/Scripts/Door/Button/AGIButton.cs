@@ -40,7 +40,7 @@ public void AGIbuttonOperation()//選択されているとき
 
         if(Input.GetKeyDown(KeyCode.RightArrow) && rest != "残り:0") 
         {
-            status_agi = System.Math.Min(status_agi + 1, 10);
+            status_agi = System.Math.Min(status_agi + 1, 5);
             GameObject.Find($"Canvas/StatusPanel/Status_Select/AGI/StatusAGIPanel/{status_agi}").SetActive(true);
         }
         Agi_Text.text = $"{status_agi.ToString()}";
