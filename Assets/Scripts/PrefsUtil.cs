@@ -24,7 +24,7 @@ public static class PrefsUtil
 
     public static string GetPlayerName()
     {
-        string name = PlayerPrefs.GetString("PLAYER_NAME", "player");
+        string name = PlayerPrefs.GetString("PLAYER_NAME", "Player");
         return name;
     }
 

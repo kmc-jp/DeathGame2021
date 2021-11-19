@@ -101,6 +101,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         
         string message = String.Join(" と ", enemyList.Select(e => e.Name)) + " があらわれた！";
         MessageWindow.Instance.MakeWindow(message);
+
+        playerStatusView.SetNameText(PrefsUtil.GetPlayerName());
         UpdatePlayersStatusView();
         PlayCommandSelectEffect(commandOrder);
     }
