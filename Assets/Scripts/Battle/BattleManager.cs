@@ -64,7 +64,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                     SkillMaster.Heal,
                     SkillMaster.Cover,
                     SkillMaster.EnhancedAttackP,
-                    SkillMaster.HighHeal
+                    SkillMaster.AtkBuff,
+                    SkillMaster.HealBuff
                     }
                 );
         buddy = new Player(
@@ -74,6 +75,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 bsv,
                 new List<SkillMaster>(){
                     SkillMaster.Heal,
+                    SkillMaster.HighHeal,
                     SkillMaster.FullHeal,
                     SkillMaster.Cover,
                     SkillMaster.EnhancedAttackB,
@@ -271,6 +273,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             buttonObj, 
             skillButtonField.transform);
         skillButton.GetComponent<RectTransform>().localPosition += new Vector3(0.0f, -50.0f * idx, 0.0f);
+        if (idx >= 4) skillButton.GetComponent<RectTransform>().localPosition += new Vector3(220.0f, 200.0f, 0.0f);
         Button buttonComponent = skillButton.GetComponent<Button>();
         SkillActionButton skillActionButton = skillButton.GetComponent<SkillActionButton>();
         skillActionButton.SetLabel(label);
