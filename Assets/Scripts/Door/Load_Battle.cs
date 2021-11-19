@@ -24,7 +24,7 @@ public class Load_Battle : MonoBehaviour
         {
             doorsound.PlayOneShot(doorsound.clip);
             StartCoroutine("WaitForFive");
-            SceneManager.LoadScene("battle");
+            SceneManager.LoadScene("Battle");
         }
     }
 
