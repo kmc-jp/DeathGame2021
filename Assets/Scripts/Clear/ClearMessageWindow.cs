@@ -7,8 +7,11 @@ using UniRx;
 
 public class ClearMessageWindow : MessageWindow
 {
+    [SerializeField]
+    private AudioSource buttonSE; 
     public void CloseClearWindow()
     {
+        buttonSE.PlayOneShot(buttonSE.clip);
         if (texts.Count == 0)
         {
             this.textField.text = "";
