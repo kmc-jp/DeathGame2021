@@ -9,7 +9,7 @@ public class ClearMessage : MonoBehaviour
     private List<string> messages = new List<string>()
     {
         "あなたはついに頂上へたどり着きました。",
-        "ここまで遊んでいただき本当にありがとうございます。",
+        "ここまで遊んでいただき\n本当にありがとうございます。",
         "タイトルへもどります。"
     };
 
