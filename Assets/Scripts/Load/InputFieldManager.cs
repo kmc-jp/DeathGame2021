@@ -58,7 +58,7 @@ public class InputFieldManager : MonoBehaviour
 
     public void ClickEnter()
     {
-        PlayerPrefs.SetString("PLAYER_NAME", username);
+        PrefsUtil.SetPlayerName(username);
         SceneManager.LoadScene("Door");
     }
 

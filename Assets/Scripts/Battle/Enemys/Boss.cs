@@ -8,7 +8,7 @@ public class Boss : RoutinedEnemy
     public Boss(EnemyBehaviour behaviour) : base(behaviour)
     {
         this.Name = "グラゴス";
-        this.Status = new Status(5000, -1, -1, 0, 0);
+        this.Status = new Status(5000, -1, -1, 0, 49);
     }
 
     protected override IEnumerator<ITurnAction> GetRoutine()

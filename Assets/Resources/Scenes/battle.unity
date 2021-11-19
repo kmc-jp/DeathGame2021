@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f70768c39e6874c8942ca365d0cdf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: {fileID: 234535648}
   hp: {fileID: 759556404}
   mp: {fileID: 677202497}
   StatusPanel: {fileID: 950836837}
@@ -2826,6 +2827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f70768c39e6874c8942ca365d0cdf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: {fileID: 2106762909}
   hp: {fileID: 69983361}
   mp: {fileID: 1197383192}
   StatusPanel: {fileID: 877045412}
