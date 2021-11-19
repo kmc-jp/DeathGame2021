@@ -70,10 +70,10 @@ public class Load_Battle : MonoBehaviour
             int floor = PrefsUtil.GetStageProgress();
             if (floor >= 7)
             {
-                SceneManager.LoadScene("Clear");
+                FadeManager.Instance.LoadScene("Clear", 1.0f);
                 return;
             }
-            SceneManager.LoadScene("Battle");
+            FadeManager.Instance.LoadScene("Battle", 1.0f);
         }
     }
 
