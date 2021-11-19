@@ -3670,6 +3670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00903973ca57fc747ad8bc0f41705e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMove: 1
 --- !u!114 &1879361871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3951,7 +3952,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 100
-    m_FontStyle: 0
+    m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 100
@@ -3961,7 +3962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30BF\u30A4\u30C8\u30EB"
+  m_Text: Death Finale
 --- !u!222 &2060945094
 CanvasRenderer:
   m_ObjectHideFlags: 0
