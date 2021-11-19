@@ -41,7 +41,7 @@ public class SSkillButton : MonoBehaviour
 
     public List<SkillMaster> GetSkillList()
     {
-        if(ischeck_select)
+        if(skillcount != 0)
         {
             return skillMasters;
         }
