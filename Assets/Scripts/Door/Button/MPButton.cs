@@ -47,22 +47,4 @@ public void MPbuttonOperation()
             Mp_Text.text = $"{status_mp.ToString()}";
             
     }
-
-//リセットボタン用関数    
-  public void MP_Reset()
- {
-      
-     for(int i =1;i<=10;i++)
-       {
-            GameObject.Find($"Canvas/StatusPanel/Status_Select/MP/StatusMPPanel/{i}").SetActive(false);
-        }
-     status_mp = 0;
-     Mp_Text.text = $"{status_mp.ToString()}";
- }
-
 }
-
-
-
-/*MP_Resetが動作したらあるboolを返しボタンオペの中に値やパネルを初期化するやつを仕込む。
-直後bool値をまたひっくり返す*/

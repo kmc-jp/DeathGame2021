@@ -11,7 +11,7 @@ public class ATKButton : MonoBehaviour
  public GameObject Status_Rest;
  public int status_atk = 0;
  private string rest;
- //private bool ischeckb;
+
 void Start()
 {
    button_atk = GameObject.Find("Canvas/StatusPanel/Status_Select/ATK").GetComponent<Button>();
@@ -46,11 +46,4 @@ public void ATKbuttonOperation()
         Atk_Text.text = $"{status_atk.ToString()}";
         
     }
-
-//リセットボタン用関数    
-  public void ATK_Reset()
- {
-     status_atk = 0;
- }
-
 }

@@ -11,7 +11,7 @@ public class AGIButton : MonoBehaviour
  public GameObject Status_Rest;
  public int status_agi = 0;
  private string rest;
- //private bool ischeckb;
+ 
 void Start()
 {
    button_agi = GameObject.Find("Canvas/StatusPanel/Status_Select/AGI").GetComponent<Button>();
@@ -46,12 +46,5 @@ public void AGIbuttonOperation()//選択されているとき
         Agi_Text.text = $"{status_agi.ToString()}";
         
     }
-
-//リセットボタン用関数    
-  public void AGI_Reset()
- {
-     status_agi= 0;
- }
-
 }
 

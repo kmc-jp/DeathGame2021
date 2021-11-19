@@ -21,6 +21,8 @@ public class DoorDialogue : MonoBehaviour
     private GameObject HpbP;
     [SerializeField]
     private GameObject HpbB;
+　　[SerializeField]
+    private GameObject Skillb;
     void Start()
     {
        Message = GameObject.Find("Canvas/WindowMessage/Message");
@@ -60,7 +62,7 @@ public class DoorDialogue : MonoBehaviour
   }
   public void ChangeDoorText(int id)
     {
-        Message.GetComponent<Text>().text = StringClass.SutefuriyaTexts[id];
+        Message.GetComponent<Text>().text = DoorStringClass.SutefuriyaTexts[id];
     }
   void Maine(int n)
   {
@@ -85,6 +87,7 @@ public class DoorDialogue : MonoBehaviour
             {
                 ChangeDoorText(8);
                 textid = 8;
+                Select_Button_Flag = true;
             }
             break;
             
@@ -124,6 +127,11 @@ public class DoorDialogue : MonoBehaviour
             break;
 
             case 9://わざ画面を表示
+             if(Select_Button_Flag)
+            {
+                EventSystem.current.SetSelectedGameObject(Skillb);
+                Select_Button_Flag = false;
+            }
             window_skil.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {

@@ -46,11 +46,4 @@ public void ATKbuttonOperation()
         Atk_Text.text = $"{status_atk.ToString()}";
         
     }
-
-//リセットボタン用関数    
-  public void ATK_Reset()
- {
-     status_atk = 0;
- }
-
 }
