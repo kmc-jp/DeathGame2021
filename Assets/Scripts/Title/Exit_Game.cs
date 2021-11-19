@@ -9,7 +9,7 @@ public class Exit_Game : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision)
     {
         IsExitPanel.SetActive(true);        
-        if(Input.GetKeyDown(KeyCode.Z))
+        if(Input.GetKey(KeyCode.Z))
         {
             Application.Quit();                           //実際に動かしているとき
             //UnityEditor.EditorApplication.isPlaying = false;//Unity上で動かしているとき

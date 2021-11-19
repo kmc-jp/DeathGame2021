@@ -28,7 +28,7 @@ public class ToDoorScene : MonoBehaviour
         {
             ToDoorWindow.SetActive(true);
             Messagge.GetComponent<Text>().text = "このまま進んでよろしいですか\n(進む場合はzキーを押してください)";
-            if(Input.GetKeyDown(KeyCode.Z))
+            if(Input.GetKey(KeyCode.Z))
             {
                 FadeManager.Instance.LoadScene("Door", 1.0f);
             }

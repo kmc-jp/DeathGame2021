@@ -14,7 +14,7 @@ public class Floor : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision2)
     {
-        if(Input.GetKeyDown(KeyCode.Z))
+        if(Input.GetKey(KeyCode.Z))
         {
             serifupanel.SetActive(true);
         }     
