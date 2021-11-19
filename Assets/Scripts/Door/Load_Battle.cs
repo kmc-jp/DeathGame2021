@@ -9,6 +9,22 @@ public class Load_Battle : MonoBehaviour
     public GameObject Lpanel;
     public GameObject isbattlecheck;
     private AudioSource doorsound;
+
+    [SerializeField]
+    HPButton hpButton;
+
+    [SerializeField]
+    MPButton mpButton;
+
+    [SerializeField]
+    ATKButton atkButton;
+
+    [SerializeField]
+    DEFButton defButton;
+
+    [SerializeField]
+    AGIButton agiButton;
+
     void Start()
     {
         Lpanel = GameObject.Find("Canvas/LoadPanel");
@@ -23,18 +39,30 @@ public class Load_Battle : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Z))
         {
             doorsound.PlayOneShot(doorsound.clip);
+            SavePlayerStatus();
             StartCoroutine("WaitForFive");
             SceneManager.LoadScene("Battle");
         }
     }
 
     void OnCollisionExit2D(Collision2D collide2)
-  {
-      Lpanel.SetActive(false);
-  }
+    {
+        Lpanel.SetActive(false);
+    }
 
-  private IEnumerator WaitForFive()
-  {
-      yield return new WaitForSeconds(5.0f);
-  }
+    private IEnumerator WaitForFive()
+    {
+        yield return new WaitForSeconds(5.0f);
+    }
+
+    private void SavePlayerStatus()
+    {
+        PrefsUtil.SetPlayerStatus(
+            hpButton.status_hp,
+            mpButton.status_mp,
+            atkButton.status_atk,
+            defButton.status_def,
+            agiButton.status_agi
+        );
+    }
 }
