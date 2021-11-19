@@ -56,13 +56,4 @@ public struct AdditionalStatus
         this.Def = def * 3;
         this.Agi = agi * 10;
     }
-
-    public AdditionalStatus()
-    {
-        this.Hp = 0;
-        this.Mp = 0;
-        this.Atk = 0;
-        this.Def = 0;
-        this.Agi = 0;
-    }
 }
