@@ -56,6 +56,12 @@ public class Load_Battle : MonoBehaviour
             doorsound.PlayOneShot(doorsound.clip);
             SavePlayerStatus();
             StartCoroutine("WaitForFive");
+            int floor = PrefsUtil.GetStageProgress();
+            if (floor >= 7)
+            {
+                SceneManager.LoadScene("Clear");
+                return;
+            }
             SceneManager.LoadScene("Battle");
         }
     }
