@@ -2127,6 +2127,7 @@ MonoBehaviour:
   HpbP: {fileID: 467312171}
   HpbB: {fileID: 658192616}
   Skillb: {fileID: 1370556314}
+  SkillManager: {fileID: 1253559772}
 --- !u!61 &309515222
 BoxCollider2D:
   m_ObjectHideFlags: 0

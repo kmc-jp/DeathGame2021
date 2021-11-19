@@ -24,6 +24,8 @@ public class DoorDialogue : MonoBehaviour
 　　[SerializeField]
     private GameObject Skillb;
 
+    [SerializeField]
+    private GameObject SkillManager;
     void Start()
     {
        Message = GameObject.Find("Canvas/WindowMessage/Message");
@@ -136,6 +138,26 @@ public class DoorDialogue : MonoBehaviour
             window_skil.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {
+                if(SkillManager.GetComponent<ESkillButton>().Getskillcount() == 1)
+                {
+                    Debug.Log("属性攻撃をセットする");//セットの処理を書く
+                }
+
+                if(SkillManager.GetComponent<HSkillButton>().Getskillcount() == 1)
+                {
+                    Debug.Log("回復をセットする");
+                }
+
+                if(SkillManager.GetComponent<SSkillButton>().Getskillcount() == 1)
+                {
+                    Debug.Log("身代わりをセットする");
+                }
+
+                if(SkillManager.GetComponent<BSkillButton>().Getskillcount() == 1)
+                {
+                    Debug.Log("バフをセットする");
+                }
+
                 window_skil.SetActive(false);
                 ChangeDoorText(6);
                 textid = 6;
