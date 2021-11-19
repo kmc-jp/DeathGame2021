@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DisplayStatus : MonoBehaviour
 {
     [SerializeField]
-    private Text name;
+    private Text Name;
     [SerializeField]
     private Text hp;
     [SerializeField]
@@ -15,7 +15,7 @@ public class DisplayStatus : MonoBehaviour
 
     public void SetNameText(string text)
     {
-        this.name.text = text;
+        this.Name.text = text;
     }
 
     public void SetHpText(string hpText)
