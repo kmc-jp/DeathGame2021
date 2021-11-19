@@ -61,14 +61,31 @@ public static class PrefsUtil
 
     public static void SetPlayerSkill(List<SkillMaster> skills)
     {
-        string skill = JsonUtility.ToJson(skills);
+        SkillHolder hodler = new SkillHolder(skills);
+        string skill = JsonUtility.ToJson(hodler);
         PlayerPrefs.SetString("PLAYER_SKILL", skill);
     }
 
     public static List<SkillMaster> GetPlayerSkill()
     {
-        string json = PlayerPrefs.GetString("PLAYER_SKILL", JsonUtility.ToJson(new List<SkillMaster>()));
-        List<SkillMaster> skills = JsonUtility.FromJson<List<SkillMaster>>(json);
-        return skills;
+        string json = PlayerPrefs.GetString("PLAYER_SKILL", JsonUtility.ToJson(new SkillHolder()));
+        SkillHolder skills = JsonUtility.FromJson<SkillHolder>(json);
+        return skills.Skills;
+    }
+}
+
+// JSONUtilityのためのwrapper
+public class SkillHolder
+{
+    public List<SkillMaster> Skills;
+
+    public SkillHolder(List<SkillMaster> skills)
+    {
+        this.Skills = skills;
+    }
+
+    public SkillHolder()
+    {
+        this.Skills = new List<SkillMaster>();
     }
 }
