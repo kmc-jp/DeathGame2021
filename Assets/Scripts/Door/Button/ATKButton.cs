@@ -9,7 +9,7 @@ public class ATKButton : MonoBehaviour
  public Button button_atk;
  public GameObject atk_status_panel;
  public GameObject Status_Rest;
- private int status_atk = 0;
+ public int status_atk = 0;
  private string rest;
  //private bool ischeckb;
 void Start()

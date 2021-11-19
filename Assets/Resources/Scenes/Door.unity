@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mp_Text: {fileID: 0}
+  status_mp: 0
   button_mp: {fileID: 0}
   mp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
@@ -3161,6 +3162,7 @@ MonoBehaviour:
   Hp_Text: {fileID: 0}
   hp_status_panel: {fileID: 2126947590}
   Status_Rest: {fileID: 836063549}
+  status_hp: 0
 --- !u!114 &467312177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3425,6 +3427,7 @@ MonoBehaviour:
   button_def: {fileID: 0}
   def_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_def: 0
 --- !u!114 &491689334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4181,6 +4184,7 @@ MonoBehaviour:
   button_atk: {fileID: 0}
   atk_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_atk: 0
 --- !u!114 &604931600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4523,6 +4527,7 @@ MonoBehaviour:
   Hp_Text: {fileID: 0}
   hp_status_panel: {fileID: 663236296}
   Status_Rest: {fileID: 1228366248}
+  status_hp: 0
 --- !u!114 &658192619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5175,6 +5180,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lpanel: {fileID: 0}
   isbattlecheck: {fileID: 335098805}
+  hpButton: {fileID: 467312176}
+  mpButton: {fileID: 26274063}
+  atkButton: {fileID: 604931599}
+  defButton: {fileID: 1299072628}
+  agiButton: {fileID: 1541618263}
+  bhpButton: {fileID: 658192618}
+  bmpButton: {fileID: 779759972}
+  batkButton: {fileID: 968256523}
+  bdefButton: {fileID: 491689332}
+  bagiButton: {fileID: 918453161}
 --- !u!82 &696549431
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5964,6 +5979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mp_Text: {fileID: 0}
+  status_mp: 0
   button_mp: {fileID: 0}
   mp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
@@ -7565,6 +7581,7 @@ MonoBehaviour:
   button_agi: {fileID: 0}
   agi_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_agi: 0
 --- !u!114 &918453162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8038,6 +8055,7 @@ MonoBehaviour:
   button_atk: {fileID: 0}
   atk_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_atk: 0
 --- !u!114 &968256525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8761,8 +8779,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.465, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1124299152
 MonoBehaviour:
@@ -8785,19 +8803,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0cb02dce9ece4bb46a437067e973b1f9, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3053\u3053\u306F1\u968E\u5C64\u3067\u3059"
+  m_Text: "\u3053\u3053\u306F 1 \u968E\u5C64\u3067\u3059"
 --- !u!222 &1124299153
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10267,6 +10285,7 @@ MonoBehaviour:
   button_def: {fileID: 0}
   def_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_def: 0
 --- !u!114 &1299072629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12227,6 +12246,7 @@ MonoBehaviour:
   button_agi: {fileID: 0}
   agi_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_agi: 0
 --- !u!1 &1545951011
 GameObject:
   m_ObjectHideFlags: 0
@@ -12557,6 +12577,7 @@ GameObject:
   - component: {fileID: 1603794445}
   - component: {fileID: 1603794447}
   - component: {fileID: 1603794446}
+  - component: {fileID: 1603794448}
   m_Layer: 5
   m_Name: SerifuPanel
   m_TagString: Untagged
@@ -12579,10 +12600,10 @@ RectTransform:
   m_Father: {fileID: 1882304687}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -796.99994, y: 100}
-  m_SizeDelta: {x: -1737.07, y: -1014.19}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -747, y: 150}
+  m_SizeDelta: {x: 350, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1603794446
 MonoBehaviour:
@@ -12604,8 +12625,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12622,6 +12643,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1603794444}
   m_CullTransparentMesh: 1
+--- !u!114 &1603794448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603794444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654960a67c5661c4c8471d949c40305e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serifuText: {fileID: 1124299152}
 --- !u!1 &1613912788
 GameObject:
   m_ObjectHideFlags: 0

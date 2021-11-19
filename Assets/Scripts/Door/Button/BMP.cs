@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BMP : MonoBehaviour
 {
  public Text Mp_Text; 
- private int status_mp = 0;
+ public int status_mp = 0;
  public Button button_mp;
  private string rest;
  public GameObject mp_status_panel;
