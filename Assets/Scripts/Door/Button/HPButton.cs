@@ -55,10 +55,4 @@ public void HPbuttonOperation()
         
     }
 
-//リセットボタン用関数    
-  public void HP_Reset()
- {
-     status_hp = 0;
- }
-
 }
