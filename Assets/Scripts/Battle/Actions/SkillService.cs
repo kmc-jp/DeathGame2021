@@ -8,6 +8,8 @@ public enum SkillMaster
     NormalAttack,
     EnhancedAttack,
     Heal,
+    HighHeal,
+    FullHeal,
     Cover,
     AtkBuff,
     HealBuff,
@@ -33,7 +35,9 @@ public static class SkillService
     public static readonly Dictionary<SkillMaster, SkillInfo> SkillInfoMaster = new Dictionary<SkillMaster, SkillInfo>(){
         { SkillMaster.NormalAttack,   new SkillInfo("通常攻撃", 0, 0, true) },
         { SkillMaster.EnhancedAttack, new SkillInfo("属性攻撃", 5, 0, true) },
-        { SkillMaster.Heal,           new SkillInfo("回復呪文", 5, 0, false) },
+        { SkillMaster.Heal,           new SkillInfo("ケア", 5, 0, false) },
+        { SkillMaster.HighHeal,       new SkillInfo("ケアル", 7, 0, false) },
+        { SkillMaster.FullHeal,       new SkillInfo("ケアルガ", 10, 0, false) },
         { SkillMaster.Cover,          new SkillInfo("身代わり", 0, 1, false) },
         { SkillMaster.AtkBuff,        new SkillInfo("攻撃バフ", 30, 1, false) },
         { SkillMaster.HealBuff,       new SkillInfo("回復バフ", 30, 1, false) },
@@ -52,7 +56,11 @@ public static class SkillService
                 actions.Add(new EnhancedAttackSkillAction(actor, target));
                 break;
             case SkillMaster.Heal:
-                actions.Add(new HealSkillAction(actor, target));
+            case SkillMaster.HighHeal:
+            case SkillMaster.FullHeal:
+                var a = new HealSkillAction(actor, target);
+                a.Id = skillId;
+                actions.Add(a);
                 break;
             case SkillMaster.Cover:
                 actions.Add(new CoverSkillAction(actor, target));

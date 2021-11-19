@@ -6,7 +6,16 @@ using UnityEngine;
 
 public class HealSkillAction : SkillAction
 {
-    private int healValue = 100;
+    private int healValue
+    {
+        get => Id switch
+            {
+                SkillMaster.Heal => 100,
+                SkillMaster.HighHeal => 300,
+                SkillMaster.FullHeal => 100000,
+                _ => 100
+            };
+    }
 
     public HealSkillAction(IActor _actor, IActor _target)
     {

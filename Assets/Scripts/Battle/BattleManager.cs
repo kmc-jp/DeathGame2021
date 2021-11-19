@@ -64,7 +64,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                     SkillMaster.Heal,
                     SkillMaster.Cover,
                     SkillMaster.EnhancedAttack,
-                    SkillMaster.AtkBuff
+                    SkillMaster.HighHeal
                     }
                 );
         buddy = new Player(
