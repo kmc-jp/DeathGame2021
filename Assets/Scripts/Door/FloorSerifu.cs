@@ -11,6 +11,6 @@ public class FloorSerifu : MonoBehaviour
     void Start()
     {
         int floor = PrefsUtil.GetStageProgress();
-        serifuText.text = $"ここは　{floor + 1} 階層です";
+        serifuText.text = $"ここは {floor + 1} 階層です";
     }
 }
