@@ -12,19 +12,23 @@ public class Quit : MonoBehaviour
     }
     void Update()
     {
-        if(!QPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        if(!QPanel.activeSelf)
         {
-            QPanel.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                QPanel.gameObject.SetActive(true);
+            }
+            return;
         }
 
-        if(QPanel.activeSelf && Input.GetKeyDown(KeyCode.Z))
+        if(Input.GetKeyDown(KeyCode.Z))
         {
             Application.Quit();
         }
 
-        if(QPanel.activeSelf && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape)))
+        if(Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.Escape))
         {
-            QPanel.SetActive(false);
+            QPanel.gameObject.SetActive(false);
         }
     }
 }
