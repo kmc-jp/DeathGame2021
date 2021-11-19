@@ -9,7 +9,7 @@ public class BDEF : MonoBehaviour
  public Button button_def;
  public GameObject def_status_panel;
  public GameObject Status_Rest;
- private int status_def = 0;
+ public int status_def = 0;
  private string rest;
  //private bool ischeckb;
 void Start()
