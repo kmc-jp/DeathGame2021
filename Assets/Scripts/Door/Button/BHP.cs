@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class BHP : MonoBehaviour
 {
  public Text Hp_Text; 
- public GameObject HPb;
  public GameObject hp_status_panel;
  public GameObject Status_Rest;
  private int status_hp = 0;
@@ -15,8 +13,6 @@ public class BHP : MonoBehaviour
 void Start()
 {
    Hp_Text = GameObject.Find("Canvas/StatusPanel(buddy)/Status_Select/BHP/Counter").GetComponent<Text>();
-   hp_status_panel = GameObject.Find("Canvas/StatusPanel(buddy)/Status_Select/BHP/StatusHPPanel");
-   Status_Rest = GameObject.Find("Canvas/StatusPanel(buddy)/Status_Rest");
 }
 
 public void BHPbuttonOperation()

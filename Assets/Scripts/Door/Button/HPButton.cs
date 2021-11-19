@@ -2,30 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+//using UnityEngine.EventSystems;
 public class HPButton : MonoBehaviour
 {
  public Text Hp_Text; 
- public Button button_hp;
- public GameObject HPb;
  public GameObject hp_status_panel;
  public GameObject Status_Rest;
  private int status_hp = 0;
  private string rest;
 
-private EventSystem ev;
+//private EventSystem ev;
 
-private void Awake()
+/*private void Awake()
 {
     ev = EventSystem.current;
     ev.firstSelectedGameObject = HPb;
-}
+}*/
 void Start()
 {
-   button_hp = HPb.GetComponent<Button>();
    Hp_Text = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/Counter").GetComponent<Text>();
-   hp_status_panel = GameObject.Find("Canvas/StatusPanel/Status_Select/HP/StatusHPPanel");
-   Status_Rest = GameObject.Find("Canvas/StatusPanel/Status_Rest");
 }
 
 public void HPbuttonOperation()
