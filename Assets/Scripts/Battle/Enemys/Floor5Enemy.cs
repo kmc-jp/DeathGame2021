@@ -8,7 +8,7 @@ public class Floor5Enemy : RoutinedEnemy
 {
     public Floor5Enemy(EnemyBehaviour behaviour) : base(behaviour)
     {
-        this.Name = "仮";
+        this.Name = "グラゴス";
         this.Status = Status.GenerateNormalEnemyStatus();
         this.Status.Agi = int.MaxValue;
 
