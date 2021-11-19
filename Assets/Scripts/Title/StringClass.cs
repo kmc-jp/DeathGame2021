@@ -6,7 +6,7 @@ public class StringClass : MonoBehaviour
 {
 
     public static readonly string Text0 = "←出口";
-    public static readonly string Text1 = "操作説明";
+    public static readonly string Text1 = "操作説明\n十字キーで移動\nzキーで決定・アクション\nバトルはマウス操作のみ";
     public static readonly string Text2 = "冒険をはじめる→";
 
     public static readonly string Text3 = "いやな予感がする...今はやめておこう";
