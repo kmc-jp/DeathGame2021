@@ -63,7 +63,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 new List<SkillMaster>(){ 
                     SkillMaster.Heal,
                     SkillMaster.Cover,
-                    SkillMaster.EnhancedAttack,
+                    SkillMaster.EnhancedAttackP,
                     SkillMaster.HighHeal
                     }
                 );
@@ -72,7 +72,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 "相棒",
                 new Status(35, 300, 150, 10, 10),
                 bsv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
+                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttackB }
                 );
         playerList = new List<Player>();
         playerList.Add(player);

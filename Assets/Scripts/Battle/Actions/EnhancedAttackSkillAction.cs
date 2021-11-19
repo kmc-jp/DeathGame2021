@@ -10,7 +10,7 @@ public class EnhancedAttackSkillAction : SkillAction
     
     public EnhancedAttackSkillAction(IActor _actor, IActor _target)
     {
-        this.Id = SkillMaster.EnhancedAttack;
+        this.Id = SkillMaster.EnhancedAttackP;
         this.Actor = _actor;
         this.Target = _target;
     }
