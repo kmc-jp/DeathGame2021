@@ -2127,7 +2127,6 @@ MonoBehaviour:
   HpbP: {fileID: 467312171}
   HpbB: {fileID: 658192616}
   Skillb: {fileID: 1370556314}
-  SkillManager: {fileID: 1253559772}
 --- !u!61 &309515222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5216,6 +5215,10 @@ MonoBehaviour:
   batkButton: {fileID: 968256523}
   bdefButton: {fileID: 491689332}
   bagiButton: {fileID: 918453161}
+  bSkillButton: {fileID: 1253559776}
+  eSkillButton: {fileID: 1253559775}
+  hSkillButton: {fileID: 1253559774}
+  sSkillButton: {fileID: 1253559773}
 --- !u!82 &696549431
 AudioSource:
   m_ObjectHideFlags: 0

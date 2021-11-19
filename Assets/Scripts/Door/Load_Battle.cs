@@ -65,6 +65,7 @@ public class Load_Battle : MonoBehaviour
             doorsound.PlayOneShot(doorsound.clip);
             SavePlayerStatus();
             SaveBuddyStatus();
+            SavePlayerSkill();
             StartCoroutine("WaitForFive");
             int floor = PrefsUtil.GetStageProgress();
             if (floor >= 7)
