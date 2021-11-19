@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Entry_Option : MonoBehaviour
 {
-   void OnCollisionEnter2D(Collision2D collision)
-   {
-        FadeManager.Instance.LoadScene("Option", 1.0f);
-   }
+    public GameObject Panel;
+    public GameObject Dialog;
+    
+    void OnCollisionStay2D(Collision2D collison)
+    {
+        Panel.SetActive(true);
+        Dialog.GetComponent<Text>().text = StringClass.Text4;
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        Panel.SetActive(false);
+    }
 }

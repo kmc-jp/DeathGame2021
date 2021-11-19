@@ -3843,6 +3843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62da7dbfb3961e2449009e1ae3471851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Panel: {fileID: 773597746}
+  Dialog: {fileID: 995226049}
 --- !u!1 &2012665058
 GameObject:
   m_ObjectHideFlags: 0
