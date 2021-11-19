@@ -35,6 +35,8 @@ public static class SkillService
         { SkillMaster.EnhancedAttack, new SkillInfo("属性攻撃", 5, 0, true) },
         { SkillMaster.Heal,           new SkillInfo("回復呪文", 5, 0, false) },
         { SkillMaster.Cover,          new SkillInfo("身代わり", 0, 1, false) },
+        { SkillMaster.AtkBuff,        new SkillInfo("攻撃バフ", 30, 1, false) },
+        { SkillMaster.HealBuff,       new SkillInfo("回復バフ", 30, 1, false) },
     };
 
     public static List<ITurnAction> MakeSkillAction(SkillMaster skillId, IActor actor, IActor target)
@@ -54,6 +56,12 @@ public static class SkillService
                 break;
             case SkillMaster.Cover:
                 actions.Add(new CoverSkillAction(actor, target));
+                break;
+            case SkillMaster.AtkBuff:
+                actions.Add(new AtkBuffSkillAction(actor, target));
+                break;
+            case SkillMaster.HealBuff:
+                actions.Add(new HealBuffSkillAction(actor, target));
                 break;
             default:
                 Debug.Log("No Such Skill");

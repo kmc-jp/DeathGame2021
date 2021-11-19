@@ -25,7 +25,9 @@ public class HealSkillAction : SkillAction
     public override async UniTask Exec()
     {
         if (Actor.IsDead) return;
-        int val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
+        int val = healValue;
+        if (Actor.Buffs.IsHealBuff) val = val * 2;
+        val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
         Target.Status.Hp += val;
         Actor.Status.Mp -= this.Info.Cost;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の体力を {val} 回復");

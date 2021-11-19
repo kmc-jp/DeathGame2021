@@ -60,7 +60,12 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 PrefsUtil.GetPlayerName(),
                 new Status(500, 100, 100, 10, 10),
                 psv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
+                new List<SkillMaster>(){ 
+                    SkillMaster.Heal,
+                    SkillMaster.Cover,
+                    SkillMaster.EnhancedAttack,
+                    SkillMaster.AtkBuff
+                    }
                 );
         buddy = new Player(
                 PlayerId.Buddy,
