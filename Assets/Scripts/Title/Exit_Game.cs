@@ -11,8 +11,8 @@ public class Exit_Game : MonoBehaviour
         IsExitPanel.SetActive(true);        
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            //Application.Quit();                           //実際に動かしているとき
-            UnityEditor.EditorApplication.isPlaying = false;//Unity上で動かしているとき
+            Application.Quit();                           //実際に動かしているとき
+            //UnityEditor.EditorApplication.isPlaying = false;//Unity上で動かしているとき
             Debug.Log("ゲームは終了しました");
         }
     }
