@@ -3427,6 +3427,7 @@ MonoBehaviour:
   button_def: {fileID: 0}
   def_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_def: 0
 --- !u!114 &491689334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4526,6 +4527,7 @@ MonoBehaviour:
   Hp_Text: {fileID: 0}
   hp_status_panel: {fileID: 663236296}
   Status_Rest: {fileID: 1228366248}
+  status_hp: 0
 --- !u!114 &658192619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5183,6 +5185,11 @@ MonoBehaviour:
   atkButton: {fileID: 604931599}
   defButton: {fileID: 1299072628}
   agiButton: {fileID: 1541618263}
+  bhpButton: {fileID: 658192618}
+  bmpButton: {fileID: 779759972}
+  batkButton: {fileID: 968256523}
+  bdefButton: {fileID: 491689332}
+  bagiButton: {fileID: 918453161}
 --- !u!82 &696549431
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5972,6 +5979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mp_Text: {fileID: 0}
+  status_mp: 0
   button_mp: {fileID: 0}
   mp_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
@@ -7573,6 +7581,7 @@ MonoBehaviour:
   button_agi: {fileID: 0}
   agi_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_agi: 0
 --- !u!114 &918453162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8046,6 +8055,7 @@ MonoBehaviour:
   button_atk: {fileID: 0}
   atk_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
+  status_atk: 0
 --- !u!114 &968256525
 MonoBehaviour:
   m_ObjectHideFlags: 0
