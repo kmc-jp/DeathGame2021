@@ -18,7 +18,7 @@ public class EnhancedAttackSkillAction : SkillAction
     public override bool Prepare()
     {
         if (Actor.IsDead) return false;
-        MessageWindow.Instance.MakeWindow($"{Actor.Name} の属性攻撃！");
+        MessageWindow.Instance.MakeWindow($"{Actor.Name} の {Info.Name}！");
         return true;
     }
     

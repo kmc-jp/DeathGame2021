@@ -16,7 +16,7 @@ public class HealBuffSkillAction : SkillAction
     public override bool Prepare()
     {
         if (Actor.IsDead) return false;
-        MessageWindow.Instance.MakeWindow($"{Actor.Name} の回復バフ！");
+        MessageWindow.Instance.MakeWindow($"{Actor.Name} の {Info.Name}！");
         return true;
     }
     
