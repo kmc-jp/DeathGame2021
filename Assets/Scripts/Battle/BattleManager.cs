@@ -58,6 +58,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         AdditionalStatus padds = PrefsUtil.GetPlayerStatus();
         Status pStatus = new Status(500, 100, 100, 0, 0);
         pStatus.ApplyAdditionalStatus(padds);
+        AdditionalStatus badds = PrefsUtil.GetBuddyStatus();
+        Status bStatus = new Status(350, 300, 150, 0, 0);
+        pStatus.ApplyAdditionalStatus(badds);
         player = new Player(
                 PlayerId.Player,
                 PrefsUtil.GetPlayerName(),
@@ -74,7 +77,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         buddy = new Player(
                 PlayerId.Buddy,
                 "相棒",
-                new Status(35, 300, 150, 0, 0),
+                bStatus,
                 bsv,
                 new List<SkillMaster>(){
                     SkillMaster.Heal,
