@@ -6,7 +6,16 @@ using UnityEngine;
 
 public class HealSkillAction : SkillAction
 {
-    private int healValue = 100;
+    private int healValue
+    {
+        get => Id switch
+            {
+                SkillMaster.Heal => 100,
+                SkillMaster.HighHeal => 300,
+                SkillMaster.FullHeal => 100000,
+                _ => 100
+            };
+    }
 
     public HealSkillAction(IActor _actor, IActor _target)
     {
@@ -25,7 +34,9 @@ public class HealSkillAction : SkillAction
     public override async UniTask Exec()
     {
         if (Actor.IsDead) return;
-        int val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
+        int val = healValue;
+        if (Actor.Buffs.IsHealBuff) val = val * 2;
+        val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);
         Target.Status.Hp += val;
         Actor.Status.Mp -= this.Info.Cost;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の体力を {val} 回復");

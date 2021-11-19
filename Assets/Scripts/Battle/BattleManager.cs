@@ -40,8 +40,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     private int commandOrder;
 
     private Tween commandSelectTween;
-
-    [SerializeField] int debugFloor;
+    
+    [SerializeField] bool debugMode;
+    [SerializeField] int Floor;
     
     readonly List<Func<UniTask>> onTurnEnd = new List<Func<UniTask>>();
     public IDisposable OnTurnEnd(Func<UniTask> task)
@@ -56,25 +57,35 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         Image bsv = buddyStatusView.StatusPanel;
         player = new Player(
                 PlayerId.Player,
-                PlayerPrefs.GetString("PLAYER_NAME"),
+                PrefsUtil.GetPlayerName(),
                 new Status(500, 100, 100, 10, 10),
                 psv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
+                new List<SkillMaster>(){ 
+                    SkillMaster.Heal,
+                    SkillMaster.Cover,
+                    SkillMaster.EnhancedAttackP,
+                    SkillMaster.HighHeal
+                    }
                 );
         buddy = new Player(
                 PlayerId.Buddy,
                 "相棒",
-                new Status(350, 300, 150, 10, 10),
+                new Status(35, 300, 150, 10, 10),
                 bsv,
-                new List<SkillMaster>(){ SkillMaster.Heal, SkillMaster.Cover, SkillMaster.EnhancedAttack }
+                new List<SkillMaster>(){
+                    SkillMaster.Heal,
+                    SkillMaster.FullHeal,
+                    SkillMaster.Cover,
+                    SkillMaster.EnhancedAttackB,
+                    }
                 );
         playerList = new List<Player>();
         playerList.Add(player);
         playerList.Add(buddy);
         enemyList = new List<IEnemy>();
-        // ここにステージ進捗を参照する処理
         
-        List<GameObject> enemys = StageMaster.GetEnemyObjects(debugFloor);
+        if (!debugMode) Floor = PrefsUtil.GetStageProgress();
+        List<GameObject> enemys = StageMaster.GetEnemyObjects(Floor);
         foreach (var e in enemys)
         {
             GameObject enemyObj = (GameObject)Instantiate(
@@ -85,7 +96,9 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         turnActions = new List<ITurnAction>();
         commandOrder = 0;
         sounds = audioManager.GetComponents<AudioSource>().ToList();
-
+        
+        string message = String.Join(" と ", enemyList.Select(e => e.Name)) + " があらわれた！";
+        MessageWindow.Instance.MakeWindow(message);
         UpdatePlayersStatusView();
         PlayCommandSelectEffect(commandOrder);
     }
@@ -140,26 +153,14 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         this.turnActions.Add(action);
         ClearSkillPanel();
-        if (commandOrder >= 1) 
-        {
-            Execute();
-            return;
-        }
-        commandOrder ++;
-        PlayCommandSelectEffect(commandOrder);
+        UpdateCommandOrder(commandOrder + 1);
     }
 
     private void AddAction(List<ITurnAction> actions)
     {
         this.turnActions.AddRange(actions);
         ClearSkillPanel();
-        if (commandOrder >= 1) 
-        {
-            Execute();
-            return;
-        }
-        commandOrder ++;
-        PlayCommandSelectEffect(commandOrder);
+        UpdateCommandOrder(commandOrder + 1);
     }
 
     private void Execute()
@@ -202,8 +203,17 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
             foreach (var e in enemyList) { clear &= e.IsDead; }
             if (clear) 
             {
-                // TODO: 終わったり次にいったりする処理書く
                 MessageWindow.Instance.MakeWindow("敵をたおした！");
+                PrefsUtil.UpdateStageProgress();
+                yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
+                yield return new WaitForSeconds(0.3f);
+                SceneManager.LoadScene("Door");
+                yield break;
+            }
+            bool defeat = playerList.Where(ally => !ally.IsDead).Count() == 0;
+            if (defeat)
+            {
+                MessageWindow.Instance.MakeWindow("ぜんめつしてしまった");
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
                 SceneManager.LoadScene("Door");
@@ -228,16 +238,15 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         }
         yield return new WaitForSeconds(0.5f);
         turnActions.Clear();
-        commandOrder = 0;
-        PlayCommandSelectEffect(commandOrder);
+        UpdateCommandOrder(0);
     }
 
     private void MakeTargetButton(IActor actor, SkillMaster skill, bool isToEnemy)
     {
         ClearSkillPanel();
         List<IActor> targets = new List<IActor>();
-        if (isToEnemy)  targets = enemyList.Cast<IActor>().ToList();
-            else targets = playerList.Cast<IActor>().ToList();
+        if (isToEnemy)  targets = enemyList.Where(ally => !ally.IsDead).Cast<IActor>().ToList();
+            else targets = playerList.Where(ally => !ally.IsDead).Cast<IActor>().ToList();
         
         for (int i = 0; i < targets.Count; i++)
         {
@@ -308,5 +317,21 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
     public void PlayDamageSE()
     {
         sounds[1].PlayOneShot(sounds[1].clip);
+    }
+
+    private void UpdateCommandOrder(int _order)
+    {
+        if (_order >= 2) 
+        {
+            Execute();
+            return;
+        }
+        if (playerList[_order].IsDead)
+        {
+            UpdateCommandOrder(_order + 1);
+            return;
+        }
+        commandOrder = _order;
+        PlayCommandSelectEffect(commandOrder);
     }
 }

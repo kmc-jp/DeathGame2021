@@ -31,6 +31,29 @@ public class Buffs
         set;
     }
 
+    // 一旦AttackRateとは別の実装をする
+    public int AtkBuff
+    {
+        get;
+        set;
+    }
+
+    public bool IsAtkBuff
+    {
+        get => AtkBuff > 0;
+    }
+
+    public int HealBuff
+    {
+        get;
+        set;
+    }
+
+    public bool IsHealBuff
+    {
+        get => HealBuff > 0;
+    }
+
     public Buffs(IActor _actor)
     {
         this.Actor = _actor;
@@ -53,6 +76,16 @@ public class Buffs
         {
             MessageWindow.Instance.AddMessage($"{Actor.Name} はカウンターの構えをやめた");
             Counter = 0;
+        }
+        if (IsAtkBuff)
+        {
+            AtkBuff--;
+            if (!IsAtkBuff) MessageWindow.Instance.AddMessage($"{Actor.Name} の攻撃上昇が解けた");
+        }
+        if (IsHealBuff)
+        {
+            HealBuff--;
+            if (!IsHealBuff) MessageWindow.Instance.AddMessage($"{Actor.Name} の回復上昇が解けた");
         }
         return false;
     }

@@ -10,7 +10,7 @@ public class EnhancedAttackSkillAction : SkillAction
     
     public EnhancedAttackSkillAction(IActor _actor, IActor _target)
     {
-        this.Id = SkillMaster.EnhancedAttack;
+        this.Id = SkillMaster.EnhancedAttackP;
         this.Actor = _actor;
         this.Target = _target;
     }
@@ -18,7 +18,7 @@ public class EnhancedAttackSkillAction : SkillAction
     public override bool Prepare()
     {
         if (Actor.IsDead) return false;
-        MessageWindow.Instance.MakeWindow($"{Actor.Name} の属性攻撃！");
+        MessageWindow.Instance.MakeWindow($"{Actor.Name} の {Info.Name}！");
         return true;
     }
     
@@ -27,7 +27,9 @@ public class EnhancedAttackSkillAction : SkillAction
         if (Actor.IsDead) return;
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         Actor.Status.Mp -= this.Info.Cost;
-        int damage = Target.DealDamage((int) ((Actor.Status.Atk + influence) * Actor.Buffs.AttackRate));
+        int d = (int) ((Actor.Status.Atk + influence) * Actor.Buffs.AttackRate);
+        if (Actor.Buffs.IsAtkBuff) d = d * 2;
+        int damage = Target.DealDamage(d);
         MessageWindow.Instance.MakeWindow($"{Target.Name} に {damage} ダメージを与えた！");
 
         await MessageWindow.Instance.CloseObservable.First();

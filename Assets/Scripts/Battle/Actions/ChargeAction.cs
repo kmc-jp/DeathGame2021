@@ -15,6 +15,7 @@ public class ChargeAction : ITurnAction
     
     public bool Prepare()
     {
+        if (Actor.IsDead) return false;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} はちからをためている！");
         return true;
     }
