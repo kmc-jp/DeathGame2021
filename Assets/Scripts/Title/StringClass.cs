@@ -42,7 +42,7 @@ public class StringClass : MonoBehaviour
     public static readonly string SutefuriyaText0 = "";
     public static readonly string SutefuriyaText1 = "あなたの力を調整いたしましょうか";
     public static readonly string SutefuriyaText2 = $"1:ステータスを変更する/2:{PlayerPrefs.GetString("PLAYER_NAME")}のわざを変更する";
-    public static readonly string SutefuriyaText3 = $"どなたのステータスを変更しますか？1:{PlayerPrefs.GetString("PLAYER_NAME")}　2: 相棒";
+    public static readonly string SutefuriyaText3 = $"どなたのステータスを変更しますか？\n1:{PlayerPrefs.GetString("PLAYER_NAME")}　2: 相棒";
     public static readonly string SutefuriyaText4 = $"{PlayerPrefs.GetString("PLAYER_NAME")}さんへの振り分けですね";
     public static readonly string SutefuriyaText5 = "";
     public static readonly string SutefuriyaText6 = "それではいってらっしゃいませ";

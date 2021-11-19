@@ -219,7 +219,6 @@ GameObject:
   - component: {fileID: 26274060}
   - component: {fileID: 26274063}
   - component: {fileID: 26274064}
-  - component: {fileID: 26274065}
   m_Layer: 5
   m_Name: MP
   m_TagString: Untagged
@@ -388,19 +387,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &26274065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26274058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872b10cb710001544aff884d0e8cc953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!1 &80945726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3047,7 +3033,6 @@ GameObject:
   - component: {fileID: 467312173}
   - component: {fileID: 467312176}
   - component: {fileID: 467312177}
-  - component: {fileID: 467312178}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -3217,19 +3202,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &467312178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467312171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872b10cb710001544aff884d0e8cc953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!1 &480452161
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,7 +3379,6 @@ GameObject:
   - component: {fileID: 491689336}
   - component: {fileID: 491689335}
   - component: {fileID: 491689334}
-  - component: {fileID: 491689333}
   - component: {fileID: 491689332}
   m_Layer: 5
   m_Name: DEF
@@ -3454,19 +3425,6 @@ MonoBehaviour:
   button_def: {fileID: 0}
   def_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
---- !u!114 &491689333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491689330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b015b4cb75971c443b660c41fc9532cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!114 &491689334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3484,9 +3442,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 491689333}
+        - m_Target: {fileID: 1228366249}
           m_TargetAssemblyTypeName: BuddyStefuriExcess, Assembly-CSharp
-          m_MethodName: RestOperation
+          m_MethodName: BRestOperation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4096,7 +4054,6 @@ GameObject:
   - component: {fileID: 604931596}
   - component: {fileID: 604931600}
   - component: {fileID: 604931599}
-  - component: {fileID: 604931601}
   m_Layer: 5
   m_Name: ATK
   m_TagString: Untagged
@@ -4265,19 +4222,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &604931601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604931594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872b10cb710001544aff884d0e8cc953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!1 &614346414
 GameObject:
   m_ObjectHideFlags: 0
@@ -4535,8 +4479,6 @@ GameObject:
   - component: {fileID: 658192621}
   - component: {fileID: 658192618}
   - component: {fileID: 658192619}
-  - component: {fileID: 658192620}
-  - component: {fileID: 658192624}
   m_Layer: 5
   m_Name: BHP
   m_TagString: Untagged
@@ -4623,19 +4565,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &658192620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658192616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b015b4cb75971c443b660c41fc9532cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!114 &658192621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4718,22 +4647,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658192616}
   m_CullTransparentMesh: 1
---- !u!114 &658192624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658192616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe8b0b0e2925664f85730bca905b8f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp_Text: {fileID: 0}
-  HPb: {fileID: 0}
-  hp_status_panel: {fileID: 0}
-  Status_Rest: {fileID: 0}
 --- !u!1 &661566180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6009,7 +5922,6 @@ GameObject:
   - component: {fileID: 779759976}
   - component: {fileID: 779759975}
   - component: {fileID: 779759973}
-  - component: {fileID: 779759974}
   - component: {fileID: 779759972}
   m_Layer: 5
   m_Name: MP
@@ -6073,9 +5985,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 779759974}
+        - m_Target: {fileID: 1228366249}
           m_TargetAssemblyTypeName: BuddyStefuriExcess, Assembly-CSharp
-          m_MethodName: RestOperation
+          m_MethodName: BRestOperation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6097,19 +6009,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &779759974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779759970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b015b4cb75971c443b660c41fc9532cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!114 &779759975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7144,8 +7043,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -865, y: 130}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 18, y: 130}
+  m_SizeDelta: {x: 1920, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898703782
 MonoBehaviour:
@@ -7169,15 +7068,15 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 0cb02dce9ece4bb46a437067e973b1f9, type: 3}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 100
+    m_MinSize: 40
+    m_MaxSize: 80
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: New Text
@@ -7306,7 +7205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: -392.32}
+  m_AnchoredPosition: {x: 0, y: -392.32}
   m_SizeDelta: {x: 0, y: -784.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &908237578
@@ -7621,7 +7520,6 @@ GameObject:
   - component: {fileID: 918453165}
   - component: {fileID: 918453164}
   - component: {fileID: 918453162}
-  - component: {fileID: 918453163}
   - component: {fileID: 918453161}
   m_Layer: 5
   m_Name: AGI
@@ -7685,9 +7583,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 918453163}
+        - m_Target: {fileID: 1228366249}
           m_TargetAssemblyTypeName: BuddyStefuriExcess, Assembly-CSharp
-          m_MethodName: RestOperation
+          m_MethodName: BRestOperation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7709,19 +7607,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &918453163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918453159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b015b4cb75971c443b660c41fc9532cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!114 &918453164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8108,7 +7993,6 @@ GameObject:
   - component: {fileID: 968256527}
   - component: {fileID: 968256526}
   - component: {fileID: 968256525}
-  - component: {fileID: 968256524}
   - component: {fileID: 968256523}
   m_Layer: 5
   m_Name: ATK
@@ -8155,19 +8039,6 @@ MonoBehaviour:
   button_atk: {fileID: 0}
   atk_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
---- !u!114 &968256524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968256521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b015b4cb75971c443b660c41fc9532cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!114 &968256525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8185,9 +8056,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 968256524}
+        - m_Target: {fileID: 1228366249}
           m_TargetAssemblyTypeName: BuddyStefuriExcess, Assembly-CSharp
-          m_MethodName: RestOperation
+          m_MethodName: BRestOperation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10270,7 +10141,6 @@ GameObject:
   - component: {fileID: 1299072625}
   - component: {fileID: 1299072629}
   - component: {fileID: 1299072628}
-  - component: {fileID: 1299072630}
   m_Layer: 5
   m_Name: DEF
   m_TagString: Untagged
@@ -10439,19 +10309,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1299072630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299072623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872b10cb710001544aff884d0e8cc953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!1 &1314512954
 GameObject:
   m_ObjectHideFlags: 0
@@ -12203,7 +12060,6 @@ GameObject:
   - component: {fileID: 1541618259}
   - component: {fileID: 1541618263}
   - component: {fileID: 1541618262}
-  - component: {fileID: 1541618264}
   m_Layer: 5
   m_Name: AGI
   m_TagString: Untagged
@@ -12372,19 +12228,6 @@ MonoBehaviour:
   button_agi: {fileID: 0}
   agi_status_panel: {fileID: 0}
   Status_Rest: {fileID: 0}
---- !u!114 &1541618264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541618257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872b10cb710001544aff884d0e8cc953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RestText: {fileID: 0}
 --- !u!1 &1545951011
 GameObject:
   m_ObjectHideFlags: 0
