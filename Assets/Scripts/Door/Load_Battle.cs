@@ -25,6 +25,21 @@ public class Load_Battle : MonoBehaviour
     [SerializeField]
     AGIButton agiButton;
 
+    [SerializeField]
+    BHP bhpButton;
+
+    [SerializeField]
+    BMP bmpButton;
+
+    [SerializeField]
+    BATK batkButton;
+
+    [SerializeField]
+    BDEF bdefButton;
+
+    [SerializeField]
+    BAGI bagiButton;
+
     void Start()
     {
         Lpanel = GameObject.Find("Canvas/LoadPanel");
@@ -63,6 +78,17 @@ public class Load_Battle : MonoBehaviour
             atkButton.status_atk,
             defButton.status_def,
             agiButton.status_agi
+        );
+    }
+
+    private void SaveBuddyStatus()
+    {
+        PrefsUtil.SetPlayerStatus(
+            bhpButton.status_hp,
+            bmpButton.status_mp,
+            batkButton.status_atk,
+            bdefButton.status_def,
+            bagiButton.status_agi
         );
     }
 }
