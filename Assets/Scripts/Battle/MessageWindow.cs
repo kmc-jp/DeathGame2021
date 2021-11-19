@@ -44,7 +44,7 @@ public class MessageWindow : SingletonMonoBehaviour<MessageWindow>
     public void MakeWindow(List<string> messages)
     {
         this.texts = messages;
-        UpdateMessage();
+        ConsumeMessage();
         this.background.gameObject.SetActive(true);
     }
 
