@@ -7,7 +7,7 @@ public class Floor3EnemyB : RoutinedEnemy
 {
     public Floor3EnemyB(EnemyBehaviour behaviour) : base(behaviour)
     {
-        this.Name = "仮";
+        this.Name = "ゴルバ";
         this.Status = new Status(2500, -1, -1, 0, 0); //HP以外仮
     }
 

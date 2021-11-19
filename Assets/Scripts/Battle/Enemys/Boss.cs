@@ -7,7 +7,7 @@ public class Boss : RoutinedEnemy
 {
     public Boss(EnemyBehaviour behaviour) : base(behaviour)
     {
-        this.Name = "仮";
+        this.Name = "グラゴス";
         this.Status = new Status(5000, -1, -1, 0, 0);
     }
 
