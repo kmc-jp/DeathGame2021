@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -922402802239089382, guid: 2e7d7a2c27950c34b8ee2921c8053aca, type: 3}
+    - target: {fileID: 4047972281890915120, guid: 86cb786f82640be4aaf1268dca024b92, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 8435252026519844337, guid: 86cb786f82640be4aaf1268dca024b92, type: 3}
       propertyPath: floor
       value: 1
