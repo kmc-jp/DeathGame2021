@@ -36,7 +36,7 @@ public class Status
 
     public static Status GenerateNormalEnemyStatus()
     {
-        return new Status(4000, -1, -1, 0, 0); //HP以外仮
+        return new Status(4000, -1, -1, 0, 49); //HP以外仮
     }
 }
 
