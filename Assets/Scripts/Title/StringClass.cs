@@ -11,7 +11,7 @@ public class StringClass : MonoBehaviour
 
     public static readonly string Text3 = "いやな予感がする...今はやめておこう";
 
-    public static readonly string Text4 = "";
+    public static readonly string Text4 = "キャラクター素材\nMACK様　http://homepage3.nifty.com/looseleaf/";
 
     public static readonly string Text5 = "";
     public static readonly string Text6 = "";
