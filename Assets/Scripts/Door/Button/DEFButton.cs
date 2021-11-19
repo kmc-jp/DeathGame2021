@@ -46,11 +46,4 @@ public void DEFbuttonOperation()
         Def_Text.text = $"{status_def.ToString()}";
         
     }
-
-//リセットボタン用関数    
-  public void DEF_Reset()
- {
-     status_def = 0;
- }
-
 }
