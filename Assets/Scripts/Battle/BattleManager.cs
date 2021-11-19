@@ -101,6 +101,8 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         
         string message = String.Join(" と ", enemyList.Select(e => e.Name)) + " があらわれた！";
         MessageWindow.Instance.MakeWindow(message);
+
+        playerStatusView.SetNameText(PrefsUtil.GetPlayerName());
         UpdatePlayersStatusView();
         PlayCommandSelectEffect(commandOrder);
     }
@@ -147,7 +149,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
         MessageWindow.Instance.MakeWindow("敵から逃げ切った");
         MessageWindow.Instance.CloseButton.OnClickAsObservable()
             .First()
-            .Subscribe(_ => SceneManager.LoadScene("Door"))
+            .Subscribe(_ => FadeManager.Instance.LoadScene("Door", 1.0f))
             .AddTo(this);
     }
 
@@ -209,7 +211,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 PrefsUtil.UpdateStageProgress();
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
-                SceneManager.LoadScene("Door");
+                FadeManager.Instance.LoadScene("Door", 1.0f);
                 yield break;
             }
             bool defeat = playerList.Where(ally => !ally.IsDead).Count() == 0;
@@ -218,7 +220,7 @@ public class BattleManager : SingletonMonoBehaviour<BattleManager>
                 MessageWindow.Instance.MakeWindow("ぜんめつしてしまった");
                 yield return MessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
                 yield return new WaitForSeconds(0.3f);
-                SceneManager.LoadScene("Door");
+                FadeManager.Instance.LoadScene("Door", 1.0f);
                 yield break;
             }
         }

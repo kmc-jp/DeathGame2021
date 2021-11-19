@@ -24,7 +24,7 @@ public static class PrefsUtil
 
     public static string GetPlayerName()
     {
-        string name = PlayerPrefs.GetString("PLAYER_NAME", "player");
+        string name = PlayerPrefs.GetString("PLAYER_NAME", "Player");
         return name;
     }
 
@@ -71,6 +71,11 @@ public static class PrefsUtil
         string json = PlayerPrefs.GetString("PLAYER_SKILL", JsonUtility.ToJson(new SkillHolder()));
         SkillHolder skills = JsonUtility.FromJson<SkillHolder>(json);
         return skills.Skills;
+    }
+
+    public static void ClearPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }
 

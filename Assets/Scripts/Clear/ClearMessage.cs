@@ -28,6 +28,7 @@ public class ClearMessage : MonoBehaviour
         ClearMessageWindow.Instance.MakeWindow(messages);
         yield return ClearMessageWindow.Instance.CloseObservable.First().ToYieldInstruction();
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Title");
+        PrefsUtil.ClearPrefs();
+        FadeManager.Instance.LoadScene("Title", 1.0f);
     }
 }
