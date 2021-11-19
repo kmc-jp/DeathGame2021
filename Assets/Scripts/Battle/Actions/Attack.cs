@@ -22,6 +22,8 @@ public class Attack
         }
         
         int damage = damageCalculator.Calc(actor, target);
+        // 主人公のバフ
+        if (actor.Buffs.IsAtkBuff) damage = damage * 2;
         int actualDamage = target.DealDamage(damage);
         MessageWindow.Instance.MakeWindow($"{target.Name} に {actualDamage} ダメージを与えた！");
         BattleManager.Instance.UpdatePlayersStatusView();

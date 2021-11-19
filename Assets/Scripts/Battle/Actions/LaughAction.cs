@@ -13,6 +13,7 @@ public class LaughAction : ITurnAction
     
     public bool Prepare()
     {
+        if (Actor.IsDead) return false;
         MessageWindow.Instance.MakeWindow($"{Actor.Name} は笑っている！");
         return true;
     }
