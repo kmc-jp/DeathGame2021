@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor5
       objectReference: {fileID: 0}
+    - target: {fileID: 4047972281200761182, guid: 86cb786f82640be4aaf1268dca024b92, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4178046375966092550, guid: 1270793a25e7a1740bb0e693a47181cf, type: 3}
     - target: {fileID: 8435252026519844337, guid: 86cb786f82640be4aaf1268dca024b92, type: 3}
       propertyPath: floor
       value: 5
