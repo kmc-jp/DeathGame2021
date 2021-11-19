@@ -60,7 +60,7 @@ public class Load_Battle : MonoBehaviour
     {
         Lpanel.SetActive(true);
         isbattlecheck.GetComponent<Text>().text = StringClass.Texts[12];
-        if(Input.GetKeyDown(KeyCode.Z))
+        if(Input.GetKey(KeyCode.Z))
         {
             doorsound.PlayOneShot(doorsound.clip);
             SavePlayerStatus();
