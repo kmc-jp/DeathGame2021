@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class DoorDialogue : MonoBehaviour
 {
     public GameObject panel;
-    public GameObject window_stat;
-    public GameObject Bwindow_stat;
-    public GameObject window_skil;
+    public GameObject window_stat;//主人公のステータス画面
+    public GameObject Bwindow_stat;//相棒のステータス画面
+    public GameObject window_skil;//わざ画面
     public GameObject Message;
     public MoveController moveController;
     private bool isStay;
+    private bool Select_Button_Flag = false;
     private int textid = 0;
+    private EventSystem ev;
+
+    [SerializeField]
+    private GameObject HpbP;
+    [SerializeField]
+    private GameObject HpbB;
     void Start()
     {
        Message = GameObject.Find("Canvas/WindowMessage/Message");
@@ -81,7 +89,7 @@ public class DoorDialogue : MonoBehaviour
             break;
             
 
-            case 3:
+            case 3://誰にステータスを振るか
             if(Input.GetKeyUp(KeyCode.Alpha1))//主人公へ
             {
                 ChangeDoorText(n + 1);
@@ -92,8 +100,15 @@ public class DoorDialogue : MonoBehaviour
                 ChangeDoorText(10);
                 textid = 10;
             }
+            Select_Button_Flag = true;
             break;
-            case 5://ステータス割り振りの画面を表示
+
+            case 5://主人公のステータス画面を表示
+            if(Select_Button_Flag)
+            {
+                EventSystem.current.SetSelectedGameObject (HpbP);
+                Select_Button_Flag = false;
+            }
             window_stat.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {
@@ -119,7 +134,12 @@ public class DoorDialogue : MonoBehaviour
             break;
 
             case 11://相棒のステータス画面を表示
-             Bwindow_stat.SetActive(true);
+            if(Select_Button_Flag)
+            {
+                EventSystem.current.SetSelectedGameObject (HpbB);
+                Select_Button_Flag = false;
+            }
+            Bwindow_stat.SetActive(true);
             if(Input.GetKeyUp(KeyCode.Z))
             {
                 Bwindow_stat.SetActive(false);
