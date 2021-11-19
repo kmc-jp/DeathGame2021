@@ -83,7 +83,7 @@ public class Load_Battle : MonoBehaviour
 
     private void SaveBuddyStatus()
     {
-        PrefsUtil.SetPlayerStatus(
+        PrefsUtil.SetBuddyStatus(
             bhpButton.status_hp,
             bmpButton.status_mp,
             batkButton.status_atk,
