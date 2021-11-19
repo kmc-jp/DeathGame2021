@@ -9,6 +9,8 @@ public enum SkillMaster
     EnhancedAttack,
     Heal,
     Cover,
+    AtkBuff,
+    HealBuff,
 }
 
 public struct SkillInfo
