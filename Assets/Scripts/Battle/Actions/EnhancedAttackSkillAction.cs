@@ -25,6 +25,12 @@ public class EnhancedAttackSkillAction : SkillAction
     public override async UniTask Exec()
     {
         if (Actor.IsDead) return;
+        if (Actor.Status.Mp < Info.Cost)
+        {
+            MessageWindow.Instance.MakeWindow($"しかしMPが足りなかった！");
+            await MessageWindow.Instance.CloseObservable.First();
+            return;
+        }
         if (Target.Buffs.CoveredBy != null) Target = Target.Buffs.CoveredBy;
         Actor.Status.Mp -= this.Info.Cost;
         int d = (int) ((Actor.Status.Atk + influence) * Actor.Buffs.AttackRate);

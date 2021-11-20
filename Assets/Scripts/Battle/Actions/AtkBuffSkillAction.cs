@@ -23,6 +23,14 @@ public class AtkBuffSkillAction : SkillAction
     public override async UniTask Exec()
     {
         if (Actor.IsDead) return;
+        
+        if (Actor.Status.Mp < Info.Cost)
+        {
+            MessageWindow.Instance.MakeWindow($"しかしMPが足りなかった！");
+            await MessageWindow.Instance.CloseObservable.First();
+            return;
+        }
+        Actor.Status.Mp -= this.Info.Cost;
         Target.Buffs.AtkBuff += 3;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の攻撃力は3ターンの間増加する！");
 

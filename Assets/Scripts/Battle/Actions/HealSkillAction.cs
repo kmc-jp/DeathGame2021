@@ -34,6 +34,12 @@ public class HealSkillAction : SkillAction
     public override async UniTask Exec()
     {
         if (Actor.IsDead) return;
+        if (Actor.Status.Mp < Info.Cost)
+        {
+            MessageWindow.Instance.MakeWindow($"しかしMPが足りなかった！");
+            await MessageWindow.Instance.CloseObservable.First();
+            return;
+        }
         int val = healValue;
         if (Actor.Buffs.IsHealBuff) val = val * 2;
         val = Mathf.Clamp(healValue, 0, Target.Status.MaxHp - Target.Status.Hp);

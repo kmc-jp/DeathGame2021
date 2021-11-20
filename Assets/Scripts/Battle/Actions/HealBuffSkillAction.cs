@@ -23,6 +23,13 @@ public class HealBuffSkillAction : SkillAction
     public override async UniTask Exec()
     {
         if (Actor.IsDead) return;
+        if (Actor.Status.Mp < Info.Cost)
+        {
+            MessageWindow.Instance.MakeWindow($"しかしMPが足りなかった！");
+            await MessageWindow.Instance.CloseObservable.First();
+            return;
+        }
+        Actor.Status.Mp -= this.Info.Cost;
         Target.Buffs.HealBuff += 3;
         MessageWindow.Instance.MakeWindow($"{Target.Name} の回復力は3ターンの間増加する！");
 
